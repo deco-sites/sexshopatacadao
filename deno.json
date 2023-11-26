@@ -1,10 +1,9 @@
 {
   "imports": {
     "deco-sites/sexshopatacadao/": "./",
-
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.46.0/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.23.1/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.46.4/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.23.12/",
     "$fresh/": "https://denopkg.com/denoland/fresh@7ad4610e3a42aba42638cbc1041b96ee58a9b29e/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
@@ -13,7 +12,8 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
     "std/": "https://deno.land/std@0.190.0/",
     "partytown/": "https://denopkg.com/deco-cx/partytown@0.4.8/",
-    "daisyui": "npm:daisyui@3.9.2"
+    "daisyui": "npm:daisyui@3.9.2",
+    "clsx": "npm:clsx@2.0.0"
   },
   "tasks": {
     "start": "deno task bundle && deno run -A --unstable --env --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",
@@ -33,18 +33,10 @@
   "githooks": {
     "pre-commit": "check"
   },
-  "exclude": [
-    "node_modules",
-    "static/",
-    "README.md",
-    "_fresh"
-  ],
+  "exclude": ["node_modules", "static/", "README.md", "_fresh"],
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "tags": ["fresh", "recommended"]
     }
   },
   "nodeModulesDir": true,

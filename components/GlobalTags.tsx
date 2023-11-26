@@ -11,6 +11,62 @@ function GlobalTags() {
 
       {/* Web Manifest */}
       <link rel="manifest" href={asset("/site.webmanifest")} />
+
+      {/* Fonts Load */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        /* ubuntu-300 - latin */
+        @font-face {
+          font-display: swap;
+          font-family: 'Ubuntu';
+          font-style: normal;
+          font-weight: 300;
+          src: url(${
+            asset("/fonts/ubuntu-v20-latin-300.woff2")
+          }) format('woff2'), url(${
+            asset("/fonts/ubuntu-v20-latin-300.woff")
+          }) format('woff');
+        }
+        /* ubuntu-regular - latin */
+        @font-face {
+          font-display: swap;
+          font-family: 'Ubuntu';
+          font-style: normal;
+          font-weight: 400;
+          src: url(${
+            asset("/fonts/ubuntu-v20-latin-regular.woff2")
+          }) format('woff2'), url(${
+            asset("/fonts/ubuntu-v20-latin-regular.woff")
+          }) format('woff');
+        }
+        /* ubuntu-500 - latin */
+        @font-face {
+          font-display: swap;
+          font-family: 'Ubuntu';
+          font-style: normal;
+          font-weight: 500;
+          src: url(${
+            asset("/fonts/ubuntu-v20-latin-500.woff2")
+          }) format('woff2'), url(${
+            asset("/fonts/ubuntu-v20-latin-500.woff")
+          }) format('woff');
+        }
+        /* ubuntu-700 - latin */
+        @font-face {
+          font-display: swap;
+          font-family: 'Ubuntu';
+          font-style: normal;
+          font-weight: 700;
+          src: url(${
+            asset("/fonts/ubuntu-v20-latin-700.woff2")
+          }) format('woff2'), url(${
+            asset("/fonts/ubuntu-v20-latin-700.woff")
+          }) format('woff');
+        }
+      `,
+        }}
+      />
     </Head>
   );
 }

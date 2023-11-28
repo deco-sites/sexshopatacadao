@@ -21,6 +21,7 @@ import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
 import type { Platform } from "$store/apps/site.ts";
+import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
 
 // Editable props
 export interface Props {
@@ -60,119 +61,80 @@ function Searchbar({
   platform,
 }: Props) {
   const id = useId();
-  const { displaySearchPopup } = useUI();
   const searchInputRef = useRef<HTMLInputElement>(null);
   const { setQuery, payload, loading } = useSuggestions(loader);
   const { products = [], searches = [] } = payload.value ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
 
-  useEffect(() => {
-    if (displaySearchPopup.value === true) {
-      searchInputRef.current?.focus();
-    }
-  }, [displaySearchPopup.value]);
+  const open = hasProducts || hasTerms;
 
   return (
-    <div
-      class="w-full grid gap-8 px-4 py-6 overflow-y-hidden"
-      style={{ gridTemplateRows: "min-content auto" }}
-    >
-      <form id={id} action={action} class="join">
-        <Button
-          type="submit"
-          class="join-item btn-square"
-          aria-label="Search"
-          for={id}
-          tabIndex={-1}
-        >
-          {loading.value
-            ? <span class="loading loading-spinner loading-xs" />
-            : <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />}
-        </Button>
-        <input
-          ref={searchInputRef}
-          id="search-input"
-          class="input input-bordered join-item flex-grow"
-          name={name}
-          onInput={(e) => {
-            const value = e.currentTarget.value;
+    <div class="relative w-full max-w-3xl h-[48px] group" data-open={open}>
+      <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 focus-within:border-primary-500">
+        <form id={id} action={action} class="flex w-full">
+          <input
+            ref={searchInputRef}
+            id="search-input"
+            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none group-data-[open='true']:!border-b group-data-[open='true']:!rounded-b-none"
+            name={name}
+            onInput={(e) => {
+              const value = e.currentTarget.value;
 
-            if (value) {
-              sendEvent({
-                name: "search",
-                params: { search_term: value },
-              });
-            }
+              if (value) {
+                sendEvent({
+                  name: "search",
+                  params: { search_term: value },
+                });
+              }
 
-            setQuery(value);
-          }}
-          placeholder={placeholder}
-          role="combobox"
-          aria-controls="search-suggestion"
-          autocomplete="off"
-        />
-        <Button
-          type="button"
-          class="join-item btn-ghost btn-square hidden sm:inline-flex"
-          onClick={() => displaySearchPopup.value = false}
-        >
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </Button>
-      </form>
+              setQuery(value);
+            }}
+            placeholder={placeholder}
+            role="combobox"
+            aria-controls="search-suggestion"
+            autocomplete="off"
+          />
+          <Button
+            type="submit"
+            class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px]"
+            aria-label="Search"
+            for={id}
+            tabIndex={-1}
+          >
+            {loading.value
+              ? <span class="loading loading-spinner loading-xs" />
+              : <Icon id="MagnifyingGlass" size={16} strokeWidth={0.01} />}
+          </Button>
+        </form>
 
-      <div
-        class={`overflow-y-scroll ${!hasProducts && !hasTerms ? "hidden" : ""}`}
-      >
-        <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
-          <div class="flex flex-col gap-6">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
-              Sugestões
-            </span>
-            <ul id="search-suggestion" class="flex flex-col gap-6">
+        <div class="max-h-0 overflow-y-auto invisible opacity-0 transition-all group-data-[open=true]:visible group-data-[open=true]:opacity-100 group-data-[open=true]:max-h-[60vh] scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[50px] scrollbar-w-[10px] scrollbar">
+          <div class="flex flex-col">
+            <ul id="search-suggestion" class="flex flex-col">
               {searches.map(({ term }) => (
                 <li>
                   <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                    <span>
-                      <Icon
-                        id="MagnifyingGlass"
-                        size={24}
-                        strokeWidth={0.01}
-                      />
-                    </span>
                     <span dangerouslySetInnerHTML={{ __html: term }} />
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
-          <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
-              Produtos sugeridos
-            </span>
-            <Slider class="carousel">
-              {products.map((product, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
-                >
-                  <ProductCard
-                    product={product}
-                    platform={platform}
-                    index={index}
-                    itemListName="Suggeestions"
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
+            <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
+              <span
+                class="font-medium text-xl"
+                role="heading"
+                aria-level={3}
+              >
+                Produtos sugeridos
+              </span>
+              <ul class="flex flex-col">
+                {products.map((product) => (
+                  <li class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]">
+                    <span>{product.name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

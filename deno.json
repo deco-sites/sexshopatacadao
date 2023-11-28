@@ -13,6 +13,7 @@
     "std/": "https://deno.land/std@0.190.0/",
     "partytown/": "https://denopkg.com/deco-cx/partytown@0.4.8/",
     "daisyui": "npm:daisyui@3.9.2",
+    "tailwind-scrollbar": "npm:tailwind-scrollbar",
     "clsx": "npm:clsx@2.0.0"
   },
   "tasks": {
@@ -28,15 +29,24 @@
     "bundle": "deno eval 'import \"deco/scripts/apps/bundle.ts\"' deco-sites/sexshopatacadao",
     "cache_clean": "rm deno.lock; deno cache -r main.ts",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts"
+    "preview": "deno run -A main.ts",
+    "dev": "eplus dev init -c 'deno task start'"
   },
   "githooks": {
     "pre-commit": "check"
   },
-  "exclude": ["node_modules", "static/", "README.md", "_fresh"],
+  "exclude": [
+    "node_modules",
+    "static/",
+    "README.md",
+    "_fresh"
+  ],
   "lint": {
     "rules": {
-      "tags": ["fresh", "recommended"]
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
     }
   },
   "nodeModulesDir": true,

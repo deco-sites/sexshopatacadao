@@ -1,11 +1,32 @@
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Drawers from "$store/islands/Header/Drawers.tsx";
+import isMobileLoader from "$store/loaders/isMobile.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import CartDrawer from "$store/islands/Header/CartDrawer.tsx";
+import MenuDrawer from "$store/islands/Header/MenuDrawer.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import Alert from "./Alert.tsx";
-import Navbar from "./Navbar.tsx";
-import { headerHeight } from "./constants.ts";
+import { SetupMicroHeader } from "$store/islands/Header/SetupMicroHeader.tsx";
+import Main from "./Main.tsx";
+import Navbar from "$store/components/header/Navbar.tsx";
+
+const HEADER_HEIGHT = 265;
+
+/** @titleBy name */
+export interface SiteNavigationElementLeaf {
+  /** The name of the item. */
+  name: string;
+  /** URL of the item. */
+  url: string;
+}
+
+/** @titleBy name */
+export interface SiteNavigationElement extends SiteNavigationElementLeaf {
+  /** Icon for the item. */
+  icon?: ImageWidget;
+  /** Highlited items will be at the end of the navbar in Desktop, and at the beginning of the menu in mobile */
+  highlighted?: boolean;
+
+  children?: SiteNavigationElementLeaf[];
+}
 
 export interface Props {
   alerts: string[];
@@ -23,35 +44,48 @@ export interface Props {
   logo?: { src: ImageWidget; alt: string };
 }
 
-function Header({
-  alerts,
-  searchbar,
-  navItems,
-  logo,
-}: Props) {
+function Header(
+  { alerts, searchbar, navItems, logo, isMobile }: ReturnType<typeof loader>,
+) {
   const platform = usePlatform();
   const items = navItems ?? [];
 
+  // Mobile = start
+  // const mobile = items.toSorted((a, b) =>
+  //   (a.highlighted && !b.highlighted)
+  //     ? isMobile ? -1 : 1
+  //     : (b.highlighted && !a.highlighted)
+  //     ? isMobile ? 1 : -1
+  //     : 0
+  // );
+
   return (
     <>
-      <header style={{ height: headerHeight }}>
-        <Drawers
-          menu={{ items }}
-          searchbar={searchbar}
-          platform={platform}
-        >
-          <div class="bg-base-100 fixed w-full z-50">
-            <Alert alerts={alerts} />
-            <Navbar
-              items={items}
-              searchbar={searchbar && { ...searchbar, platform }}
-              logo={logo}
-            />
-          </div>
-        </Drawers>
+      <header
+        id="main-header"
+        class="group/header"
+        style={{ height: HEADER_HEIGHT }}
+      >
+        {/* <Drawers menu={{ items }} searchbar={searchbar} platform={platform}> */}
+        <div class="bg-base-100 fixed w-full z-50">
+          {/* <Alert alerts={alerts} /> */}
+          <Main
+            searchbar={searchbar && { ...searchbar, platform }}
+            logo={logo}
+          />
+          {!isMobile && <Navbar navItems={items} />}
+        </div>
+        <CartDrawer platform={platform} />
+        {isMobile && <MenuDrawer menu={{ items: items }} />}
+        {/* </Drawers> */}
       </header>
+      <SetupMicroHeader rootId="main-header" />
     </>
   );
+}
+
+export function loader(props: Props, req: Request) {
+  return isMobileLoader(props, req);
 }
 
 export default Header;

@@ -1,5 +1,5 @@
 import Icon from "$store/components/ui/Icon.tsx";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import { type SiteNavigationElement } from "$store/components/header/Header.tsx";
 
 export interface Props {
   items: SiteNavigationElement[];

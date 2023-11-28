@@ -2,8 +2,9 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/List/Sections.tsx";
-import * as $$$1 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$0 from "./loaders/isMobile.ts";
+import * as $$$1 from "./loaders/List/Sections.tsx";
+import * as $$$2 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$$$$0 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$1 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryList.tsx";
@@ -43,8 +44,9 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/sexshopatacadao/loaders/Layouts/ProductCard.tsx": $$$1,
-    "deco-sites/sexshopatacadao/loaders/List/Sections.tsx": $$$0,
+    "deco-sites/sexshopatacadao/loaders/isMobile.ts": $$$0,
+    "deco-sites/sexshopatacadao/loaders/Layouts/ProductCard.tsx": $$$2,
+    "deco-sites/sexshopatacadao/loaders/List/Sections.tsx": $$$1,
   },
   "sections": {
     "deco-sites/sexshopatacadao/sections/Category/CategoryBanner.tsx": $$$$$$3,

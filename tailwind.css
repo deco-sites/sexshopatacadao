@@ -26,6 +26,10 @@
     overflow: hidden;
     height: 100vh;
   }
+
+  .navitem[data-highlighted='true']:first-of-type {
+    @apply border-l;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

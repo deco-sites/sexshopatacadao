@@ -1,51 +1,44 @@
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import { type SiteNavigationElement } from "$store/components/header/Header.tsx";
 import Image from "apps/website/components/Image.tsx";
 import { headerHeight } from "./constants.ts";
 
 function NavItem({ item }: { item: SiteNavigationElement }) {
-  const { url, name, children } = item;
-  const image = item?.image?.[0];
+  const { url, name, children, highlighted } = item;
+  const iconSrc = item?.icon;
 
   return (
-    <li class="group flex items-center">
-      <a href={url} class="px-4 py-3">
-        <span class="group-hover:underline">
+    <li
+      data-highlighted={highlighted ? "true" : undefined}
+      class="navitem flex items-center group/navitem border-black"
+    >
+      <a href={url} class="flex flex-col items-center pb-6">
+        <div class="w-[40px] h-[51px]">
+          {iconSrc && (
+            <img
+              class="w-full h-full object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[-5deg] transition-all duration-500"
+              src={iconSrc}
+              alt={name}
+              width={40}
+              height={51}
+              loading="eager"
+            />
+          )}
+        </div>
+        <span class="block text-center uppercase text-[13px] font-bold group-hover/navitem:text-primary-500 transition-colors h-8 leading-none">
           {name}
         </span>
       </a>
 
       {children && children.length > 0 &&
         (
-          <div
-            class="fixed hidden hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen"
-            style={{ top: "0px", left: "0px", marginTop: headerHeight }}
+          <div class="absolute top-[calc(100%-16px)] w-full left-0 flex invisible opacity-0 group-hover/navitem:visible group-hover/navitem:opacity-100 transition-all duration-100 bg-white z-50 rounded-[6px] shadow-[0_2px_5px_rgba(0,0,0,.3)] py-5 px-10" // style={{ top: "0px", left: "0px", marginTop: headerHeight }}
           >
-            {image?.url && (
-              <Image
-                class="p-6"
-                src={image.url}
-                alt={image.alternateName}
-                width={300}
-                height={332}
-                loading="lazy"
-              />
-            )}
-            <ul class="flex items-start justify-center gap-6">
+            <ul class="grid grid-cols-3 gap-3 w-full">
               {children.map((node) => (
-                <li class="p-6">
-                  <a class="hover:underline" href={node.url}>
+                <li class="hover:text-primary-500 font-bold uppercase text-[13px]">
+                  <a class="" href={node.url}>
                     <span>{node.name}</span>
                   </a>
-
-                  <ul class="flex flex-col gap-1 mt-4">
-                    {node.children?.map((leaf) => (
-                      <li>
-                        <a class="hover:underline" href={leaf.url}>
-                          <span class="text-xs">{leaf.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
                 </li>
               ))}
             </ul>

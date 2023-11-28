@@ -10,7 +10,6 @@ import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
 
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
-const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
 
 export interface Props {
   menu: MenuProps;
@@ -52,50 +51,57 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children, platform }: Props) {
-  const { displayCart, displayMenu, displaySearchDrawer } = useUI();
+export type CartDrawerProps = Pick<Props, "platform" | "children">;
+
+export function CartDrawer(
+  { platform, children }: CartDrawerProps,
+) {
+  const { displayCart } = useUI();
+
+  return (
+    <Drawer // right drawer
+      class="drawer-end"
+      open={displayCart.value !== false}
+      onClose={() => displayCart.value = false}
+      aside={
+        <Aside
+          title="Minha sacola"
+          onClose={() => displayCart.value = false}
+        >
+          <Cart platform={platform} />
+        </Aside>
+      }
+    >
+      {children}
+    </Drawer>
+  );
+}
+
+export type MenuDrawerProps = Pick<Props, "menu" | "children">;
+
+export function MenuDrawer(
+  { menu, children }: MenuDrawerProps,
+) {
+  const { displayMenu } = useUI();
 
   return (
     <Drawer // left drawer
-      open={displayMenu.value || displaySearchDrawer.value}
+      open={displayMenu.value}
       onClose={() => {
         displayMenu.value = false;
-        displaySearchDrawer.value = false;
       }}
       aside={
         <Aside
           onClose={() => {
             displayMenu.value = false;
-            displaySearchDrawer.value = false;
           }}
-          title={displayMenu.value ? "Menu" : "Buscar"}
+          title="Menu"
         >
           {displayMenu.value && <Menu {...menu} />}
-          {searchbar && displaySearchDrawer.value && (
-            <div class="w-screen">
-              <Searchbar {...searchbar} />
-            </div>
-          )}
         </Aside>
       }
     >
-      <Drawer // right drawer
-        class="drawer-end"
-        open={displayCart.value !== false}
-        onClose={() => displayCart.value = false}
-        aside={
-          <Aside
-            title="Minha sacola"
-            onClose={() => displayCart.value = false}
-          >
-            <Cart platform={platform} />
-          </Aside>
-        }
-      >
-        {children}
-      </Drawer>
+      {children}
     </Drawer>
   );
 }
-
-export default Drawers;

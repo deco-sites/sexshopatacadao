@@ -47,7 +47,7 @@ function Main({ searchbar, logo }: {
 
       {/* Desktop Version */}
       <div class="hidden md:flex flex-row justify-evenly items-center max-w-[96rem] mx-auto">
-        <div class="flex-none w-44 lg:my-5">
+        <div class="flex-none lg:my-5">
           {logo && (
             <a
               href="/"
@@ -60,14 +60,27 @@ function Main({ searchbar, logo }: {
           )}
         </div>
         <Searchbar searchbar={searchbar} />
-        <div class="flex-none w-44 flex items-center justify-end gap-2">
+        <div class="flex-none items-center hidden lg:flex">
           <a
-            class="btn btn-circle btn-sm btn-ghost"
+            class="flex items-center gap-2 group-data-[micro-header='true']/header:flex-col py-2"
             href="/login"
             aria-label="Log in"
           >
-            <Icon id="User" size={24} strokeWidth={0.4} />
+            <Icon
+              id="User"
+              size={20}
+              strokeWidth={0}
+              class="text-primary-500"
+            />
+            <span class="block uppercase text-xs font-bold group-data-[micro-header='true']/header:hidden">
+              Faça Login | Cadastre-se
+            </span>
+            <span class="hidden text-xs group-data-[micro-header='true']/header:block">
+              Entrar
+            </span>
           </a>
+        </div>
+        <div class="flex-none flex items-center">
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
           {platform === "wake" && <CartButtonWake />}

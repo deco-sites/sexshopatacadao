@@ -12,10 +12,10 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
       class="navitem flex items-center group/navitem border-black"
     >
       <a href={url} class="flex flex-col items-center pb-6">
-        <div class="w-[40px] h-[51px]">
+        <div class="w-[40px] max-h-[51px] group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:max-h-0 transition-all">
           {iconSrc && (
             <img
-              class="w-full h-full object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[-5deg] transition-all duration-500"
+              class="w-full h-[51px] object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[-5deg] group-data-[micro-header='true']/header:!scale-0 transition-all duration-500"
               src={iconSrc}
               alt={name}
               width={40}

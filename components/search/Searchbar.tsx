@@ -21,7 +21,9 @@ import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
 import type { Platform } from "$store/apps/site.ts";
+import Image from "apps/website/components/Image.tsx";
 import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
+import { useComputed, useSignal } from "@preact/signals";
 
 // Editable props
 export interface Props {
@@ -60,17 +62,23 @@ function Searchbar({
   loader,
   platform,
 }: Props) {
+  const isFocused = useSignal(false);
   const id = useId();
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { setQuery, payload, loading } = useSuggestions(loader);
+  const { setQuery, payload, loading, query } = useSuggestions(loader);
   const { products = [], searches = [] } = payload.value ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
 
-  const open = hasProducts || hasTerms;
+  const open = isFocused.value && !!query && (hasProducts || hasTerms);
+
+  const shouldClear = !!query;
 
   return (
-    <div class="relative w-full max-w-3xl h-[48px] group" data-open={open}>
+    <div
+      class="relative w-full max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all"
+      data-open={open}
+    >
       <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 focus-within:border-primary-500">
         <form id={id} action={action} class="flex w-full">
           <input
@@ -90,6 +98,8 @@ function Searchbar({
 
               setQuery(value);
             }}
+            onFocus={() => isFocused.value = true}
+            onBlur={() => isFocused.value = false}
             placeholder={placeholder}
             role="combobox"
             aria-controls="search-suggestion"
@@ -101,41 +111,63 @@ function Searchbar({
             aria-label="Search"
             for={id}
             tabIndex={-1}
+            onClick={(e) => {
+              e.preventDefault();
+
+              if (searchInputRef.current) {
+                if (shouldClear) {
+                  setQuery("");
+                  searchInputRef.current.value = "";
+                }
+
+                searchInputRef.current.focus();
+              }
+            }}
           >
             {loading.value
               ? <span class="loading loading-spinner loading-xs" />
+              : shouldClear
+              ? <Icon id="XMark" size={16} strokeWidth={2} />
               : <Icon id="MagnifyingGlass" size={16} strokeWidth={0.01} />}
           </Button>
         </form>
 
-        <div class="max-h-0 overflow-y-auto invisible opacity-0 transition-all group-data-[open=true]:visible group-data-[open=true]:opacity-100 group-data-[open=true]:max-h-[60vh] scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[50px] scrollbar-w-[10px] scrollbar">
-          <div class="flex flex-col">
-            <ul id="search-suggestion" class="flex flex-col">
-              {searches.map(({ term }) => (
-                <li>
-                  <a href={`/s?q=${term}`} class="flex gap-4 items-center">
-                    <span dangerouslySetInnerHTML={{ __html: term }} />
-                  </a>
+        <div class="flex flex-col text-xs max-h-0 overflow-y-auto invisible opacity-0 transition-all group-data-[open=true]:visible group-data-[open=true]:opacity-100 group-data-[open=true]:max-h-[60vh] scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[50px] scrollbar-w-[10px] scrollbar">
+          <ul id="search-suggestion" class="flex flex-col">
+            <li>
+              <a href={`/s?q=${query}`} class="flex p-3">
+                <span>
+                  Buscar por "<>{query}</>"
+                </span>
+              </a>
+            </li>
+            {searches.map(({ term }) => (
+              <li>
+                <a href={`/s?q=${term}`} class="flex p-3">
+                  <span dangerouslySetInnerHTML={{ __html: term }} />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <ul class="flex flex-col">
+            {products.map((product) => {
+              const [image] = product.image ?? [];
+
+              return (
+                <li class="p-3 flex gap-3 items-center">
+                  <Image
+                    src={image.url!}
+                    alt={image.alternateName!}
+                    width={29}
+                    height={29}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span>{product.name}</span>
                 </li>
-              ))}
-            </ul>
-            <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-              <span
-                class="font-medium text-xl"
-                role="heading"
-                aria-level={3}
-              >
-                Produtos sugeridos
-              </span>
-              <ul class="flex flex-col">
-                {products.map((product) => (
-                  <li class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]">
-                    <span>{product.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </div>

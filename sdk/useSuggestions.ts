@@ -53,5 +53,6 @@ export const useSuggestions = (
     loading,
     payload,
     setQuery,
+    query: latestQuery,
   };
 };

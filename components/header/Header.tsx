@@ -7,6 +7,8 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { SetupMicroHeader } from "$store/islands/Header/SetupMicroHeader.tsx";
 import Main from "./Main.tsx";
 import Navbar from "$store/components/header/Navbar.tsx";
+import { type EditableProps as BenefitsProps } from "$store/components/header/Benefits.tsx";
+import Benefits from "$store/components/header/Benefits.tsx";
 
 const HEADER_HEIGHT = 265;
 
@@ -29,7 +31,8 @@ export interface SiteNavigationElement extends SiteNavigationElementLeaf {
 }
 
 export interface Props {
-  alerts: string[];
+  /** @title Benefits & Help */
+  benefits: BenefitsProps;
 
   /** @title Search Bar */
   searchbar?: Omit<SearchbarProps, "platform">;
@@ -45,7 +48,7 @@ export interface Props {
 }
 
 function Header(
-  { alerts, searchbar, navItems, logo, isMobile }: ReturnType<typeof loader>,
+  { benefits, searchbar, navItems, logo, isMobile }: ReturnType<typeof loader>,
 ) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -68,6 +71,7 @@ function Header(
       >
         {/* <Drawers menu={{ items }} searchbar={searchbar} platform={platform}> */}
         <div class="bg-base-100 fixed w-full z-50">
+          <Benefits {...benefits} isMobile={isMobile} />
           {/* <Alert alerts={alerts} /> */}
           <Main
             searchbar={searchbar && { ...searchbar, platform }}

@@ -11,7 +11,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
       data-highlighted={highlighted ? "true" : undefined}
       class="navitem flex items-center group/navitem border-black"
     >
-      <a href={url} class="flex flex-col items-center pb-6">
+      <a href={url} class="flex flex-col items-center pb-5">
         <div class="w-[40px] max-h-[51px] group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:max-h-0 transition-all">
           {iconSrc && (
             <img

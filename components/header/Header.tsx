@@ -10,7 +10,7 @@ import Navbar from "$store/components/header/Navbar.tsx";
 import { type EditableProps as BenefitsProps } from "$store/components/header/Benefits.tsx";
 import Benefits from "$store/components/header/Benefits.tsx";
 
-const HEADER_HEIGHT_DESKTOP = 265;
+const HEADER_HEIGHT_DESKTOP = 266;
 const HEADER_HEIGHT_MOBILE = 180;
 
 /** @titleBy name */
@@ -25,11 +25,11 @@ export interface SiteNavigationElementLeaf {
 export interface SiteNavigationElement extends SiteNavigationElementLeaf {
   /** Icon for the item. */
   icon?: ImageWidget;
-  /** 
+  /**
    * @description Highlighted items will be at last desktop navbar
    */
   highlighted?: boolean;
-  /** 
+  /**
    * @title Pinned
    * @description Pinned items will be at first in mobile menu
    */

@@ -76,7 +76,7 @@ function Searchbar({
 
   return (
     <div
-      class="relative w-full max-w-[598px] md:max-w-[750px] lg:max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all order-last basis-full lg:basis-0 lg:order-none mx-6 lg:mx-0"
+      class="relative w-full max-w-[598px] md:max-w-[750px] lg:max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all order-last basis-full lg:basis-[unset] lg:order-none mx-6 lg:mx-0"
       data-open={open}
     >
       <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 focus-within:border-primary-500">

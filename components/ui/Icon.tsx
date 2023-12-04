@@ -44,7 +44,9 @@ export type AvailableIcons =
   | "Zoom"
   | "Mail"
   | "XFilled"
-  | "AngleUp";
+  | "Close"
+  | "AngleUp"
+  | "ShippingTruck";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

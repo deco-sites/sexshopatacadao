@@ -69,10 +69,9 @@ export function CartDrawer(
       open={displayCart.value !== false}
       onClose={() => displayCart.value = false}
       aside={
-        <Aside
-          title="Minha sacola"
-          onClose={() => displayCart.value = false}
-        >
+        <Aside // title="Minha sacola"
+         // onClose={() => displayCart.value = false}
+        class="w-[85%] min-w-[280px] max-w-[400px]">
           <Cart platform={platform} />
         </Aside>
       }

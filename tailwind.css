@@ -34,6 +34,9 @@
   .menuitem[open], .menuitem > input[type=checkbox]:checked ~.collapse-title .menuitem-arrow {
     @apply rotate-0;
   }
+  .drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
+    background-color: rgba(3,4,78,.25) !important;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

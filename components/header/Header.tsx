@@ -25,8 +25,15 @@ export interface SiteNavigationElementLeaf {
 export interface SiteNavigationElement extends SiteNavigationElementLeaf {
   /** Icon for the item. */
   icon?: ImageWidget;
-  /** Highlited items will be at the end of the navbar in Desktop, and at the beginning of the menu in mobile */
+  /** 
+   * @description Highlighted items will be at last desktop navbar
+   */
   highlighted?: boolean;
+  /** 
+   * @title Pinned
+   * @description Pinned items will be at first in mobile menu
+   */
+  pinned?: boolean;
 
   children?: SiteNavigationElementLeaf[];
 }
@@ -54,13 +61,9 @@ function Header(
   const platform = usePlatform();
   const items = navItems ?? [];
 
-  // Mobile = start
+  // Pinned at first
   const mobileItems = items.toSorted((a, b) =>
-    (a.highlighted && !b.highlighted)
-      ? isMobile ? -1 : 1
-      : (b.highlighted && !a.highlighted)
-      ? isMobile ? 1 : -1
-      : 0
+    (a.pinned && !b.pinned) ? -1 : (b.pinned && !a.pinned) ? 1 : 0
   );
 
   return (

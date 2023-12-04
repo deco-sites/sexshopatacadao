@@ -15,7 +15,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
         <div class="w-[40px] max-h-[51px] group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:max-h-0 transition-all">
           {iconSrc && (
             <img
-              class="w-full h-[51px] object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[-5deg] group-data-[micro-header='true']/header:!scale-0 transition-all duration-500"
+              class="w-full h-[51px] object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[5deg] group-data-[micro-header='true']/header:!scale-0 transition-all duration-500"
               src={iconSrc}
               alt={name}
               width={40}
@@ -24,7 +24,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
             />
           )}
         </div>
-        <span class="block text-center uppercase text-[13px] font-bold group-hover/navitem:text-primary-500 transition-colors h-8 leading-none">
+        <span class="block text-center uppercase text-[13px] font-bold group-hover/navitem:text-primary-500 group-data-[highlighted='true']/navitem:text-primary-500 transition-colors h-8 leading-none">
           {name}
         </span>
       </a>

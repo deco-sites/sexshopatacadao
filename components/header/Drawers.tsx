@@ -22,17 +22,22 @@ export interface Props {
 }
 
 const Aside = (
-  { title, onClose, children }: {
-    title: string;
+  { title, onClose, children, class: _class }: {
+    title?: string;
     onClose?: () => void;
     children: ComponentChildren;
+    class?: string;
   },
 ) => (
-  <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
+  <div
+    class={`bg-base-100 grid grid-rows-[auto_1fr] h-full max-w-[100vw] ${_class}`}
+  >
     <div class="flex justify-between items-center">
-      <h1 class="px-4 py-3">
-        <span class="font-medium text-2xl">{title}</span>
-      </h1>
+      {title && (
+        <h1 class="px-4 py-3">
+          <span class="font-medium text-2xl">{title}</span>
+        </h1>
+      )}
       {onClose && (
         <Button class="btn btn-ghost" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
@@ -91,12 +96,11 @@ export function MenuDrawer(
         displayMenu.value = false;
       }}
       aside={
-        <Aside
-          onClose={() => {
-            displayMenu.value = false;
-          }}
-          title="Menu"
-        >
+        <Aside // onClose={() => {
+         //   displayMenu.value = false;
+        // }}
+        // title="Menu"
+        class="w-[80%] relative">
           {displayMenu.value && <Menu {...menu} />}
         </Aside>
       }

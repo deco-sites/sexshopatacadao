@@ -131,7 +131,7 @@ function Buttons() {
 const HeaderBenefits = ({ helpItems, benefits, isMobile }: Props) => {
   return (
     <div class="grid group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:invisible group-data-[micro-header='true']/header:grid-rows-[0fr] grid-rows-[1fr] transition-all font-montserrat">
-      <div class="group-data-[micro-header='true']/header:overflow-hidden w-full bg-primary-500 flex items-center justify-center lg:gap-12">
+      <div class="group-data-[micro-header='true']/header:overflow-hidden w-full bg-primary-500 flex items-center justify-center min-[1341px]:gap-12 max-[1340px]:gap-6">
         {isMobile
           ? (
             <div
@@ -159,7 +159,7 @@ const HeaderBenefits = ({ helpItems, benefits, isMobile }: Props) => {
           : (
             <>
               {!!helpItems?.length && (
-                <div class="relative h-full text-white group hover:bg-primary-600 transition-colors pl-3 pr-2">
+                <div class="relative h-full text-white group bg-primary-600 transition-colors pl-3 pr-2">
                   <div class="flex items-center cursor-default">
                     <div class="flex flex-col uppercase">
                       <strong class="text-sm leading-none">Precisa</strong>
@@ -169,7 +169,7 @@ const HeaderBenefits = ({ helpItems, benefits, isMobile }: Props) => {
                     </div>
                     <strong class="text-4xl leading-none">?</strong>
                   </div>
-                  <ul class="absolute z-20 bg-primary-600 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col left-0 top-full py-2 px-5 rounded-b-[10px]">
+                  <ul class="absolute z-20 bg-primary-600 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all flex flex-col left-0 top-full py-2 px-5 rounded-b-[10px] ">
                     {helpItems?.map((helpItem) => (
                       <li class="group">
                         <HelpItem {...helpItem} />
@@ -178,7 +178,7 @@ const HeaderBenefits = ({ helpItems, benefits, isMobile }: Props) => {
                   </ul>
                 </div>
               )}
-              <ul class="h-10 flex items-center gap-12">
+              <ul class="h-10 flex items-center gap-12 max-[1340px]:gap-6">
                 {benefits?.map((benefit) => (
                   <li class="flex">
                     <BenefitItem {...benefit} />

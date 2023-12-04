@@ -6,14 +6,16 @@ export default function MenuButton() {
   const { displayMenu } = useUI();
 
   return (
-    <Button
-      class="btn btn-circle btn-sm btn-ghost"
-      aria-label="open menu"
-      onClick={() => {
-        displayMenu.value = true;
-      }}
-    >
-      <Icon id="Bars3" size={24} strokeWidth={0.01} />
-    </Button>
+    <div class="flex-1 lg:flex-none">
+      <Button
+        class="bg-transparent hover:bg-transparent !border-transparent !outline-none text-primary-500"
+        aria-label="open menu"
+        onClick={() => {
+          displayMenu.value = true;
+        }}
+      >
+        <Icon id="Bars3" size={20} strokeWidth={0} />
+      </Button>
+    </div>
   );
 }

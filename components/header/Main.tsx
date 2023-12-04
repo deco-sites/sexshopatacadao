@@ -12,16 +12,18 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import Image from "apps/website/components/Image.tsx";
 import { navbarHeight } from "./constants.ts";
 
-function Main({ searchbar, logo }: {
+function Main({ searchbar, logo, isMobile }: {
   searchbar?: SearchbarProps;
   logo?: { src: string; alt: string };
+  isMobile?: boolean;
 }) {
   const platform = usePlatform();
 
   return (
     <>
       {/* Mobile Version */}
-      <div
+      {
+        /* <div
         style={{ height: navbarHeight }}
         class="md:hidden flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6 gap-2"
       >
@@ -43,19 +45,29 @@ function Main({ searchbar, logo }: {
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
         </div>
-      </div>
+      </div> */
+      }
 
       {/* Desktop Version */}
-      <div class="hidden md:flex flex-row justify-evenly items-center max-w-[96rem] mx-auto">
+      <div class="flex flex-row flex-wrap lg:flex-nowrap lg:justify-evenly justify-center items-center max-w-[96rem] mx-auto">
+        {isMobile && <MenuButton />}
+
         <div class="flex-none lg:my-5">
           {logo && (
             <a
               href="/"
               aria-label="Distribuidor Sex Shop Atacadão"
               // class="block px-4 py-3 w-[160px]"
-              class="flex"
+              class="flex py-2 lg:p-0"
             >
-              <Image src={logo.src} alt={logo.alt} width={122} height={71} />
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={122}
+                height={71}
+                class="w-[114px] h-[66px] lg:w-[122px] lg:h-[71px]"
+                loading="eager"
+              />
             </a>
           )}
         </div>
@@ -80,7 +92,7 @@ function Main({ searchbar, logo }: {
             </span>
           </a>
         </div>
-        <div class="flex-none flex items-center">
+        <div class="flex-1 lg:flex-none flex items-center lg:justify-start justify-end">
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
           {platform === "wake" && <CartButtonWake />}

@@ -10,7 +10,8 @@ import Navbar from "$store/components/header/Navbar.tsx";
 import { type EditableProps as BenefitsProps } from "$store/components/header/Benefits.tsx";
 import Benefits from "$store/components/header/Benefits.tsx";
 
-const HEADER_HEIGHT = 265;
+const HEADER_HEIGHT_DESKTOP = 265;
+const HEADER_HEIGHT_MOBILE = 180;
 
 /** @titleBy name */
 export interface SiteNavigationElementLeaf {
@@ -54,20 +55,22 @@ function Header(
   const items = navItems ?? [];
 
   // Mobile = start
-  // const mobile = items.toSorted((a, b) =>
-  //   (a.highlighted && !b.highlighted)
-  //     ? isMobile ? -1 : 1
-  //     : (b.highlighted && !a.highlighted)
-  //     ? isMobile ? 1 : -1
-  //     : 0
-  // );
+  const mobileItems = items.toSorted((a, b) =>
+    (a.highlighted && !b.highlighted)
+      ? isMobile ? -1 : 1
+      : (b.highlighted && !a.highlighted)
+      ? isMobile ? 1 : -1
+      : 0
+  );
 
   return (
     <>
       <header
         id="main-header"
         class="group/header"
-        style={{ height: HEADER_HEIGHT }}
+        style={{
+          height: isMobile ? HEADER_HEIGHT_MOBILE : HEADER_HEIGHT_DESKTOP,
+        }}
       >
         {/* <Drawers menu={{ items }} searchbar={searchbar} platform={platform}> */}
         <div class="bg-base-100 fixed w-full z-50">
@@ -76,11 +79,12 @@ function Header(
           <Main
             searchbar={searchbar && { ...searchbar, platform }}
             logo={logo}
+            isMobile={isMobile}
           />
           {!isMobile && <Navbar navItems={items} />}
         </div>
         <CartDrawer platform={platform} />
-        {isMobile && <MenuDrawer menu={{ items: items }} />}
+        {isMobile && <MenuDrawer menu={{ items: mobileItems }} />}
         {/* </Drawers> */}
       </header>
       <SetupMicroHeader rootId="main-header" />

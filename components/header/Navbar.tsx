@@ -24,7 +24,7 @@ const Navbar = ({ navItems }: NavbarProps) => {
         {normal?.map((navItem) => <NavItem item={navItem} />)}
         {!!highlight.length && (
           <>
-            <li class="h-full max-h-[70px] w-[1px] bg-black self-start group-data-[micro-header='true']/header:bg-transparent group-data-[micro-header='true']/header:max-h-0 transition-all" />
+            <li class="h-full max-h-[70px] w-[1px] bg-gray-400 self-start group-data-[micro-header='true']/header:bg-transparent group-data-[micro-header='true']/header:max-h-0 transition-all" />
             {highlight.map((navItem) => <NavItem item={navItem} />)}
           </>
         )}

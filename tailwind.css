@@ -30,6 +30,10 @@
   .navitem[data-highlighted='true']:first-of-type {
     @apply border-l;
   }
+
+  .menuitem[open], .menuitem > input[type=checkbox]:checked ~.collapse-title .menuitem-arrow {
+    @apply rotate-0;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

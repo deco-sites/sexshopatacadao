@@ -15,6 +15,8 @@ export default {
         "success-500": "#4da630",
         "success-600": "#3f8e25",
 
+        "danger-500": "#d33232",
+
         "gray-100": "#f2f4f5",
         "gray-200": "#f0f0f0",
         "gray-400": "#e3e3e3",
@@ -27,6 +29,23 @@ export default {
         sans: ["Ubuntu", "sans-serif"],
         serif: ["inherit", "serif"],
         montserrat: ["Montserrat", "Ubuntu", "sans-serif"],
+      },
+
+      screens: {
+        lg: "1025px", // Consider big tablets as mobile
+      },
+
+      animation: {
+        "blink-primary": "blink-primary 2s linear infinite",
+      },
+
+      keyframes: {
+        "blink-primary": {
+          "0%": { color: "#fff" },
+          "50%": { color: "#fff" },
+          "51%": { color: "#e5067c" },
+          "100%": { color: "#e5067c" },
+        },
       },
     },
   },

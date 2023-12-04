@@ -76,7 +76,7 @@ function Searchbar({
 
   return (
     <div
-      class="relative w-full max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all"
+      class="relative w-full max-w-[598px] md:max-w-[750px] lg:max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all order-last basis-full lg:basis-0 lg:order-none mx-6 lg:mx-0"
       data-open={open}
     >
       <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 focus-within:border-primary-500">
@@ -84,7 +84,7 @@ function Searchbar({
           <input
             ref={searchInputRef}
             id="search-input"
-            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none group-data-[open='true']:!border-b group-data-[open='true']:!rounded-b-none"
+            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none group-data-[open='true']:!border-b group-data-[open='true']:!rounded-b-none font-montserrat text-gray-700 text-base lg:text-[13px] h-[38px] lg:h-[48px]"
             name={name}
             onInput={(e) => {
               const value = e.currentTarget.value;
@@ -107,7 +107,7 @@ function Searchbar({
           />
           <Button
             type="submit"
-            class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px]"
+            class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px] h-[38px] lg:h-[48px] !min-h-[unset]"
             aria-label="Search"
             for={id}
             tabIndex={-1}

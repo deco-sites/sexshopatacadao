@@ -12,9 +12,9 @@ interface Props {
 
 function BlinkingText({ children }: { children: ComponentChildren }) {
   return (
-    <span class="animate-blink-primary text-base lg:text-lg leading-none">
+    <strong class="animate-blink-primary text-base lg:text-lg !leading-none">
       {children}
-    </span>
+    </strong>
   );
 }
 
@@ -29,7 +29,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
         {total > 0
           ? remaining > 0
             ? (
-              <span class="leading-none text-[13px] sm:text-sm lg:text-base">
+              <span class="!leading-none text-[12px] sm:text-sm lg:text-base">
                 Não perca o frete{" "}
                 <BlinkingText>
                   GRÁTIS
@@ -42,7 +42,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
               </span>
             )
             : (
-              <span class="leading-none text-[13px] sm:text-sm lg:text-base">
+              <span class="!leading-none text-[12px] sm:text-sm lg:text-base">
                 Parabéns! você ganhou frete{" "}
                 <BlinkingText>
                   GRÁTIS
@@ -52,7 +52,7 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
               </span>
             )
           : (
-            <span class="leading-none text-[13px] sm:text-sm lg:text-base">
+            <span class="!leading-none text-[12px] sm:text-sm lg:text-base">
               Frete{" "}
               <BlinkingText>
                 GRÁTIS

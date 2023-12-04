@@ -1,12 +1,21 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { asset } from "$fresh/runtime.ts";
+import { ComponentChildren } from "preact";
 
 interface Props {
   total: number;
   target: number;
   locale: string;
   currency: string;
+}
+
+function BlinkingText({ children }: { children: ComponentChildren }) {
+  return (
+    <span class="animate-blink-primary text-base lg:text-lg leading-none">
+      {children}
+    </span>
+  );
 }
 
 function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
@@ -20,38 +29,38 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
         {total > 0
           ? remaining > 0
             ? (
-              <span class="leading-none">
+              <span class="leading-none text-[13px] sm:text-sm lg:text-base">
                 Não perca o frete{" "}
-                <strong class="animate-blink-primary text-lg leading-none">
+                <BlinkingText>
                   GRÁTIS
-                </strong>
+                </BlinkingText>
                 <br />
                 faltam apenas{" "}
-                <strong class="animate-blink-primary text-lg leading-none">
+                <BlinkingText>
                   {formatPrice(remaining, currency, locale)}*
-                </strong>
+                </BlinkingText>
               </span>
             )
             : (
-              <span class="leading-none">
+              <span class="leading-none text-[13px] sm:text-sm lg:text-base">
                 Parabéns! você ganhou frete{" "}
-                <strong class="animate-blink-primary text-lg leading-none">
+                <BlinkingText>
                   GRÁTIS
-                </strong>
+                </BlinkingText>
                 <br />
                 válido para todo o Brasil.
               </span>
             )
           : (
-            <span class="leading-none">
+            <span class="leading-none text-[13px] sm:text-sm lg:text-base">
               Frete{" "}
-              <strong class="animate-blink-primary text-lg leading-none">
+              <BlinkingText>
                 GRÁTIS
-              </strong>{" "}
+              </BlinkingText>{" "}
               a partir de{" "}
-              <strong class="animate-blink-primary text-lg leading-none">
+              <BlinkingText>
                 {formatPrice(target, currency, locale)}*
-              </strong>{" "}
+              </BlinkingText>{" "}
               válido para todo o Brasil!
             </span>
           )}

@@ -116,6 +116,22 @@ function GlobalTags() {
             asset("/fonts/montserrat-v26-latin-700.woff")
           }) format('woff');
         }
+
+        
+
+        /* lobster-400 - latin */
+        @font-face {
+          font-family: "Lobster";
+          font-display: swap;
+          font-style: cursive;
+          font-weight: 400;
+          src: url(${
+            asset("/fonts/Lobster/lobster-v28-latin-regular.woff")
+          }) format("woff"),
+            url(${
+            asset("/fonts/Lobster/lobster-v28-latin-regular.woff2")
+          }) format("woff2");
+        }
       `,
         }}
       />

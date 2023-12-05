@@ -29,6 +29,7 @@ export default {
         sans: ["Ubuntu", "sans-serif"],
         serif: ["inherit", "serif"],
         montserrat: ["Montserrat", "Ubuntu", "sans-serif"],
+        lobster: ["Lobster", "serif"],
       },
 
       screens: {

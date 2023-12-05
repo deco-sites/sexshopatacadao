@@ -12,6 +12,25 @@ function GlobalTags() {
       {/* Web Manifest */}
       <link rel="manifest" href={asset("/site.webmanifest")} />
 
+      {/* Favicon */}
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href={asset("/apple-touch-icon.png")}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href={asset("/favicon-32x32.png")}
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href={asset("/favicon-16x16.png")}
+      />
+
       {/* Fonts Load */}
       <style
         dangerouslySetInnerHTML={{
@@ -126,10 +145,10 @@ function GlobalTags() {
           font-style: cursive;
           font-weight: 400;
           src: url(${
-            asset("/fonts/Lobster/lobster-v28-latin-regular.woff")
+            asset("/fonts/lobster-v28-latin-regular.woff")
           }) format("woff"),
             url(${
-            asset("/fonts/Lobster/lobster-v28-latin-regular.woff2")
+            asset("/fonts/lobster-v28-latin-regular.woff2")
           }) format("woff2");
         }
       `,

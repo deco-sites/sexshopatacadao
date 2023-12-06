@@ -10,6 +10,26 @@ export interface Props {
 function MenuItem({ item }: { item: SiteNavigationElement }) {
   const hasChildren = Boolean(item.children?.length);
 
+  const titleContent = (
+    <div
+      data-highlighted={item.highlighted}
+      class={clsx(
+        "p-0 flex items-center h-[60px] data-[highlighted]:font-bold data-[highlighted]:text-primary-500",
+        hasChildren && "collapse-title",
+      )}
+    >
+      <span>{item.name}</span>
+      {hasChildren && (
+        <Icon
+          id="AngleUp"
+          size={13}
+          strokeWidth={1}
+          class="rotate-180 transition-transform custom-collapse-arrow ml-auto"
+        />
+      )}
+    </div>
+  );
+
   return (
     <div
       class={clsx(
@@ -18,23 +38,13 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
       )}
     >
       {hasChildren && <input type="checkbox" />}
-      <div
-        data-highlighted={item.highlighted}
-        class={clsx(
-          "p-0 flex items-center h-[60px] data-[highlighted]:font-bold data-[highlighted]:text-primary-500",
-          hasChildren && "collapse-title",
-        )}
-      >
-        <span>{item.name}</span>
-        {hasChildren && (
-          <Icon
-            id="AngleUp"
-            size={13}
-            strokeWidth={1}
-            class="rotate-180 transition-transform custom-collapse-arrow ml-auto"
-          />
-        )}
-      </div>
+      {hasChildren ? titleContent : (
+        <a
+          href={item.url}
+        >
+          {titleContent}
+        </a>
+      )}
       {hasChildren && (
         <div class="collapse-content px-0">
           <ul>

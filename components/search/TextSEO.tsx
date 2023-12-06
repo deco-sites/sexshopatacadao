@@ -5,31 +5,26 @@ export default function TextSeo(
   const inputId = `text-seo-input`;
 
   return (
-    <div class="py-9 lg:pt-14 lg:pb-12 flex justify-center bg-primary relative mb-6 lg:mb-0">
+    <div class="container-center-plp rounded-[5px] border border-primary-500 pt-4 px-1 pb-7 md:px-5">
       <input type={"checkbox"} class={"hidden peer"} id={inputId} />
-      <div
-        class={"center flex flex-col px-[10px] overflow-hidden peer-checked:max-h-none max-h-[279px] lg:max-h-none lg:px-14 xl:px-[10px]"}
-      >
-        <div id={id} class={"contents"}>
+      <div class="flex flex-col group">
+        <div
+          class={"grid grid-rows-[120px] peer-checked:group-[]:grid-rows-[1fr]"}
+        >
           <div
-            class="prose [&_p]:mb-4 leading-[25px] text-xs uppercase"
+            class="prose plp-seo overflow-hidden"
             dangerouslySetInnerHTML={{ __html: text }}
           />
         </div>
-      </div>
 
-      <label
-        htmlFor={inputId}
-        class="peer-checked:hidden lg:hidden w-full h-[35px] absolute bottom-0 bg-primary left-1/2 translate-x-[-50%] translate-y-[-50%]"
-        style={{}}
-      >
         <label
           htmlFor={inputId}
-          class="mx-auto cursor-pointer flex items-center justify-center rounded w-[160px] h-[35px] border border-tertiary bg-white"
+          class="self-center md:self-end mt-1"
         >
-          <span class="font-light text-tertiary text-sm">Continuar Lendo</span>
+          <span class="text-gray-750 link leading-none after:content-['Ver_mais'] peer-checked:group-[]:after:content-['Ver_menos']">
+          </span>
         </label>
-      </label>
+      </div>
     </div>
   );
 }

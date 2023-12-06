@@ -37,10 +37,40 @@
   .drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
     background-color: rgba(3,4,78,.25) !important;
   }
+
+  
+  .prose a {
+    @apply link;
+  }
+  .prose ul {
+    @apply py-4 pl-10 list-disc;
+  }
+  .prose ol {
+    @apply py-4 pl-10 list-decimal;
+  }
+
+  .prose.plp-seo {
+    @apply leading-[25px] text-gray-750;
+  }
+  .prose.plp-seo p {
+    @apply my-[10px];
+  }
+  .prose.plp-seo h2, .prose.plp-seo h3 {
+    @apply font-bold uppercase text-lg text-primary-500 mb-[5px];
+  }
+  .prose.plp-seo b, .prose.plp-seo strong {
+    @apply font-bold text-primary-500;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {
   animation: progress-frame ease normal
+}
+
+@layer components {
+  .container-center-plp {
+    @apply w-full mx-auto md:max-w-[calc(96rem-10vw)];
+  }
 }
 
 @keyframes progress-frame {

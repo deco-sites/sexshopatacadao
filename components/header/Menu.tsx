@@ -13,7 +13,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
   return (
     <div
       class={clsx(
-        "menuitem px-3 w-full font-montserrat group",
+        "custom-collapse px-3 w-full font-montserrat group",
         hasChildren && "collapse",
       )}
     >
@@ -31,7 +31,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             id="AngleUp"
             size={13}
             strokeWidth={1}
-            class="rotate-180 transition-transform menuitem-arrow ml-auto"
+            class="rotate-180 transition-transform custom-collapse-arrow ml-auto"
           />
         )}
       </div>

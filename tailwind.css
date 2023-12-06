@@ -31,7 +31,7 @@
     @apply border-l;
   }
 
-  .menuitem[open], .menuitem > input[type=checkbox]:checked ~.collapse-title .menuitem-arrow {
+  .custom-collapse[open], .custom-collapse > input[type=checkbox]:checked ~.collapse-title .custom-collapse-arrow {
     @apply rotate-0;
   }
   .drawer-toggle:checked ~ .drawer-side > .drawer-overlay {

@@ -154,6 +154,23 @@ function GlobalTags() {
       `,
         }}
       />
+
+      {/* Aux styles Load */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .footer-section-title::after {
+              content: "";
+              position: absolute;
+              left: 80%;
+              background: url(${asset("/image/slash.svg")}) no-repeat;
+              width: 33px;
+              height: 17px;
+              display: block;
+            }
+          `,
+        }}
+      />
     </Head>
   );
 }

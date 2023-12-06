@@ -19,6 +19,7 @@ export default {
 
         "gray-100": "#f2f4f5",
         "gray-200": "#f0f0f0",
+        "gray-300": "#eeeeee",
         "gray-400": "#e3e3e3",
         // "gray-500": "#1a1a1a",
         "gray-700": "#888888",
@@ -29,11 +30,13 @@ export default {
         sans: ["Ubuntu", "sans-serif"],
         serif: ["inherit", "serif"],
         montserrat: ["Montserrat", "Ubuntu", "sans-serif"],
-        lobster: ["Lobster", "serif"],
+        lobster: ["Lobster", "cursive", "serif"],
       },
 
       screens: {
         lg: "1025px", // Consider big tablets as mobile
+
+        xs: "440px",
       },
 
       animation: {

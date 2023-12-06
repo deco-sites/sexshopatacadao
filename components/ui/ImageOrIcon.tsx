@@ -13,8 +13,8 @@ export interface ImageOrIconType {
 
 export interface ImageOrIconProps extends ImageOrIconType {
   class?: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
   alt?: string;
   loading?: "lazy" | "eager";
 }

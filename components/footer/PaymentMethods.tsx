@@ -1,7 +1,13 @@
 import Icon from "$store/components/ui/Icon.tsx";
+import SectionTitle from "deco-sites/sexshopatacadao/components/footer/SectionTitle.tsx";
+import ImageOrIcon, {
+  ImageOrIconType,
+} from "deco-sites/sexshopatacadao/components/ui/ImageOrIcon.tsx";
 
+/** @title {{ name }} */
 export interface PaymentItem {
-  label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";
+  name: string;
+  image: ImageOrIconType;
 }
 
 export default function PaymentMethods(
@@ -10,20 +16,21 @@ export default function PaymentMethods(
   return (
     <>
       {content && content.items && content.items.length > 0 && (
-        <div class="flex flex-col gap-4">
-          {content.title && <h3 class="text-lg">{content.title}</h3>}
-          <ul class="flex items-center gap-4 flex-wrap">
+        <div class="flex flex-col gap-[14px]">
+          {content.title && <SectionTitle>{content.title}</SectionTitle>}
+          <ul class="flex items-center justify-between gap-x-[6px] gap-y-2 flex-wrap max-w-[192px] xs:max-w-[unset] sm:max-w-[192px] mx-8 sm:mx-0">
             {content.items.map((item) => {
               return (
                 <li
-                  class="border"
-                  title={item.label}
+                  class=""
+                  title={item.name}
                 >
-                  <Icon
-                    width={48}
-                    height={32}
-                    strokeWidth={1}
-                    id={item.label}
+                  <ImageOrIcon
+                    class="!w-auto"
+                    width={43}
+                    height={27}
+                    alt={item.name}
+                    {...item.image}
                   />
                 </li>
               );

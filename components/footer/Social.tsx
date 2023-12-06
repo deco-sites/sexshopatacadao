@@ -39,6 +39,7 @@ export default function Social(
                   alt={item.name}
                   width={30}
                   height={30}
+                  optimize
                 />
               </a>
             </li>

@@ -1,5 +1,8 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Image, {
+  Props as DecoImageProps,
+} from "apps/website/components/Image.tsx";
 
 export interface ImageOrIconType {
   /** @title Image */
@@ -17,19 +20,48 @@ export interface ImageOrIconProps extends ImageOrIconType {
   height?: number;
   alt?: string;
   loading?: "lazy" | "eager";
+
+  optimize?: boolean | Omit<DecoImageProps, "src" | "width" | "height">;
 }
 
 const ImageOrIcon = (
-  { icon, image, alt, width, height, loading, class: _class }: ImageOrIconProps,
+  {
+    icon,
+    image,
+    alt,
+    width,
+    height,
+    loading = "lazy",
+    optimize,
+    class: _class,
+  }: ImageOrIconProps,
 ) => {
   if (image) {
+    if (optimize && width) {
+      return (
+        <Image
+          src={image}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={loading}
+          class={`object-contain ${_class}`}
+          style={{
+            width: `${width}px`,
+            height: `${height}px`,
+          }}
+          {...(typeof optimize === "object" ? optimize : { fit: "contain" })}
+        />
+      );
+    }
+
     return (
       <img
         src={image}
         alt={alt}
         width={width}
         height={height}
-        loading={loading ?? "lazy"}
+        loading={loading}
         class={`object-contain ${_class}`}
         style={{
           width: `${width}px`,

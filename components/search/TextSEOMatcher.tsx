@@ -1,4 +1,5 @@
 import TextSEO from "$store/components/search/TextSEO.tsx";
+import matchUrlLoader from "deco-sites/sexshopatacadao/loaders/matchUrl.ts";
 
 /**
  * @title {{matcher}}
@@ -11,7 +12,7 @@ export interface Item {
    * @description text to be rendered on top of the image
    * @format html
    */
-  text?: string;
+  text: string;
 }
 
 export interface Props {
@@ -33,9 +34,7 @@ export default function TextSeoMatcher(
 export const loader = (props: Props, req: Request) => {
   const { items } = { ...props };
 
-  const text = items.find(({ matcher }) =>
-    new URLPattern({ pathname: matcher }).test(req.url)
-  )?.text;
+  const matched = matchUrlLoader(items, req);
 
-  return { text };
+  return { text: matched?.text };
 };

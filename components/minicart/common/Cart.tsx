@@ -67,7 +67,7 @@ function Cart({
       />
 
       {/* Title */}
-      <h2 class="font-montserrat text-lg pt-[9px] px-3 mt-1 mb-3 font-bold flex items-center text-gray-800">
+      <h2 class="text-lg pt-[9px] px-3 mt-1 mb-3 font-bold flex items-center text-gray-800">
         Meu Carrinho
       </h2>
       {

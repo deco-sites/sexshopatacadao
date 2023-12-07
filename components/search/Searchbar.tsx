@@ -79,12 +79,12 @@ function Searchbar({
       class="relative w-full max-w-[598px] md:max-w-[750px] lg:max-w-[598px] h-[48px] group lg:group-data-[micro-header='true']/header:mr-[100px] transition-all order-last basis-full lg:basis-[unset] lg:order-none mx-6 lg:mx-0"
       data-open={open}
     >
-      <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 focus-within:border-primary-500">
+      <div class="absolute top-0 left-0 w-full rounded-[6px] border border-gray-100 bg-white transition-colors z-10 group-data-[open='true']:border-primary-500">
         <form id={id} action={action} class="flex w-full">
           <input
             ref={searchInputRef}
             id="search-input"
-            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none group-data-[open='true']:!border-b group-data-[open='true']:!rounded-b-none font-montserrat text-gray-700 text-base lg:text-[13px] h-[38px] lg:h-[48px]"
+            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none !border-b-[1.5px] group-data-[open='true']:!rounded-b-none font-montserrat text-gray-700 text-base lg:text-[13px] h-[38px] lg:h-[48px]"
             name={name}
             onInput={(e) => {
               const value = e.currentTarget.value;
@@ -133,7 +133,7 @@ function Searchbar({
         </form>
 
         <div class="flex flex-col text-xs max-h-0 overflow-y-auto invisible opacity-0 transition-all group-data-[open=true]:visible group-data-[open=true]:opacity-100 group-data-[open=true]:max-h-[60vh] scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[50px] scrollbar-w-[10px] scrollbar">
-          <ul id="search-suggestion" class="flex flex-col">
+          <ul id="search-suggestion" class="flex flex-col font-montserrat">
             <li>
               <a href={`/s?q=${query}`} class="flex p-3">
                 <span>

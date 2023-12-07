@@ -1,9 +1,8 @@
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import type { Product } from "apps/commerce/types.ts";
 import BaseCart from "../common/Cart.tsx";
-import { useComputed, useSignal } from "@preact/signals";
+import { useComputed, useSignal, useSignalEffect } from "@preact/signals";
 import { invoke } from "$store/runtime.ts";
-import { useEffect } from "preact/hooks";
 
 const useProductsSpecifications = (ids: string[]) => {
   const productsSpecifications = useSignal(
@@ -41,9 +40,9 @@ const useProductsSpecifications = (ids: string[]) => {
     productsSpecifications.value = productMap;
   };
 
-  useEffect(() => {
+  useSignalEffect(() => {
     ids?.length && fetchAdditionalProperties();
-  }, [ids]);
+  });
 
   return productsSpecifications.value;
 };

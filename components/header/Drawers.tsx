@@ -1,5 +1,5 @@
 import type { Props as MenuProps } from "$store/components/header/Menu.tsx";
-import Cart from "$store/components/minicart/Cart.tsx";
+// import Cart from "$store/components/minicart/Cart.tsx";
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
 import Button from "$store/components/ui/Button.tsx";
 import Drawer from "$store/components/ui/Drawer.tsx";
@@ -10,6 +10,7 @@ import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
 
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
+const Cart = lazy(() => import("$store/components/minicart/Cart.tsx"));
 
 export interface Props {
   menu: MenuProps;
@@ -72,7 +73,17 @@ export function CartDrawer(
         <Aside // title="Minha sacola"
          // onClose={() => displayCart.value = false}
         class="w-[85%] min-w-[280px] max-w-[400px]">
-          <Cart platform={platform} />
+          {displayCart.value && (
+            <Suspense
+              fallback={
+                <div class="w-screen flex items-center justify-center">
+                  <span class="loading loading-ring" />
+                </div>
+              }
+            >
+              <Cart platform={platform} />
+            </Suspense>
+          )}
         </Aside>
       }
     >

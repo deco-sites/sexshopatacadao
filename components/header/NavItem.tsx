@@ -11,7 +11,7 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
       data-highlighted={highlighted ? "true" : undefined}
       class="navitem flex items-center group/navitem border-black"
     >
-      <a href={url} class="flex flex-col items-center pb-5">
+      <a href={url} class="flex flex-col items-center pb-5 min-w-[75px]">
         <div class="w-[40px] max-h-[51px] group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:max-h-0 transition-all">
           {iconSrc && (
             <img
@@ -24,9 +24,11 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
             />
           )}
         </div>
-        <span class="block text-center uppercase text-[13px] font-bold group-hover/navitem:text-primary-500 group-data-[highlighted='true']/navitem:text-primary-500 transition-colors h-8 leading-none">
-          {name}
-        </span>
+        <div class="flex items-center justify-center h-8">
+          <span class="text-center uppercase text-[13px] font-bold group-hover/navitem:text-primary-500 group-data-[highlighted='true']/navitem:text-primary-500 transition-colors  leading-none">
+            {name}
+          </span>
+        </div>
       </a>
 
       {children && children.length > 0 &&

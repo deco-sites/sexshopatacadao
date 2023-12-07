@@ -25,7 +25,7 @@ function CartButton({ loading, currency, total, items }: Props) {
 
   return (
     <Button
-      class="flex-none flex items-center gap-2 py-4 mr-4 lg:mr-0 group-data-[micro-header='true']/header:mr-0 lg:gap-6 !border-0 !border-transparent h-auto min-h-0 lg:bg-success-500 lg:hover:bg-success-600 group-data-[micro-header='true']/header:!bg-transparent lg:px-8 lg:pt-4 lg:pb-3 rounded-[6px] transition-all cursor-pointer flex-col lg:flex-row group-data-[micro-header='true']/header:flex-col group-data-[micro-header='true']/header:gap-2 group-data-[micro-header='true']/header:pb-3 bg-transparent hover:bg-transparent"
+      class="flex-none flex items-center gap-2 py-4 mr-4 lg:mr-0 group-data-[micro-header='true']/header:mr-0 lg:gap-6 !border-0 !border-transparent h-auto min-h-0 lg:bg-success-500 lg:hover:bg-success-600 group-data-[micro-header='true']/header:!bg-transparent lg:px-8 lg:pt-4 lg:pb-3 rounded-[6px] transition-all cursor-pointer flex-col lg:flex-row group-data-[micro-header='true']/header:flex-col lg:group-data-[micro-header='true']/header:justify-between lg:group-data-[micro-header='true']/header:gap-0 group-data-[micro-header='true']/header:gap-2 lg:group-data-[micro-header='true']/header:h-[48px] lg:group-data-[micro-header='true']/header:pb-0 lg:group-data-[micro-header='true']/header:pt-1 max-lg:group-data-[micro-header='true']/header:pb-3 bg-transparent hover:bg-transparent"
       aria-label="open cart"
       data-deco={displayCart.value && "open-cart"}
       // loading={loading}
@@ -46,7 +46,7 @@ function CartButton({ loading, currency, total, items }: Props) {
           class="text-primary-500 group-data-[micro-header='true']/header:text-primary-500 lg:text-white transition-colors"
         />
       </div>
-      <span class="hidden lg:inline lg:uppercase text-white text-xs lg:text-sm group-data-[micro-header='true']/header:text-inherit group-data-[micro-header='true']/header:inline group-data-[micro-header='true']/header:normal-case lg:pb-1 select-none group-data-[micro-header='true']/header:text-xs font-normal transition-colors leading-none">
+      <span class="hidden lg:inline lg:uppercase text-white text-xs lg:text-sm group-data-[micro-header='true']/header:text-inherit group-data-[micro-header='true']/header:inline group-data-[micro-header='true']/header:normal-case lg:pb-1 lg:group-data-[micro-header='true']/header:pb-0 select-none group-data-[micro-header='true']/header:text-xs font-normal !leading-none transition-all">
         Carrinho
       </span>
     </Button>

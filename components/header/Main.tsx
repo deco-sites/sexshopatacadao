@@ -49,10 +49,10 @@ function Main({ searchbar, logo, isMobile }: {
       }
 
       {/* Desktop Version */}
-      <div class="flex flex-row flex-wrap lg:flex-nowrap lg:justify-evenly justify-center items-center max-w-[96rem] mx-auto">
+      <div class="flex flex-row flex-wrap lg:flex-nowrap lg:justify-evenly justify-center items-center max-w-[96rem] mx-auto lg:py-5">
         {isMobile && <MenuButton />}
 
-        <div class="flex-none lg:my-5">
+        <div class="flex-none">
           {logo && (
             <a
               href="/"
@@ -74,22 +74,24 @@ function Main({ searchbar, logo, isMobile }: {
         <Searchbar searchbar={searchbar} />
         <div class="flex-none items-center hidden lg:flex">
           <a
-            class="flex items-center gap-2 group-data-[micro-header='true']/header:flex-col py-2"
+            class="flex items-center "
             href="/login"
             aria-label="Log in"
           >
-            <Icon
-              id="User"
-              size={20}
-              strokeWidth={0}
-              class="text-primary-500"
-            />
-            <span class="block uppercase text-xs font-bold group-data-[micro-header='true']/header:hidden">
-              Faça Login | Cadastre-se
-            </span>
-            <span class="hidden text-xs group-data-[micro-header='true']/header:block">
-              Entrar
-            </span>
+            <div class="flex items-center gap-2 group-data-[micro-header='true']/header:justify-between group-data-[micro-header='true']/header:flex-col transition-all h-[48px]">
+              <Icon
+                id="User"
+                size={20}
+                strokeWidth={0}
+                class="text-primary-500"
+              />
+              <span class="block uppercase text-xs font-bold group-data-[micro-header='true']/header:hidden">
+                Faça Login | Cadastre-se
+              </span>
+              <span class="hidden text-xs group-data-[micro-header='true']/header:block leading-none">
+                Entrar
+              </span>
+            </div>
           </a>
         </div>
         <div class="flex-1 lg:flex-none flex items-center lg:justify-start justify-end">

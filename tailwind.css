@@ -39,9 +39,6 @@
   }
 
   
-  .prose a {
-    @apply link;
-  }
   .prose ul {
     @apply py-4 pl-10 list-disc;
   }
@@ -54,6 +51,9 @@
   }
   .prose.plp-seo p {
     @apply my-[10px];
+  }
+  .prose.plp-seo a {
+    @apply link;
   }
   .prose.plp-seo h2, .prose.plp-seo h3 {
     @apply font-bold uppercase text-lg text-primary-500 mb-[5px];

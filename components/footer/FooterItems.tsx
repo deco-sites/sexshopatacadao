@@ -63,7 +63,7 @@ export default function FooterItems(
                           <li>
                             <a
                               href={item.href}
-                              class="block py-1 pt-1 pb-3 uppercase"
+                              class="block py-1 pt-1 pb-3 uppercase leading-[14px]"
                             >
                               {item.label}
                             </a>
@@ -107,7 +107,7 @@ export default function FooterItems(
                             <li>
                               <a
                                 href={item.href}
-                                class="block py-1 pt-1 pb-3"
+                                class="block py-1 pt-1 pb-3 leading-[14px]"
                               >
                                 {item.label}
                               </a>

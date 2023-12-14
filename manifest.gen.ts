@@ -33,15 +33,17 @@ import * as $$$$$$23 from "./sections/Search/TextSEO.tsx";
 import * as $$$$$$24 from "./sections/Layout/Grid.tsx";
 import * as $$$$$$25 from "./sections/Layout/GridItem.tsx";
 import * as $$$$$$26 from "./sections/Layout/Container.tsx";
-import * as $$$$$$27 from "./sections/Layout/Flex.tsx";
-import * as $$$$$$28 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$29 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$30 from "./sections/Gallery.tsx";
-import * as $$$$$$31 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$32 from "./sections/Content/Logos.tsx";
-import * as $$$$$$33 from "./sections/Content/Benefits.tsx";
-import * as $$$$$$34 from "./sections/Content/Faq.tsx";
-import * as $$$$$$35 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$27 from "./sections/Layout/Spacing.tsx";
+import * as $$$$$$28 from "./sections/Layout/Flex.tsx";
+import * as $$$$$$29 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$30 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$31 from "./sections/Gallery.tsx";
+import * as $$$$$$32 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$33 from "./sections/Content/Logos.tsx";
+import * as $$$$$$34 from "./sections/Content/Benefits.tsx";
+import * as $$$$$$35 from "./sections/Content/Text.tsx";
+import * as $$$$$$36 from "./sections/Content/Faq.tsx";
+import * as $$$$$$37 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
@@ -56,21 +58,23 @@ const manifest = {
   "sections": {
     "deco-sites/sexshopatacadao/sections/Category/CategoryBanner.tsx": $$$$$$3,
     "deco-sites/sexshopatacadao/sections/Category/CategoryList.tsx": $$$$$$2,
-    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$33,
-    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$34,
-    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$32,
-    "deco-sites/sexshopatacadao/sections/Content/Testimonials.tsx": $$$$$$31,
+    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$34,
+    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$36,
+    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$33,
+    "deco-sites/sexshopatacadao/sections/Content/Testimonials.tsx": $$$$$$32,
+    "deco-sites/sexshopatacadao/sections/Content/Text.tsx": $$$$$$35,
     "deco-sites/sexshopatacadao/sections/Footer/Footer.tsx": $$$$$$21,
-    "deco-sites/sexshopatacadao/sections/Gallery.tsx": $$$$$$30,
+    "deco-sites/sexshopatacadao/sections/Gallery.tsx": $$$$$$31,
     "deco-sites/sexshopatacadao/sections/Header/Header.tsx": $$$$$$4,
     "deco-sites/sexshopatacadao/sections/Images/BannerGrid.tsx": $$$$$$16,
     "deco-sites/sexshopatacadao/sections/Images/Carousel.tsx": $$$$$$14,
     "deco-sites/sexshopatacadao/sections/Images/ImageGallery.tsx": $$$$$$15,
     "deco-sites/sexshopatacadao/sections/Images/ShoppableBanner.tsx": $$$$$$17,
     "deco-sites/sexshopatacadao/sections/Layout/Container.tsx": $$$$$$26,
-    "deco-sites/sexshopatacadao/sections/Layout/Flex.tsx": $$$$$$27,
+    "deco-sites/sexshopatacadao/sections/Layout/Flex.tsx": $$$$$$28,
     "deco-sites/sexshopatacadao/sections/Layout/Grid.tsx": $$$$$$24,
     "deco-sites/sexshopatacadao/sections/Layout/GridItem.tsx": $$$$$$25,
+    "deco-sites/sexshopatacadao/sections/Layout/Spacing.tsx": $$$$$$27,
     "deco-sites/sexshopatacadao/sections/Links/LinkTree.tsx": $$$$$$18,
     "deco-sites/sexshopatacadao/sections/Links/Shortcuts.tsx": $$$$$$19,
     "deco-sites/sexshopatacadao/sections/Miscellaneous/CampaignTimer.tsx":
@@ -93,9 +97,9 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Product/Wishlist.tsx": $$$$$$7,
     "deco-sites/sexshopatacadao/sections/Search/TextSEO.tsx": $$$$$$23,
     "deco-sites/sexshopatacadao/sections/Search/TextSEOMatcher.tsx": $$$$$$22,
-    "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$28,
-    "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$29,
-    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$35,
+    "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$29,
+    "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$30,
+    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$37,
   },
   "actions": {
     "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,

@@ -17,6 +17,9 @@ export default {
 
         "danger-500": "#d33232",
 
+        "warning-500": "#ffd165",
+        "warning-600": "#ffc12f",
+
         "gray-100": "#f2f4f5",
         "gray-200": "#f0f0f0",
         "gray-300": "#eeeeee",

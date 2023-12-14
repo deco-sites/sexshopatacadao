@@ -20,7 +20,7 @@ import * as $$13 from "./islands/Header/CartDrawer.tsx";
 import * as $$14 from "./islands/Header/MenuDrawer.tsx";
 import * as $$15 from "./islands/Header/Searchbar.tsx";
 import * as $$16 from "./islands/Header/SetupMicroHeader.tsx";
-import * as $$17 from "./islands/Newsletter.tsx";
+import * as $$17 from "./islands/Newsletter/Newsletter.tsx";
 import * as $$18 from "./islands/OutOfStock.tsx";
 import * as $$19 from "./islands/ProductImageZoom.tsx";
 import * as $$20 from "./islands/SearchControls.tsx";
@@ -50,7 +50,7 @@ const manifest = {
     "./islands/Header/MenuDrawer.tsx": $$14,
     "./islands/Header/Searchbar.tsx": $$15,
     "./islands/Header/SetupMicroHeader.tsx": $$16,
-    "./islands/Newsletter.tsx": $$17,
+    "./islands/Newsletter/Newsletter.tsx": $$17,
     "./islands/OutOfStock.tsx": $$18,
     "./islands/ProductImageZoom.tsx": $$19,
     "./islands/SearchControls.tsx": $$20,

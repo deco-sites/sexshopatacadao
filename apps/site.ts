@@ -6,7 +6,7 @@ import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
 import { Section } from "deco/blocks/section.ts";
-import { App } from "deco/mod.ts";
+import { App, AppContext as DecoAppContext } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
@@ -29,7 +29,7 @@ export type Platform =
   | "nuvemshop"
   | "custom";
 
-export let _platform: Platform = "custom";
+export let _platform: Platform = "vtex";
 
 const color = (platform: string) => {
   switch (platform) {
@@ -54,9 +54,11 @@ const color = (platform: string) => {
 
 let firstRun = true;
 
+type SexShopAtacadao = App<Manifest, Props, [ReturnType<typeof commerce>]>;
+
 export default function Site(
   { theme, ...state }: Props,
-): App<Manifest, Props, [ReturnType<typeof commerce>]> {
+): SexShopAtacadao {
   _platform = state.platform || state.commerce?.platform || "custom";
 
   // Prevent console.logging twice
@@ -80,5 +82,7 @@ export default function Site(
     ],
   };
 }
+
+export type AppContext = DecoAppContext<SexShopAtacadao>;
 
 export { onBeforeResolveProps } from "apps/website/mod.ts";

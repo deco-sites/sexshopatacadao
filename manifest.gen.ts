@@ -42,6 +42,7 @@ import * as $$$$$$32 from "./sections/Content/Logos.tsx";
 import * as $$$$$$33 from "./sections/Content/Benefits.tsx";
 import * as $$$$$$34 from "./sections/Content/Faq.tsx";
 import * as $$$$$$35 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
@@ -95,6 +96,9 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$28,
     "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$29,
     "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$35,
+  },
+  "actions": {
+    "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/sexshopatacadao/apps/decohub.ts": $$$$$$$$$$$1,

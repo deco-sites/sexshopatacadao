@@ -189,7 +189,6 @@ export default function Gallery(props: Props) {
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
       <Header
         title={title}
-        description={description}
         alignment={layout?.headerAlignment || "center"}
       />
       <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">

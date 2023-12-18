@@ -74,7 +74,6 @@ export default function InstagramPosts({
     <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
       <Header
         title={title}
-        description={description}
         alignment={layout?.headerAlignment || "center"}
       />
       <div class="hidden lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6">

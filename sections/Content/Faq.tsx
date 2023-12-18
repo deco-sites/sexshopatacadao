@@ -100,7 +100,6 @@ export default function FAQ(props: Props) {
           <div class="flex flex-col gap-8 lg:gap-10">
             <Header
               title={title || ""}
-              description={description || ""}
               alignment={layout?.headerAlignment || "center"}
             />
             <div class="join join-vertical w-full">
@@ -117,7 +116,6 @@ export default function FAQ(props: Props) {
           <div class="flex flex-col gap-8 lg:gap-10">
             <Header
               title={title || ""}
-              description={description || ""}
               alignment={layout?.headerAlignment || "center"}
             />
             <div class="join join-vertical w-full">
@@ -134,7 +132,6 @@ export default function FAQ(props: Props) {
           <div class="order-1 lg:order-1">
             <Header
               title={title || ""}
-              description={description || ""}
               alignment={layout?.headerAlignment || "center"}
             />
           </div>

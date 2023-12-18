@@ -84,7 +84,6 @@ function CategoryList(props: Props) {
     >
       <Header
         title={header.title}
-        description={header.description || ""}
         alignment={layout.headerAlignment || "center"}
       />
 

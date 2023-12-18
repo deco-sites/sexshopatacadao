@@ -159,7 +159,7 @@ function Newsletter({
           </div>
           <button
             type="submit"
-            class="hover:bg-warning-600 bg-warning-500 transition-colors w-full lg:max-w-[188px] text-primary-500 uppercase font-bold rounded-[6px] h-10 lg:h-[50px] px-[42px] flex items-center justify-center group/btn disabled:bg-warning-600 mt-[34px] lg:mt-0"
+            class="hover:bg-warning-600 bg-warning-500 transition-colors w-full lg:max-w-[188px] text-primary-500 uppercase font-bold rounded-[6px] h-10 lg:h-[50px] flex items-center justify-center group/btn disabled:bg-warning-600 mt-[34px] lg:mt-0"
             disabled={loading}
           >
             <span class="group-disabled/btn:loading group-disabled/btn:text-[0px]">

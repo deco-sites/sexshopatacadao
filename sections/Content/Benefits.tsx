@@ -95,7 +95,6 @@ export default function Benefits(
           <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
             <Header
               title={title}
-              description={description}
               alignment={layout?.headerAlignment || "center"}
             />
             <div class="w-full flex justify-center">
@@ -110,7 +109,6 @@ export default function Benefits(
         <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
           <Header
             title={title}
-            description={description}
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">
@@ -124,7 +122,6 @@ export default function Benefits(
         <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
           <Header
             title={title}
-            description={description}
             alignment={layout?.headerAlignment || "center"}
           />
           <div class="w-full flex justify-center">

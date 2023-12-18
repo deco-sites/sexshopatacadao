@@ -1,50 +1,28 @@
 interface Props {
   title?: string;
-  fontSize?: "Normal" | "Large";
-  description?: string;
-  alignment: "center" | "left";
-  colorReverse?: boolean;
+  alignment?: "center" | "left";
 }
 
-function Header(props: Props) {
+function Header({ title, alignment = "center" }: Props) {
   return (
     <>
-      {props.title || props.description
+      {title
         ? (
           <div
-            class={`flex flex-col gap-2 ${
-              props.alignment === "left" ? "text-left" : "text-center"
-            }`}
+            class={`relative flex flex-col my-[0.83rem] ${
+              alignment === "left"
+                ? "items-start text-start"
+                : "items-center text-center"
+            } w-full`}
           >
-            {props.title &&
-              (
-                <h1
-                  class={`text-2xl leading-8 lg:leading-10
-                  ${
-                    props.colorReverse
-                      ? "text-primary-content"
-                      : "text-base-content"
-                  }
-                  ${props.fontSize === "Normal" ? "lg:text-3xl" : "lg:text-4xl"}
-                `}
-                >
-                  {props.title}
-                </h1>
-              )}
-            {props.description &&
+            {title &&
               (
                 <h2
-                  class={`
-                  leading-6 lg:leading-8
-                  ${
-                    props.colorReverse ? "text-primary-content" : "text-neutral"
-                  }
-                  ${props.fontSize === "Normal" ? "lg:text-xl" : "lg:text-2xl"}
-                `}
-                >
-                  {props.description}
-                </h2>
+                  class={`bg-white w-fit relative text-3xl z-[1] text-primary-500 leading-[1.15] uppercase px-10`}
+                  dangerouslySetInnerHTML={{ __html: title }}
+                />
               )}
+            <div class="absolute w-[88%] h-1 bg-primary-500 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2" />
           </div>
         )
         : null}

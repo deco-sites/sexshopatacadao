@@ -42,11 +42,12 @@ import * as $$$$$$32 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$33 from "./sections/Social/WhatsApp.tsx";
 import * as $$$$$$34 from "./sections/Gallery.tsx";
 import * as $$$$$$35 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$36 from "./sections/Content/Logos.tsx";
-import * as $$$$$$37 from "./sections/Content/Benefits.tsx";
-import * as $$$$$$38 from "./sections/Content/Text.tsx";
-import * as $$$$$$39 from "./sections/Content/Faq.tsx";
-import * as $$$$$$40 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$36 from "./sections/Content/Articles.tsx";
+import * as $$$$$$37 from "./sections/Content/Logos.tsx";
+import * as $$$$$$38 from "./sections/Content/Benefits.tsx";
+import * as $$$$$$39 from "./sections/Content/Text.tsx";
+import * as $$$$$$40 from "./sections/Content/Faq.tsx";
+import * as $$$$$$41 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
@@ -61,11 +62,12 @@ const manifest = {
   "sections": {
     "deco-sites/sexshopatacadao/sections/Category/CategoryBanner.tsx": $$$$$$3,
     "deco-sites/sexshopatacadao/sections/Category/CategoryList.tsx": $$$$$$2,
-    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$37,
-    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$39,
-    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$36,
+    "deco-sites/sexshopatacadao/sections/Content/Articles.tsx": $$$$$$36,
+    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$38,
+    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$40,
+    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$37,
     "deco-sites/sexshopatacadao/sections/Content/Testimonials.tsx": $$$$$$35,
-    "deco-sites/sexshopatacadao/sections/Content/Text.tsx": $$$$$$38,
+    "deco-sites/sexshopatacadao/sections/Content/Text.tsx": $$$$$$39,
     "deco-sites/sexshopatacadao/sections/Footer/Footer.tsx": $$$$$$24,
     "deco-sites/sexshopatacadao/sections/Gallery.tsx": $$$$$$34,
     "deco-sites/sexshopatacadao/sections/Header/Header.tsx": $$$$$$4,
@@ -105,7 +107,7 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Search/TextSEOMatcher.tsx": $$$$$$25,
     "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$32,
     "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$33,
-    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$40,
+    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$41,
   },
   "actions": {
     "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,

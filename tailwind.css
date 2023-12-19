@@ -61,6 +61,17 @@
   .prose.plp-seo b, .prose.plp-seo strong {
     @apply font-bold text-primary-500;
   }
+
+  
+  .prose.banner-text h1,
+  .prose.banner-text h2,
+  .prose.banner-text h3,
+  .prose.banner-text h4 {
+    @apply text-primary-500 md:text-[72px] text-[40px] leading-[26px] md:my-[30px] my-9 font-lobster;
+  }
+  .prose.banner-text p {
+    @apply !leading-[32px] !text-base text-black h-[130px] w-[382px] md:mb-[17%] mb-[36%] mt-6 inline-block;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

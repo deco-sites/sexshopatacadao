@@ -18,7 +18,7 @@ function Header({ title, alignment = "center" }: Props) {
             {title &&
               (
                 <h2
-                  class={`bg-white w-fit relative text-3xl z-[1] text-primary-500 leading-[1.15] uppercase px-10`}
+                  class={`bg-white relative text-3xl z-[1] text-primary-500 leading-[1.15] uppercase px-10 w-[70%] md:[50%] 2xl:w-[30%]`}
                   dangerouslySetInnerHTML={{ __html: title }}
                 />
               )}

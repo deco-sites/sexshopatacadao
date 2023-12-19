@@ -49,11 +49,11 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
             id={id}
             class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
           >
-            <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+            <Slider class="carousel carousel-center sm:carousel-end col-span-full row-start-2 row-end-5">
               {products.map((product, index) => (
                 <Slider.Item
                   index={index}
-                  class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+                  class="carousel-item flex justify-center xl:w-[calc(20%-20px)] lg:w-[calc(25%-20px)] md:w-[calc(33.333333%-20px)] w-[calc(50%-20px)] px-[10px]"
                 >
                   <ProductCard
                     product={product}
@@ -66,7 +66,8 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
               ))}
             </Slider>
 
-            <>
+            {
+              /* <>
               <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
                 <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
                   <Icon size={24} id="ChevronLeft" strokeWidth={3} />
@@ -77,7 +78,8 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
                   <Icon size={24} id="ChevronRight" strokeWidth={3} />
                 </Slider.NextButton>
               </div>
-            </>
+            </> */
+            }
             <SliderJS rootId={id} />
           </div>
         )

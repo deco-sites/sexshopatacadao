@@ -136,8 +136,8 @@ function ProductCard(
         }}
       />
       <figure
-        class="relative overflow-hidden mx-auto mb-[18px]"
-        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
+        class="relative overflow-hidden mx-auto mb-[18px] w-full"
+        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}`, maxWidth: `${WIDTH}px` }}
       >
         {/* Wishlist button */}
         <div

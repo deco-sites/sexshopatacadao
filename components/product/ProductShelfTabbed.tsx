@@ -12,17 +12,19 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
 
 /** @titleBy title */
 interface Tab {
   title: string;
-  products: Product[] | null;
+  productsRow1: Product[] | null;
+  productsRow2: Product[] | null;
 }
 
 export interface Props {
   tabs: Tab[];
+  /** @format html */
   title?: string;
-  description?: string;
   layout?: {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large";
@@ -31,86 +33,147 @@ export interface Props {
   tabIndex?: number;
 }
 
+function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
+  id: string;
+  products: Product[];
+  cardLayout?: cardLayout;
+  platform: ReturnType<typeof usePlatform>;
+  title: string;
+  isMobile: boolean;
+}) {
+  return (
+    <div class="w-full max-w-[96rem] mx-auto flex flex-col">
+      {isMobile
+        ? (
+          <div
+            id={id}
+            class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+          >
+            <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+              {products.map((product, index) => (
+                <Slider.Item
+                  index={index}
+                  class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+                >
+                  <ProductCard
+                    product={product}
+                    itemListName={title}
+                    layout={cardLayout}
+                    platform={platform}
+                    index={index}
+                  />
+                </Slider.Item>
+              ))}
+            </Slider>
+
+            <>
+              <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
+                <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
+                  <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+                </Slider.PrevButton>
+              </div>
+              <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
+                <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
+                  <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                </Slider.NextButton>
+              </div>
+            </>
+            <SliderJS rootId={id} />
+          </div>
+        )
+        : (
+          <>
+            <ul class="grid grid-rows-1 grid-cols-3 xl:grid-cols-5 lg:grid-cols-4 gap-6">
+              {products.map((product, index) => (
+                <li class="[&:nth-child(5)]:hidden [&:nth-child(4)]:hidden xl:[&:nth-child(5)]:block lg:[&:nth-child(4)]:block">
+                  <ProductCard
+                    product={product}
+                    itemListName={title}
+                    layout={cardLayout}
+                    platform={platform}
+                    index={index}
+                  />
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+    </div>
+  );
+}
+
 function TabbedProductShelf({
   tabs,
   title,
-  description,
   layout,
   cardLayout,
   tabIndex,
-}: Props) {
+  isMobile,
+}: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
-  const { products } = tabs[ti];
+  const { productsRow1, productsRow2, title: shelfTitle } = tabs[ti];
 
-  if (!products || products.length === 0) {
+  if (!productsRow1 || productsRow1.length === 0) {
     return null;
   }
 
+  const parsedProductsRow1 = isMobile ? productsRow1 : productsRow1.slice(0, 5);
+  const parsedProductsRow2 =
+    (isMobile ? productsRow2 : productsRow2?.slice(0, 5)) ?? [];
+
   return (
-    <div class="w-full py-8 flex flex-col gap-8 lg:gap-12 lg:py-10">
+    <div class="w-full flex flex-col gap-5">
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}
       />
 
-      <div class="flex justify-center">
-        <div class="tabs tabs-boxed">
-          {tabs.map((tab, index) => (
-            <button
-              class={`tab tab-lg ${index === ti ? "tab-active" : ""}`}
-              {...usePartialSection({ props: { tabIndex: index } })}
-            >
-              {tab.title}
-            </button>
-          ))}
-        </div>
+      <div class="flex justify-center gap-2">
+        {tabs.map((tab, index) => (
+          <button
+            data-active={index === ti}
+            class={"w-[150px] h-[45px] bg-white text-primary-500 border border-primary-500 rounded-[5px] data-[active='true']:bg-primary-500 data-[active='true']:text-white transition-colors duration-500 font-medium"}
+            {...usePartialSection({ props: { tabIndex: index } })}
+          >
+            {tab.title}
+          </button>
+        ))}
       </div>
 
       <div
         id={id}
-        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+        class="flex flex-col w-full gap-[45px]"
       >
-        <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
-          {products?.map((product, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
-            >
-              <ProductCard
-                product={product}
-                itemListName={title}
-                layout={cardLayout}
-                platform={platform}
-                index={index}
-              />
-            </Slider.Item>
-          ))}
-        </Slider>
-
-        <>
-          <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
-          </div>
-          <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
-          </div>
-        </>
-        <SliderJS rootId={id} />
+        <Shelf
+          id={id}
+          products={parsedProductsRow1}
+          cardLayout={cardLayout}
+          platform={platform}
+          title={shelfTitle}
+          isMobile={isMobile}
+        />
+        <Shelf
+          id={id}
+          products={parsedProductsRow2}
+          cardLayout={cardLayout}
+          platform={platform}
+          title={shelfTitle}
+          isMobile={isMobile}
+        />
         <SendEventOnView
           id={id}
           event={{
             name: "view_item_list",
             params: {
               item_list_name: title,
-              items: products.map((product, index) =>
+              items: [...productsRow1, ...parsedProductsRow2].map((
+                product,
+                index,
+              ) =>
                 mapProductToAnalyticsItem({
                   index,
                   product,
@@ -123,6 +186,11 @@ function TabbedProductShelf({
       </div>
     </div>
   );
+}
+
+export function loader(props: Props, req: Request) {
+  const isMobileValue = checkIsMobile(req);
+  return { ...props, isMobile: isMobileValue };
 }
 
 export default TabbedProductShelf;

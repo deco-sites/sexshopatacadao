@@ -47,7 +47,9 @@ export type AvailableIcons =
   | "XFilled"
   | "Close"
   | "AngleUp"
-  | "ShippingTruck";
+  | "ShippingTruck"
+  | "ThinCaretLeft"
+  | "ThinCaretRight";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

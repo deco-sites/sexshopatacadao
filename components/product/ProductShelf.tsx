@@ -45,6 +45,7 @@ function ProductShelf({
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}
+        limitSize
       />
 
       <div class="w-full max-w-[96rem] mx-auto flex flex-col">

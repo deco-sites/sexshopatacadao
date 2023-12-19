@@ -130,6 +130,7 @@ function TabbedProductShelf({
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}
+        limitSize
       />
 
       <div class="flex justify-center gap-2">

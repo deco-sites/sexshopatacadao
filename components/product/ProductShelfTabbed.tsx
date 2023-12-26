@@ -61,6 +61,7 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
                     layout={cardLayout}
                     platform={platform}
                     index={index}
+                    isMobile={isMobile}
                   />
                 </Slider.Item>
               ))}
@@ -94,6 +95,7 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
                     layout={cardLayout}
                     platform={platform}
                     index={index}
+                    isMobile={isMobile}
                   />
                 </li>
               ))}

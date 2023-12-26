@@ -7,6 +7,10 @@ import { useVariantPossibilities } from "$store/sdk/useVariantPossibilities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
+import {
+  ProductCardAddToCart,
+} from "$store/components/product/ProductCardActions.tsx";
+import ProductCardActions from "$store/islands/ProductCard/Actions.tsx";
 
 export interface Layout {
   basics?: {
@@ -47,6 +51,7 @@ interface Props {
 
   layout?: Layout;
   platform?: Platform;
+  isMobile?: boolean;
 }
 
 const relative = (url: string) => {
@@ -58,7 +63,7 @@ const WIDTH = 202;
 const HEIGHT = 202;
 
 function ProductCard(
-  { product, preload, itemListName, layout, platform, index }: Props,
+  { product, preload, itemListName, layout, platform, index, isMobile }: Props,
 ) {
   const {
     url,
@@ -72,7 +77,8 @@ function ProductCard(
   // const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments, installmentsData } = useOffer(offers);
+  const { listPrice, price, installments, installmentsData, seller = "1" } =
+    useOffer(offers);
   // const possibilities = useVariantPossibilities(hasVariant, product);
   // const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
@@ -93,15 +99,17 @@ function ProductCard(
   //   </li>
   // ));
 
-  const cta = (
-    <button
-      type="button"
-      aria-label="view product"
-      class="btn btn-block !bg-primary-500 !outline-none !border-none text-white font-montserrat text-base min-h-[unset] h-[44px] font-normal rounded-[5px]"
-    >
-      {l?.basics?.ctaText || "Ver produto"}
-    </button>
-  );
+  const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
+
+  const cta = (isUniqueSku && !isMobile)
+    ? (
+      <ProductCardActions
+        text={l?.basics?.ctaText}
+        productID={productID}
+        seller={seller}
+      />
+    )
+    : <ProductCardAddToCart>{l?.basics?.ctaText}</ProductCardAddToCart>;
 
   return (
     <a

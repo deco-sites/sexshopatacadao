@@ -217,7 +217,10 @@ function Buttons() {
 
 function BannerCarousel(props: Props) {
   const id = useId();
-  const { images, preload, interval, sizes } = { ...DEFAULT_PROPS, ...props };
+  const { images, preload = false, interval, sizes } = {
+    ...DEFAULT_PROPS,
+    ...props,
+  };
 
   if (images?.length === 1) {
     const params = { promotion_name: images[0].alt };

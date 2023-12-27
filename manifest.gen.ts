@@ -2,10 +2,11 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/isMobile.ts";
-import * as $$$1 from "./loaders/List/Sections.tsx";
-import * as $$$2 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$3 from "./loaders/matchUrl.ts";
+import * as $$$0 from "./loaders/breadcrumb.ts";
+import * as $$$1 from "./loaders/isMobile.ts";
+import * as $$$2 from "./loaders/List/Sections.tsx";
+import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$4 from "./loaders/matchUrl.ts";
 import * as $$$$$$0 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$1 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryList.tsx";
@@ -35,43 +36,45 @@ import * as $$$$$$25 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$26 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$27 from "./sections/Search/TextSEOMatcher.tsx";
 import * as $$$$$$28 from "./sections/Search/TextSEO.tsx";
-import * as $$$$$$29 from "./sections/Layout/Grid.tsx";
-import * as $$$$$$30 from "./sections/Layout/GridItem.tsx";
-import * as $$$$$$31 from "./sections/Layout/Container.tsx";
-import * as $$$$$$32 from "./sections/Layout/Spacing.tsx";
-import * as $$$$$$33 from "./sections/Layout/Flex.tsx";
-import * as $$$$$$34 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$35 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$36 from "./sections/Gallery.tsx";
-import * as $$$$$$37 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$38 from "./sections/Content/Articles.tsx";
-import * as $$$$$$39 from "./sections/Content/Logos.tsx";
-import * as $$$$$$40 from "./sections/Content/Benefits.tsx";
-import * as $$$$$$41 from "./sections/Content/Text.tsx";
-import * as $$$$$$42 from "./sections/Content/Faq.tsx";
-import * as $$$$$$43 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$29 from "./sections/Search/Breadcrumb.tsx";
+import * as $$$$$$30 from "./sections/Layout/Grid.tsx";
+import * as $$$$$$31 from "./sections/Layout/GridItem.tsx";
+import * as $$$$$$32 from "./sections/Layout/Container.tsx";
+import * as $$$$$$33 from "./sections/Layout/Spacing.tsx";
+import * as $$$$$$34 from "./sections/Layout/Flex.tsx";
+import * as $$$$$$35 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$36 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$37 from "./sections/Gallery.tsx";
+import * as $$$$$$38 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$39 from "./sections/Content/Articles.tsx";
+import * as $$$$$$40 from "./sections/Content/Logos.tsx";
+import * as $$$$$$41 from "./sections/Content/Benefits.tsx";
+import * as $$$$$$42 from "./sections/Content/Text.tsx";
+import * as $$$$$$43 from "./sections/Content/Faq.tsx";
+import * as $$$$$$44 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/sexshopatacadao/loaders/isMobile.ts": $$$0,
-    "deco-sites/sexshopatacadao/loaders/Layouts/ProductCard.tsx": $$$2,
-    "deco-sites/sexshopatacadao/loaders/List/Sections.tsx": $$$1,
-    "deco-sites/sexshopatacadao/loaders/matchUrl.ts": $$$3,
+    "deco-sites/sexshopatacadao/loaders/breadcrumb.ts": $$$0,
+    "deco-sites/sexshopatacadao/loaders/isMobile.ts": $$$1,
+    "deco-sites/sexshopatacadao/loaders/Layouts/ProductCard.tsx": $$$3,
+    "deco-sites/sexshopatacadao/loaders/List/Sections.tsx": $$$2,
+    "deco-sites/sexshopatacadao/loaders/matchUrl.ts": $$$4,
   },
   "sections": {
     "deco-sites/sexshopatacadao/sections/Category/CategoryBanner.tsx": $$$$$$3,
     "deco-sites/sexshopatacadao/sections/Category/CategoryList.tsx": $$$$$$2,
-    "deco-sites/sexshopatacadao/sections/Content/Articles.tsx": $$$$$$38,
-    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$40,
-    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$42,
-    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$39,
-    "deco-sites/sexshopatacadao/sections/Content/Testimonials.tsx": $$$$$$37,
-    "deco-sites/sexshopatacadao/sections/Content/Text.tsx": $$$$$$41,
+    "deco-sites/sexshopatacadao/sections/Content/Articles.tsx": $$$$$$39,
+    "deco-sites/sexshopatacadao/sections/Content/Benefits.tsx": $$$$$$41,
+    "deco-sites/sexshopatacadao/sections/Content/Faq.tsx": $$$$$$43,
+    "deco-sites/sexshopatacadao/sections/Content/Logos.tsx": $$$$$$40,
+    "deco-sites/sexshopatacadao/sections/Content/Testimonials.tsx": $$$$$$38,
+    "deco-sites/sexshopatacadao/sections/Content/Text.tsx": $$$$$$42,
     "deco-sites/sexshopatacadao/sections/Footer/Footer.tsx": $$$$$$26,
-    "deco-sites/sexshopatacadao/sections/Gallery.tsx": $$$$$$36,
+    "deco-sites/sexshopatacadao/sections/Gallery.tsx": $$$$$$37,
     "deco-sites/sexshopatacadao/sections/Header/Header.tsx": $$$$$$4,
     "deco-sites/sexshopatacadao/sections/Images/BannerGrid.tsx": $$$$$$21,
     "deco-sites/sexshopatacadao/sections/Images/BannerRow.tsx": $$$$$$18,
@@ -82,11 +85,11 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Images/ImageGallery.tsx": $$$$$$19,
     "deco-sites/sexshopatacadao/sections/Images/Instafeed.tsx": $$$$$$17,
     "deco-sites/sexshopatacadao/sections/Images/ShoppableBanner.tsx": $$$$$$22,
-    "deco-sites/sexshopatacadao/sections/Layout/Container.tsx": $$$$$$31,
-    "deco-sites/sexshopatacadao/sections/Layout/Flex.tsx": $$$$$$33,
-    "deco-sites/sexshopatacadao/sections/Layout/Grid.tsx": $$$$$$29,
-    "deco-sites/sexshopatacadao/sections/Layout/GridItem.tsx": $$$$$$30,
-    "deco-sites/sexshopatacadao/sections/Layout/Spacing.tsx": $$$$$$32,
+    "deco-sites/sexshopatacadao/sections/Layout/Container.tsx": $$$$$$32,
+    "deco-sites/sexshopatacadao/sections/Layout/Flex.tsx": $$$$$$34,
+    "deco-sites/sexshopatacadao/sections/Layout/Grid.tsx": $$$$$$30,
+    "deco-sites/sexshopatacadao/sections/Layout/GridItem.tsx": $$$$$$31,
+    "deco-sites/sexshopatacadao/sections/Layout/Spacing.tsx": $$$$$$33,
     "deco-sites/sexshopatacadao/sections/Links/LinkTree.tsx": $$$$$$23,
     "deco-sites/sexshopatacadao/sections/Links/Shortcuts.tsx": $$$$$$24,
     "deco-sites/sexshopatacadao/sections/Miscellaneous/CampaignTimer.tsx":
@@ -107,11 +110,12 @@ const manifest = {
       $$$$$$9,
     "deco-sites/sexshopatacadao/sections/Product/SearchResult.tsx": $$$$$$12,
     "deco-sites/sexshopatacadao/sections/Product/Wishlist.tsx": $$$$$$7,
+    "deco-sites/sexshopatacadao/sections/Search/Breadcrumb.tsx": $$$$$$29,
     "deco-sites/sexshopatacadao/sections/Search/TextSEO.tsx": $$$$$$28,
     "deco-sites/sexshopatacadao/sections/Search/TextSEOMatcher.tsx": $$$$$$27,
-    "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$34,
-    "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$35,
-    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$43,
+    "deco-sites/sexshopatacadao/sections/Social/InstagramPosts.tsx": $$$$$$35,
+    "deco-sites/sexshopatacadao/sections/Social/WhatsApp.tsx": $$$$$$36,
+    "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$44,
   },
   "actions": {
     "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,

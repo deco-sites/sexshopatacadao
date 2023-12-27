@@ -1,7 +1,6 @@
 import { useMemo } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import type { JSX } from "preact";
-import Icon from "deco-sites/sexshopatacadao/components/ui/Icon.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
 
 const SORT_QUERY_PARAM = "sort";
 
@@ -44,8 +43,10 @@ function Sort({ sortOptions }: Props) {
           <span
             class={"text-sm leading-[1.15]"}
           >
-            Ordenar Por{" "}
-            <strong>
+            <span class="max-xs:hidden">
+              Ordenar Por{" "}
+            </span>
+            <strong class="min-w-[106px] inline-block">
               {portugueseMappings[sort as keyof typeof portugueseMappings] ??
                 "Relevância"}
             </strong>

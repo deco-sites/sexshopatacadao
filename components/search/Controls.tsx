@@ -20,29 +20,33 @@ function SearchControls(
 
   return (
     <Drawer
-      class="lg:w-[unset]"
+      class="drawer-end lg:w-[unset]"
       loading="lazy"
       open={open.value}
       onClose={() => open.value = false}
       aside={
         <>
-          <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
+          <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden w-[80%]">
             <div class="flex justify-between items-center">
-              <h1 class="px-4 py-3">
-                <span class="font-medium text-2xl">Filtrar</span>
+              <h1 class="p-4">
+                <span class="font-montserrat text-2xl !leading-[1.15] border-b border-gray-400">
+                  Filtros
+                </span>
               </h1>
-              <Button class="btn btn-ghost" onClick={() => open.value = false}>
+              {
+                /* <Button class="btn btn-ghost" onClick={() => open.value = false}>
                 <Icon id="XMark" size={24} strokeWidth={2} />
-              </Button>
+              </Button> */
+              }
             </div>
-            <div class="flex-grow overflow-auto">
+            <div class="flex-grow overflow-auto px-2">
               <Filters filters={filters} />
             </div>
           </div>
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] w-full">
+      <div class="flex flex-col justify-between sm:gap-4 pt-1 sm:flex-row sm:h-[53px] w-full sm:border-b-0 border-b border-gray-400">
         <div class="flex flex-row items-center justify-around sm:gap-4 w-full">
           {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
           <Button

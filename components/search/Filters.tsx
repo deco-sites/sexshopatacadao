@@ -7,6 +7,12 @@ import type {
   ProductListingPage,
 } from "apps/commerce/types.ts";
 import { parseRange } from "apps/commerce/utils/filters.ts";
+import Icon from "deco-sites/sexshopatacadao/components/ui/Icon.tsx";
+import { lazy, Suspense } from "preact/compat";
+
+const PriceRange = lazy(() =>
+  import("deco-sites/sexshopatacadao/islands/Search/PriceRange.tsx")
+);
 
 interface Props {
   filters: ProductListingPage["filters"];
@@ -19,38 +25,51 @@ function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
-      <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm">{label}</span>
-      {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>}
+    <a href={url} rel="nofollow" class="flex gap-2">
+      <div
+        aria-checked={selected}
+        class="w-4 h-4 min-w-[1rem] min-h-[1rem] border-[2px] border-gray-400 aria-[checked='true']:bg-[#b20260] aria-[checked='true']:border-white"
+      />
+      <span class="text-sm font-montserrat leading-[16px]">{label}</span>
+      {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </a>
   );
 }
 
-function FilterValues({ key, values }: FilterToggle) {
-  const flexDirection = key === "tamanho" || key === "cor"
-    ? "flex-row"
-    : "flex-col";
+function FilterValues(filterItem: FilterToggle) {
+  const { key, values } = filterItem;
+  // const flexDirection = key === "tamanho" || key === "cor"
+  //   ? "flex-row"
+  //   : "flex-col";
+  const flexDirection = "flex-col";
+
+  // ! NOT WORKING :/
+  // if (key === "price") {
+  //   return (
+  //     <Suspense fallback={<div>Loading...</div>}>
+  //       <PriceRange filter={filterItem} />
+  //     </Suspense>
+  //   );
+  // }
 
   return (
-    <ul class={`flex flex-wrap gap-2 ${flexDirection}`}>
+    <ul class={`flex flex-wrap gap-[14px] ${flexDirection}`}>
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 
-        if (key === "cor" || key === "tamanho") {
-          return (
-            <a href={url} rel="nofollow">
-              <Avatar
-                content={value}
-                variant={selected ? "active" : "default"}
-              />
-            </a>
-          );
-        }
+        // if (key === "cor" || key === "tamanho") {
+        //   return (
+        //     <a href={url} rel="nofollow">
+        //       <Avatar
+        //         content={value}
+        //         variant={selected ? "active" : "default"}
+        //       />
+        //     </a>
+        //   );
+        // }
 
         if (key === "price") {
           const range = parseRange(item.value);
-
           return range && (
             <ValueItem
               {...item}
@@ -67,13 +86,29 @@ function FilterValues({ key, values }: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6 p-4">
+    <ul class="flex flex-col gap-6">
       {filters
         .filter(isToggle)
         .map((filter) => (
-          <li class="flex flex-col gap-4">
-            <span>{filter.label}</span>
-            <FilterValues {...filter} />
+          <li class="pb-[6px] border-b border-gray-400">
+            <div class="collapse custom-collapse !rounded-none">
+              <input type="checkbox" defaultChecked />
+              <div class="flex justify-between collapse-title h-[58px] px-0">
+                <span class="text-base text-gray-800 font-montserrat font-semibold !leading-none">
+                  {filter.label}
+                </span>
+
+                <Icon
+                  width={16}
+                  height={16}
+                  id="ChevronDown"
+                  class="rotate-180 transition-transform custom-collapse-arrow ml-auto"
+                />
+              </div>
+              <div class="collapse-content px-0 max-h-[200px] overflow-y-auto scrollbar scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-[#d3d3d3] scrollbar-thumb-rounded-[50px] scrollbar-w-[12px]">
+                <FilterValues {...filter} />
+              </div>
+            </div>
           </li>
         ))}
     </ul>

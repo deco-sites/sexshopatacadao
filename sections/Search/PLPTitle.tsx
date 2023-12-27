@@ -5,7 +5,7 @@ export interface Props {
 }
 
 export default function PLPTitle({ data }: Props) {
-  const title = data.itemListElement.pop()?.name;
+  const title = data.itemListElement.at(-1)?.name;
 
   return (
     <h1 class="w-full max-w-[96rem] mx-auto my-[1em] font-montserrat text-2xl !leading-[1.15] font-semibold px-2 md:px-[5vw] text-black">

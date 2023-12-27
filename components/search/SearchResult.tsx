@@ -27,6 +27,8 @@ export interface Props {
   layout?: Layout;
   cardLayout?: CardLayout;
 
+  filterLabelsToHide?: string[];
+
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
 }
@@ -45,6 +47,7 @@ function Result({
   cardLayout,
   startingPage = 0,
   galleryMode,
+  filterLabelsToHide = [],
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   galleryMode: GalleryMode;
@@ -72,19 +75,29 @@ function Result({
     />
   );
 
+  // Price filter should always be the last one
+  const parsedFilters = filters.filter(({ label }) =>
+    !filterLabelsToHide.includes(label)
+  ).sort((a, b) =>
+    a.key === "price" ? (b.key === "price" ? 0 : 1) : b.key === "price" ? -1 : 0
+  );
+
   return (
     <>
       <div class="w-full max-w-[96rem] md:px-[5vw] mx-auto">
         <div class="flex flex-row lg:gap-16">
           {layout?.variant === "aside" && filters.length > 0 && (
-            <aside class="hidden lg:block w-min min-w-[250px]">
-              <Filters filters={filters} />
+            <aside class="hidden lg:flex flex-col w-min min-w-[223px]">
+              <h5 class="font-montserrat text-primary-500 text-lg font-semibold py-5 border-b border-gray-400">
+                Filtros
+              </h5>
+              <Filters filters={parsedFilters} />
             </aside>
           )}
           <div class="flex-grow" id={id}>
             <div class="flex items-center mb-[18px] lg:gap-5 lg:flex-row flex-col">
               <div class="w-full flex-1 flex items-center justify-between lg:border-b border-gray-400 min-[1380px]:flex-nowrap flex-wrap">
-                <span class="font-montserrat text-sm leading-[1.15] font-medium order-3 lg:order-none basis-full lg:basis-[unset] lg:mx-0 mx-auto lg:py-0 py-4 text-center lg:text-left">
+                <span class="font-montserrat text-sm leading-[1.15] font-medium order-3 lg:order-none basis-full lg:basis-[unset] lg:mx-0 mx-auto lg:py-0 py-4 text-center lg:text-left lg:mb-0 mb-[10px]">
                   <span class="text-primary-500">{records}</span> Produtos
                 </span>
                 <div class="min-[1380px]:contents flex order-4 lg:-order-1 flex-1 basis-full w-full justify-center">
@@ -92,7 +105,7 @@ function Result({
                 </div>
                 <SearchControls
                   sortOptions={sortOptions}
-                  filters={filters}
+                  filters={parsedFilters}
                   displayFilter={layout?.variant === "drawer"}
                 />
               </div>

@@ -20,6 +20,7 @@ function SearchControls(
 
   return (
     <Drawer
+      class="lg:w-[unset]"
       loading="lazy"
       open={open.value}
       onClose={() => open.value = false}
@@ -41,18 +42,18 @@ function SearchControls(
         </>
       }
     >
-      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] sm:border-b sm:border-base-200">
-        <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
+      <div class="flex flex-col justify-between mb-4 p-4 sm:mb-0 sm:p-0 sm:gap-4 sm:flex-row sm:h-[53px] w-full">
+        <div class="flex flex-row items-center justify-around sm:gap-4 w-full">
+          {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
           <Button
-            class={displayFilter ? "btn-ghost" : "btn-ghost sm:hidden"}
+            class={displayFilter ? "btn-ghost" : "btn-ghost lg:hidden"}
             onClick={() => {
               open.value = true;
             }}
           >
             Filtrar
-            <Icon id="FilterList" width={16} height={16} />
+            <Icon id="FilterList" width={16} height={16} strokeWidth={1} />
           </Button>
-          {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
         </div>
       </div>
     </Drawer>

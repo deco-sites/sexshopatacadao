@@ -148,7 +148,8 @@ function ProductCard(
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}`, maxWidth: `${WIDTH}px` }}
       >
         {/* Wishlist button */}
-        <div
+        {
+          /* <div
           class={`absolute top-2 z-10
           ${
             l?.elementsPositions?.favoriteIcon === "Top left"
@@ -168,7 +169,8 @@ function ProductCard(
               productID={productID}
             />
           )}
-        </div>
+        </div> */
+        }
         {/* Product Images */}
         <div class="grid grid-cols-1 grid-rows-1 w-full max-w-[202px] border border-[hsla(0,0%,75.3%,.2)] rounded-[3px]">
           <Image

@@ -206,10 +206,14 @@
 		<path fill-rule="evenodd" clip-rule="evenodd"
 			d="M8.0513 21.6337C8.2536 20.9257 8.99158 20.5157 9.69963 20.718C14.1269 21.9829 17.8731 21.9829 22.3004 20.718C23.0084 20.5157 23.7464 20.9257 23.9487 21.6337C24.151 22.3418 23.741 23.0797 23.033 23.282C18.1269 24.6838 13.8731 24.6838 8.96704 23.282C8.25899 23.0797 7.849 22.3418 8.0513 21.6337Z" />
 	</symbol>
-	<symbol id="FilterList" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
-		<path
-			d="M6.66667 12H9.33333V10.6667H6.66667V12ZM2 4V5.33333H14V4H2ZM4 8.66667H12V7.33333H4V8.66667Z"
-			fill="currentColor" />
+
+	<symbol id="FilterList" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" fill="none">
+		<path d="M4 5V1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M4 16V14" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M13 12V16" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M13 1V3" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M4 14C5.65685 14 7 12.6569 7 11C7 9.34315 5.65685 8 4 8C2.34315 8 1 9.34315 1 11C1 12.6569 2.34315 14 4 14Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M13 9C14.6569 9 16 7.65685 16 6C16 4.34315 14.6569 3 13 3C11.3431 3 10 4.34315 10 6C10 7.65685 11.3431 9 13 9Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 	</symbol>
 
 	<symbol id="Trash" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -411,6 +415,42 @@
 	<symbol id="ThinCaretRight" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
 			d="M7.54584 7.1197L2.93985 12.0765C2.62149 12.4191 2.10671 12.4191 1.79174 12.0765L1.02633 11.2528C0.707978 10.9102 0.707978 10.3562 1.02633 10.0172L4.28778 6.5001L1.02295 2.98662C0.704592 2.64401 0.704592 2.09002 1.02295 1.75107L1.78835 0.923719C2.10671 0.581118 2.62149 0.581118 2.93646 0.923719L7.54245 5.8805C7.86419 6.2231 7.86419 6.7771 7.54584 7.1197Z"
+			fill="currentColor"></path>
+	</symbol>
+
+
+	<symbol id="PagePrev" viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M7 6L13 12L14.41 10.59L9.83 6L14.41 1.41L13 7.86805e-07L7 6Z" fill="currentColor"></path>
+		<path d="M7.86805e-07 6L6 12L7.41 10.59L2.83 6L7.41 1.41L6 7.86805e-07L7.86805e-07 6Z"
+			fill="currentColor"></path>
+	</symbol>
+
+
+	<symbol id="PageNext" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M7.40997 6L1.40997 -2.62268e-07L-2.67645e-05 1.41L4.57997 6L-2.71658e-05 10.59L1.40997 12L7.40997 6Z"
+			fill="currentColor"></path>
+		<path
+			d="M13.8201 6L7.82013 -2.62268e-07L6.41013 1.41L10.9901 6L6.41013 10.59L7.82013 12L13.8201 6Z"
+			fill="currentColor"></path>
+	</symbol>
+
+	<symbol id="GalleryGrid" fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+		<path d="M6 0H1C0.4 0 0 0.4 0 1V6C0 6.6 0.4 7 1 7H6C6.6 7 7 6.6 7 6V1C7 0.4 6.6 0 6 0Z"
+			fill="currentColor"></path>
+		<path
+			d="M15 0H10C9.4 0 9 0.4 9 1V6C9 6.6 9.4 7 10 7H15C15.6 7 16 6.6 16 6V1C16 0.4 15.6 0 15 0Z"
+			fill="currentColor"></path>
+		<path d="M6 9H1C0.4 9 0 9.4 0 10V15C0 15.6 0.4 16 1 16H6C6.6 16 7 15.6 7 15V10C7 9.4 6.6 9 6 9Z"
+			fill="currentColor"></path>
+		<path
+			d="M15 9H10C9.4 9 9 9.4 9 10V15C9 15.6 9.4 16 10 16H15C15.6 16 16 15.6 16 15V10C16 9.4 15.6 9 15 9Z"
+			fill="currentColor"></path>
+	</symbol>
+
+	<symbol id="GalleryList" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M6.41665 8.625V12.375C6.41665 12.9963 5.95495 13.5 5.3854 13.5H1.03125C0.461699 13.5 0 12.9963 0 12.375V8.625C0 8.00367 0.461699 7.5 1.03125 7.5H5.3854C5.95495 7.5 6.41665 8.00367 6.41665 8.625ZM0 16.125V19.875C0 20.4963 0.461699 21 1.03125 21H5.3854C5.95495 21 6.41665 20.4963 6.41665 19.875V16.125C6.41665 15.5037 5.95495 15 5.3854 15H1.03125C0.461699 15 0 15.5037 0 16.125ZM5.3854 0H1.03125C0.461699 0 0 0.503672 0 1.125V4.875C0 5.49633 0.461699 6 1.03125 6H5.3854C5.95495 6 6.41665 5.49633 6.41665 4.875V1.125C6.41665 0.503672 5.95495 0 5.3854 0ZM8.8229 21H20.9688C21.5383 21 22 20.4963 22 19.875V16.125C22 15.5037 21.5383 15 20.9688 15H8.8229C8.25335 15 7.79165 15.5037 7.79165 16.125V19.875C7.79165 20.4963 8.25335 21 8.8229 21ZM7.79165 1.125V4.875C7.79165 5.49633 8.25335 6 8.8229 6H20.9688C21.5383 6 22 5.49633 22 4.875V1.125C22 0.503672 21.5383 0 20.9688 0H8.8229C8.25335 0 7.79165 0.503672 7.79165 1.125ZM8.8229 13.5H20.9688C21.5383 13.5 22 12.9963 22 12.375V8.625C22 8.00367 21.5383 7.5 20.9688 7.5H8.8229C8.25335 7.5 7.79165 8.00367 7.79165 8.625V12.375C7.79165 12.9963 8.25335 13.5 8.8229 13.5Z"
 			fill="currentColor"></path>
 	</symbol>
 

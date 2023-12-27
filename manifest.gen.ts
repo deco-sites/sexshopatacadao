@@ -54,6 +54,7 @@ import * as $$$$$$43 from "./sections/Content/Text.tsx";
 import * as $$$$$$44 from "./sections/Content/Faq.tsx";
 import * as $$$$$$45 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
+import * as $$$$$$$$$1 from "./actions/gallery/mode.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
@@ -120,6 +121,7 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$45,
   },
   "actions": {
+    "deco-sites/sexshopatacadao/actions/gallery/mode.ts": $$$$$$$$$1,
     "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,
   },
   "apps": {

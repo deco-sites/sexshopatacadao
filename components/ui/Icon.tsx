@@ -49,7 +49,11 @@ export type AvailableIcons =
   | "AngleUp"
   | "ShippingTruck"
   | "ThinCaretLeft"
-  | "ThinCaretRight";
+  | "ThinCaretRight"
+  | "PagePrev"
+  | "PageNext"
+  | "GalleryGrid"
+  | "GalleryList";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

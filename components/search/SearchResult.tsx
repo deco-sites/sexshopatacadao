@@ -96,7 +96,7 @@ function Result({
                   displayFilter={layout?.variant === "drawer"}
                 />
               </div>
-              <div class="self-end lg:order-none -order-1">
+              <div class="self-end lg:self-start lg:order-none -order-1">
                 <GalleryModeSwitch current={galleryMode} />
               </div>
             </div>

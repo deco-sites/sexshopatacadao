@@ -25,13 +25,13 @@ export type Props = Pick<ProductListingPage, "sortOptions">;
 // TODO: move this to the loader
 const portugueseMappings = {
   "relevance:desc": "Relevância",
-  "price:desc": "Maior Preço",
-  "price:asc": "Menor Preço",
-  "orders:desc": "Mais vendidos",
-  "name:desc": "Nome - de Z a A",
-  "name:asc": "Nome - de A a Z",
+  "price:desc": "Maior preço",
+  "price:asc": "Menor preço",
+  "orders:desc": "Mais Vendidos",
+  "name:desc": "De Z a A",
+  "name:asc": "De A a Z",
   "release:desc": "Mais recentes",
-  "discount:desc": "Maior desconto",
+  "discount:desc": "Descontos",
 };
 
 function Sort({ sortOptions }: Props) {

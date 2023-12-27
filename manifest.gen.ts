@@ -6,7 +6,8 @@ import * as $$$0 from "./loaders/breadcrumb.ts";
 import * as $$$1 from "./loaders/isMobile.ts";
 import * as $$$2 from "./loaders/List/Sections.tsx";
 import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$4 from "./loaders/matchUrl.ts";
+import * as $$$4 from "./loaders/getGalleryMode.ts";
+import * as $$$5 from "./loaders/matchUrl.ts";
 import * as $$$$$$0 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$1 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryList.tsx";
@@ -61,10 +62,11 @@ import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 const manifest = {
   "loaders": {
     "deco-sites/sexshopatacadao/loaders/breadcrumb.ts": $$$0,
+    "deco-sites/sexshopatacadao/loaders/getGalleryMode.ts": $$$4,
     "deco-sites/sexshopatacadao/loaders/isMobile.ts": $$$1,
     "deco-sites/sexshopatacadao/loaders/Layouts/ProductCard.tsx": $$$3,
     "deco-sites/sexshopatacadao/loaders/List/Sections.tsx": $$$2,
-    "deco-sites/sexshopatacadao/loaders/matchUrl.ts": $$$4,
+    "deco-sites/sexshopatacadao/loaders/matchUrl.ts": $$$5,
   },
   "sections": {
     "deco-sites/sexshopatacadao/sections/Category/CategoryBanner.tsx": $$$$$$3,

@@ -37,7 +37,7 @@ const parseInstallments = (
   installment: UnitPriceSpecification,
   sellingPrice: number,
 ) => {
-  const { billingDuration, billingIncrement, price } = installment;
+  const { billingDuration, billingIncrement, price, name } = installment;
 
   if (!billingDuration || !billingIncrement) {
     return null;
@@ -49,6 +49,7 @@ const parseInstallments = (
     billingDuration,
     billingIncrement,
     withTaxes,
+    name,
   };
 };
 

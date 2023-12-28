@@ -24,14 +24,15 @@ import * as $$17 from "./islands/Header/SetupMicroHeader.tsx";
 import * as $$18 from "./islands/Newsletter/Newsletter.tsx";
 import * as $$19 from "./islands/OutOfStock.tsx";
 import * as $$20 from "./islands/ProductCard/Actions.tsx";
-import * as $$21 from "./islands/ProductImageZoom.tsx";
-import * as $$22 from "./islands/Search/GalleryModeSwitch.tsx";
-import * as $$23 from "./islands/Search/PriceRange.tsx";
-import * as $$24 from "./islands/SearchControls.tsx";
-import * as $$25 from "./islands/ShippingSimulation.tsx";
-import * as $$26 from "./islands/SliderJS.tsx";
-import * as $$27 from "./islands/WishlistButton.tsx";
-import * as $$28 from "./islands/ZoomableImage.tsx";
+import * as $$21 from "./islands/ProductDetailsActions.tsx";
+import * as $$22 from "./islands/ProductImageZoom.tsx";
+import * as $$23 from "./islands/Search/GalleryModeSwitch.tsx";
+import * as $$24 from "./islands/Search/PriceRange.tsx";
+import * as $$25 from "./islands/SearchControls.tsx";
+import * as $$26 from "./islands/ShippingSimulation.tsx";
+import * as $$27 from "./islands/SliderJS.tsx";
+import * as $$28 from "./islands/WishlistButton.tsx";
+import * as $$29 from "./islands/ZoomableImage.tsx";
 
 const manifest = {
   routes: {
@@ -59,14 +60,15 @@ const manifest = {
     "./islands/Newsletter/Newsletter.tsx": $$18,
     "./islands/OutOfStock.tsx": $$19,
     "./islands/ProductCard/Actions.tsx": $$20,
-    "./islands/ProductImageZoom.tsx": $$21,
-    "./islands/Search/GalleryModeSwitch.tsx": $$22,
-    "./islands/Search/PriceRange.tsx": $$23,
-    "./islands/SearchControls.tsx": $$24,
-    "./islands/ShippingSimulation.tsx": $$25,
-    "./islands/SliderJS.tsx": $$26,
-    "./islands/WishlistButton.tsx": $$27,
-    "./islands/ZoomableImage.tsx": $$28,
+    "./islands/ProductDetailsActions.tsx": $$21,
+    "./islands/ProductImageZoom.tsx": $$22,
+    "./islands/Search/GalleryModeSwitch.tsx": $$23,
+    "./islands/Search/PriceRange.tsx": $$24,
+    "./islands/SearchControls.tsx": $$25,
+    "./islands/ShippingSimulation.tsx": $$26,
+    "./islands/SliderJS.tsx": $$27,
+    "./islands/WishlistButton.tsx": $$28,
+    "./islands/ZoomableImage.tsx": $$29,
   },
   baseUrl: import.meta.url,
 };

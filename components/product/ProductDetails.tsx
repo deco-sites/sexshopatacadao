@@ -19,6 +19,7 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
 import GallerySlider from "deco-sites/sexshopatacadao/components/product/Gallery/ImageSlider.tsx";
 import BrowserLog from "deco-sites/sexshopatacadao/islands/BrowserLog.tsx";
+import ProductDetailsActions from "deco-sites/sexshopatacadao/islands/ProductDetailsActions.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -59,7 +60,8 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
     price = 0,
     listPrice,
     seller = "1",
-    installments,
+    // installments,
+    installmentsData,
     availability,
   } = useOffer(offers);
 
@@ -79,6 +81,14 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
     price,
     listPrice,
   });
+
+  const bestInstallments = offers?.offers?.[0].priceSpecification.flatMap((
+    priceSpecification,
+  ) =>
+    priceSpecification.name === installmentsData?.name
+      ? [priceSpecification]
+      : []
+  );
 
   {/* Title, brand & code */}
   const title = (
@@ -131,43 +141,100 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
             {!isMobile && title}
 
             {/* Prices */}
-            <div class="mt-4">
-              <div class="flex flex-row gap-2 items-center">
-                {(listPrice ?? 0) > price && (
-                  <span class="line-through text-base-300 text-xs">
-                    {formatPrice(listPrice, offers?.priceCurrency)}
+            <div class="mt-4 mb-1 flex flex-col font-montserrat">
+              {(listPrice ?? 0) > price && (
+                <div class="flex flex-row gap-2 items-center text-sm mb-1">
+                  <span class="line-through text-[#cacbcc] !leading-[1.15]">
+                    De: {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
-                )}
-                <span class="font-medium text-xl text-secondary">
+                  <span class="font-bold !leading-[18px] bg-primary-500 rounded-[15px] text-white block px-[10px]">
+                    Economize{" "}
+                    {formatPrice(listPrice! - price, offers?.priceCurrency)}
+                  </span>
+                </div>
+              )}
+              <strong class="font-bold text-sm text-primary-500 uppercase !leading-[17px] mb-[17px]">
+                À vista{" "}
+                <span class="font-sans font-black text-2xl !leading-[17px]">
                   {formatPrice(price, offers?.priceCurrency)}
                 </span>
+              </strong>
+              <div class="text-gray-500 flex flex-col">
+                <span class="text-[11px] leading-[1.15] uppercase">
+                  {formatPrice(price, offers?.priceCurrency)}{" "}
+                  <strong>à prazo</strong>
+                </span>
+                <div class="flex xs:flex-row flex-col xs:justify-between text-xs leading-[1.15]">
+                  <span class="uppercase">
+                    ou{" "}
+                    <strong class="font-semibold">
+                      {installmentsData?.billingDuration}x
+                    </strong>{" "}
+                    de R$ {installmentsData?.billingIncrement}{" "}
+                    <strong class="font-semibold">
+                      {installmentsData?.withTaxes ? "com juros" : "sem juros"}
+                    </strong>
+                  </span>
+
+                  <div
+                    class={"relative z-[12]"}
+                  >
+                    <details class="text-black peer group cursor-pointer">
+                      <summary class="flex text-sm items-center">
+                        <span class="leading-[1.5] underline">
+                          Opções de parcelamento
+                        </span>
+                      </summary>
+                    </details>
+                    <div class="absolute -left-[40px] peer-open:border border-gray-400 rounded-[5px] bg-white grid grid-rows-[0fr] peer-open:grid-rows-[1fr] w-[263px] text-xs transition-all font-sans">
+                      <div class="w-full overflow-hidden flex flex-col">
+                        {bestInstallments?.map((installment) => (
+                          <div class="px-[15px] h-[34px] uppercase flex justify-between items-center w-full even:bg-gray-400 ">
+                            <span>
+                              <strong class="font-semibold">
+                                {installment.billingDuration}
+                              </strong>x de{" "}
+                              <strong class="text-primary-500 font-semibold">
+                                {formatPrice(
+                                  installment.billingIncrement,
+                                  offers?.priceCurrency,
+                                )}
+                              </strong>
+                            </span>
+                            <span>
+                              Total:{" "}
+                              <strong class="font-semibold">
+                                {formatPrice(
+                                  installment.price,
+                                  offers?.priceCurrency,
+                                )}
+                              </strong>
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <span class="text-sm text-base-300">
-                {installments}
-              </span>
             </div>
             {/* Sku Selector */}
-            <div class="mt-4 sm:mt-6">
+            {
+              /* <div class="mt-4 sm:mt-6">
               <ProductSelector product={product} />
-            </div>
+            </div> */
+            }
             {/* Add to Cart and Favorites button */}
             <div class="mt-4 sm:mt-10 flex flex-col gap-2">
               {availability === "https://schema.org/InStock"
                 ? (
                   <>
                     {platform === "vtex" && (
-                      <>
-                        <AddToCartButtonVTEX
-                          eventParams={{ items: [eventItem] }}
-                          productID={productID}
-                          seller={seller}
-                        />
-                        <WishlistButton
-                          variant="full"
-                          productID={productID}
-                          productGroupID={productGroupID}
-                        />
-                      </>
+                      <ProductDetailsActions
+                        eventParams={{ items: [eventItem] }}
+                        productID={productID}
+                        seller={seller}
+                      />
                     )}
                     {platform === "wake" && (
                       <AddToCartButtonWake

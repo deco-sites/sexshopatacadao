@@ -128,7 +128,7 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
 
       {isMobile && title}
 
-      <div class="px-[5vw]">
+      <div class="px-[5vw] mt-16">
         <div class="flex w-full max-w-[96rem] mx-auto lg:mt-3 lg:pt-8 lg:flex-row flex-col">
           <div class="w-full lg:w-1/2 lg:pr-8">
             <GallerySlider
@@ -285,20 +285,7 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
                 />
               )}
             </div>
-            {/* Description card */}
-            <div class="mt-4 sm:mt-6">
-              <span class="text-sm">
-                {description && (
-                  <details>
-                    <summary class="cursor-pointer">Descrição</summary>
-                    <div
-                      class="ml-2 mt-2"
-                      dangerouslySetInnerHTML={{ __html: description }}
-                    />
-                  </details>
-                )}
-              </span>
-            </div>
+
             {/* Analytics Event */}
             <SendEventOnView
               id={id}
@@ -314,6 +301,20 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
           </div>
         </div>
       </div>
+
+      {/* Description */}
+      {description && (
+        <div class="max-w-[96rem] mx-auto flex font-montserrat">
+          <div class="p-[5vw] text-sm leading-[1.6rem] text-gray-800">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+              Descrição do produto
+            </h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

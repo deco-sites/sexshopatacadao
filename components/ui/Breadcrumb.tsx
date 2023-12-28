@@ -1,15 +1,23 @@
 import type { BreadcrumbList } from "apps/commerce/types.ts";
+import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
 
 interface Props {
   itemListElement: BreadcrumbList["itemListElement"];
+
+  applyPadding?: boolean;
 }
 
-function Breadcrumb({ itemListElement = [] }: Props) {
+function Breadcrumb({ itemListElement = [], applyPadding = true }: Props) {
   const items = [{ name: "Home", item: "/" }, ...itemListElement];
 
   return (
-    <div class="w-full max-w-[96rem] md:px-[5vw] mx-auto p-[15px] font-montserrat text-xs font-medium leading-[1.15]">
-      <ul class="flex">
+    <div
+      class={clsx(
+        "w-full max-w-[96rem] mx-auto font-montserrat text-xs font-medium leading-[1.15]",
+        applyPadding && "md:px-[5vw]",
+      )}
+    >
+      <ul class="flex p-[15px]">
         {items
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => (

@@ -208,12 +208,20 @@
 	</symbol>
 
 	<symbol id="FilterList" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" fill="none">
-		<path d="M4 5V1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-		<path d="M4 16V14" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-		<path d="M13 12V16" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-		<path d="M13 1V3" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-		<path d="M4 14C5.65685 14 7 12.6569 7 11C7 9.34315 5.65685 8 4 8C2.34315 8 1 9.34315 1 11C1 12.6569 2.34315 14 4 14Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
-		<path d="M13 9C14.6569 9 16 7.65685 16 6C16 4.34315 14.6569 3 13 3C11.3431 3 10 4.34315 10 6C10 7.65685 11.3431 9 13 9Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path d="M4 5V1" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path d="M4 16V14" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path d="M13 12V16" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path d="M13 1V3" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+			stroke-linejoin="round"></path>
+		<path
+			d="M4 14C5.65685 14 7 12.6569 7 11C7 9.34315 5.65685 8 4 8C2.34315 8 1 9.34315 1 11C1 12.6569 2.34315 14 4 14Z"
+			stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+		<path
+			d="M13 9C14.6569 9 16 7.65685 16 6C16 4.34315 14.6569 3 13 3C11.3431 3 10 4.34315 10 6C10 7.65685 11.3431 9 13 9Z"
+			stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
 	</symbol>
 
 	<symbol id="Trash" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -415,6 +423,16 @@
 	<symbol id="ThinCaretRight" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 		<path
 			d="M7.54584 7.1197L2.93985 12.0765C2.62149 12.4191 2.10671 12.4191 1.79174 12.0765L1.02633 11.2528C0.707978 10.9102 0.707978 10.3562 1.02633 10.0172L4.28778 6.5001L1.02295 2.98662C0.704592 2.64401 0.704592 2.09002 1.02295 1.75107L1.78835 0.923719C2.10671 0.581118 2.62149 0.581118 2.93646 0.923719L7.54245 5.8805C7.86419 6.2231 7.86419 6.7771 7.54584 7.1197Z"
+			fill="currentColor"></path>
+	</symbol>
+
+	<symbol id="CaretLeft" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M2.80524 8.73746C2.37243 8.34108 2.37243 7.65892 2.80525 7.26254L10.7353 0L13 2.07407L6.52941 8L13 13.9259L10.7353 16L2.80524 8.73746Z" fill="currentColor"></path>
+	</symbol>
+
+	<symbol id="CaretRight" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path
+			d="M12.1948 7.26254C12.6276 7.65892 12.6276 8.34108 12.1948 8.73746L4.26471 16L2 13.9259L8.47059 8L2 2.07407L4.26471 0L12.1948 7.26254Z"
 			fill="currentColor"></path>
 	</symbol>
 

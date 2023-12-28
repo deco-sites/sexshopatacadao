@@ -50,6 +50,8 @@ export type AvailableIcons =
   | "ShippingTruck"
   | "ThinCaretLeft"
   | "ThinCaretRight"
+  | "CaretLeft"
+  | "CaretRight"
   | "PagePrev"
   | "PageNext"
   | "GalleryGrid"

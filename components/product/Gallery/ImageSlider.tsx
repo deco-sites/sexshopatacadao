@@ -5,15 +5,14 @@ import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import ZoomableImage from "$store/islands/ZoomableImage.tsx";
+import { useOffer } from "deco-sites/sexshopatacadao/sdk/useOffer.ts";
 
 export interface Props {
-  /** @title Integration */
-  page: ProductDetailsPage | null;
+  product: ProductDetailsPage["product"];
 
-  layout: {
-    width: number;
-    height: number;
-  };
+  showDots?: boolean;
+  zoomMode?: "hover" | "click";
 }
 
 /**
@@ -22,33 +21,59 @@ export interface Props {
  * On mobile, there's one single column with 3 rows. Note that the orders are different from desktop to mobile, that's why
  * we rearrange each cell with col-start- directives
  */
-export default function GallerySlider(props: Props) {
-  const id = useId();
-
-  if (props.page === null) {
-    throw new Error("Missing Product Details Page Info");
-  }
+export default function GallerySlider(
+  { product, showDots = true, zoomMode = "hover" }: Props,
+) {
+  const { image: images, offers } = product;
 
   const {
-    page: { product: { image: images = [] } },
-    layout: { width, height },
-  } = props;
-  const aspectRatio = `${width} / ${height}`;
+    price = 0,
+    listPrice,
+  } = useOffer(offers);
+
+  const id = useId();
+
+  const width = 570;
+  const height = 570;
+
+  if (!images?.length) {
+    return null;
+  }
+
+  const discountPercentage = Math.trunc(
+    ((listPrice ?? 0) - price) / (listPrice ?? 1) * 100,
+  );
 
   return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+    <div id={id} class="flex">
       {/* Image Slider */}
-      <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+      <div class="relative order-1 sm:order-2 w-full">
+        <Slider class="carousel carousel-center gap-6 w-full">
           {images.map((img, index) => (
             <Slider.Item
               index={index}
               class="carousel-item w-full"
             >
-              <Image
+              {
+                /* <Image
+                class="w-full lg:w-[573px] lg:h-[530px]"
+                sizes="(max-width: 640px) 100vw, 30vw"
+                style={{ aspectRatio: 573 / 530 }}
+                src={img.url!}
+                alt={img.alternateName}
+                width={width}
+                height={height}
+                // Preload LCP image for better web vitals
+                preload={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+              /> */
+              }
+              <ZoomableImage
+                type={zoomMode}
+                factor={2}
                 class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
+                sizes="(max-width: 640px) 100vw, 30vw"
+                style={{ aspectRatio: 1 }}
                 src={img.url!}
                 alt={img.alternateName}
                 width={width}
@@ -62,47 +87,64 @@ export default function GallerySlider(props: Props) {
         </Slider>
 
         <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+          class="absolute left-2 top-1/2 text-black"
           disabled
         >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          <Icon size={24} id="CaretLeft" strokeWidth={0} />
         </Slider.PrevButton>
 
         <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+          class="absolute right-2 top-1/2 text-black"
           disabled={images.length < 2}
         >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
+          <Icon size={24} id="CaretRight" strokeWidth={0} />
         </Slider.NextButton>
 
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+        {
+          /* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
             images={images}
             width={700}
             height={Math.trunc(700 * height / width)}
           />
+        </div> */
+        }
+
+        {/* Top Right Badges */}
+        <div class="absolute top-[3px] right-[5px]">
+          {discountPercentage > 0 && (
+            <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
+              <span>
+                {discountPercentage}%
+              </span>
+            </div>
+          )}
         </div>
       </div>
 
       {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
-        {images.map((img, index) => (
-          <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
-            <Slider.Dot index={index}>
-              <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
-                width={63}
-                height={87.5}
-                src={img.url!}
-                alt={img.alternateName}
-              />
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
+      {showDots && (
+        <ul class="hidden sm:carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1 2xl:mr-20 lg:mr-[10%] mr-20 min-w-[100px]">
+          {images.map((img, index) => (
+            <li class="carousel-item w-full">
+              <Slider.Dot index={index}>
+                <Image
+                  style={{ aspectRatio: 1 }}
+                  class="group-disabled:opacity-40"
+                  width={100}
+                  height={100}
+                  src={img.url!}
+                  alt={img.alternateName}
+                />
+              </Slider.Dot>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <SliderJS rootId={id} />
+      <div class="hidden">
+        <SliderJS rootId={id} />
+      </div>
     </div>
   );
 }

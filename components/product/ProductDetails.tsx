@@ -120,7 +120,7 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
 
   return (
     <div class="flex flex-col" id={id}>
-      <BrowserLog payload={{ product }} />
+      {/* <BrowserLog payload={{ product }} /> */}
       <Breadcrumb
         itemListElement={breadcrumbList.itemListElement}
         applyPadding={false}

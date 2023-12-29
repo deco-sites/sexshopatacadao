@@ -20,9 +20,11 @@ import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
 import GallerySlider from "deco-sites/sexshopatacadao/components/product/Gallery/ImageSlider.tsx";
 import BrowserLog from "deco-sites/sexshopatacadao/islands/BrowserLog.tsx";
 import ProductDetailsActions from "deco-sites/sexshopatacadao/islands/ProductDetailsActions.tsx";
+import { ProductManufacturerCode } from "deco-sites/sexshopatacadao/loaders/manufacturerCode.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
+  productManufacturerCode: ProductManufacturerCode | null;
   layout: {
     /**
      * @title Product Name
@@ -33,7 +35,11 @@ interface Props {
   };
 }
 
-function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
+function ProductDetails(
+  { isMobile, page, layout, productManufacturerCode }: ReturnType<
+    typeof loader
+  >,
+) {
   const platform = usePlatform();
   const id = useId();
 
@@ -90,6 +96,8 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
       : []
   );
 
+  const manufacturerCode = productManufacturerCode?.manufacturerCode ?? refId;
+
   {/* Title, brand & code */}
   const title = (
     <div class="flex flex-col font-montserrat gap-2 text-gray-800 p-[10px] lg:px-0 mt-[25px] bg-gray-100 lg:bg-white items-center lg:items-start text-center lg:text-left mb-[15px] lg:mb-0">
@@ -109,9 +117,9 @@ function ProductDetails({ isMobile, page, layout }: ReturnType<typeof loader>) {
             <strong>Fabricante:</strong> {brandName}
           </span>
         )}
-        {refId && (
+        {manufacturerCode && (
           <span class="whitespace-nowrap leading-[1.15]">
-            <strong>Código:</strong> {refId}
+            <strong>Código:</strong> {manufacturerCode}
           </span>
         )}
       </div>

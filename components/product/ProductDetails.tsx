@@ -282,16 +282,21 @@ function ProductDetails(
                 : <OutOfStock productID={productID} />}
             </div>
             {/* Shipping Simulation */}
-            <div class="mt-8">
-              {platform === "vtex" && (
-                <ShippingSimulation
-                  items={[{
-                    id: Number(product.sku),
-                    quantity: 1,
-                    seller: seller,
-                  }]}
-                />
-              )}
+            <div class="flex flex-col md:flex-row">
+              <div class="mt-8 md:flex-1">
+                {platform === "vtex" && (
+                  <ShippingSimulation
+                    items={[{
+                      id: Number(product.sku),
+                      quantity: 1,
+                      seller: seller,
+                    }]}
+                  />
+                )}
+              </div>
+              <div class="md:flex-1">
+                {/* TODO Share */}
+              </div>
             </div>
 
             {/* Analytics Event */}

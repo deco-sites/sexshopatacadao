@@ -17,13 +17,13 @@ function Breadcrumb({ itemListElement = [], applyPadding = true }: Props) {
         applyPadding && "md:px-[5vw]",
       )}
     >
-      <ul class="flex p-[15px]">
+      <ul class="block p-[15px]">
         {items
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => (
             <li
               data-highlight={name === "Home"}
-              class="data-[highlight='true']:text-primary-500 data-[highlight='true']:font-bold leading-[1.15] [&:first-child]:px-0 [&:not(:first-child)]:before:content-['/'] px-1"
+              class="data-[highlight='true']:text-primary-500 data-[highlight='true']:font-bold leading-[1.15] [&:first-child]:px-0 [&:not(:first-child)]:before:content-['/'] px-1 inline-block"
             >
               <a class="px-1 py-[2px]" href={item}>{name}</a>
             </li>

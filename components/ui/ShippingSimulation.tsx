@@ -1,4 +1,4 @@
-import { Signal, useSignal } from "@preact/signals";
+import { Signal, useComputed, useSignal } from "@preact/signals";
 import { useCallback } from "preact/hooks";
 import Button from "$store/components/ui/Button.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
@@ -22,10 +22,12 @@ function ShippingContent({ simulation }: {
 }) {
   const { cart } = useCart();
 
-  const methods = simulation.value?.logisticsInfo?.reduce(
-    (initial, { slas }) => [...initial, ...slas],
-    [] as Sla[],
-  ) ?? [];
+  const methods = useComputed(() =>
+    simulation.value?.logisticsInfo?.reduce(
+      (initial, { slas }) => [...initial, ...slas],
+      [] as Sla[],
+    ) ?? []
+  );
 
   const locale = cart.value?.clientPreferencesData.locale || "pt-BR";
   const currencyCode = cart.value?.storePreferencesData.currencyCode || "BRL";
@@ -34,7 +36,7 @@ function ShippingContent({ simulation }: {
     return null;
   }
 
-  if (methods.length === 0) {
+  if (methods.value.length === 0) {
     return (
       <div class="p-2">
         <span>CEP inválido</span>
@@ -43,29 +45,49 @@ function ShippingContent({ simulation }: {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-4 bg-base-200 rounded-[4px]">
-      {methods.map((method) => (
-        <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">
-            Entrega {method.name}
-          </span>
-          <span class="text-button">
-            até {formatShippingEstimate(method.shippingEstimate)}
-          </span>
-          <span class="text-base font-semibold text-right">
-            {method.price === 0 ? "Grátis" : (
-              formatPrice(method.price / 100, currencyCode, locale)
-            )}
-          </span>
-        </li>
-      ))}
-      <span class="text-base-300">
-        Os prazos de entrega começam a contar a partir da confirmação do
-        pagamento e podem variar de acordo com a quantidade de produtos na
-        sacola.
-      </span>
-    </ul>
+    <div class="mt-3 py-2 border-y border-gray-400">
+      <table class="text-sm w-full">
+        {methods.value.map((method) => (
+          <tr>
+            <td>
+              <input type="radio" name="shipping-option" />
+            </td>
+            <td>
+              {method.name}
+            </td>
+            <td>
+              Em até {formatShippingEstimate(method.shippingEstimate)}
+            </td>
+            <td>
+              {method.price === 0 ? "Grátis" : (
+                formatPrice(method.price / 100, currencyCode, locale)
+              )}
+            </td>
+          </tr>
+        ))}
+      </table>
+    </div>
   );
+
+  // return (
+  //   <ul class="flex flex-col gap-4 p-4 rounded-[4px]">
+  //     {methods.value.map((method) => (
+  //       <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
+  //         <span class="text-button text-center">
+  //           Entrega {method.name}
+  //         </span>
+  //         <span class="text-button">
+  //           até {formatShippingEstimate(method.shippingEstimate)}
+  //         </span>
+  //         <span class="text-base font-semibold text-right">
+  //           {method.price === 0 ? "Grátis" : (
+  //             formatPrice(method.price / 100, currencyCode, locale)
+  //           )}
+  //         </span>
+  //       </li>
+  //     ))}
+  //   </ul>
+  // );
 }
 
 function ShippingSimulation({ items }: Props) {
@@ -92,16 +114,18 @@ function ShippingSimulation({ items }: Props) {
   }, []);
 
   return (
-    <div class="flex flex-col gap-2">
-      <div class="flex flex-col">
-        <span>Calcular frete</span>
-        <span>
-          Informe seu CEP para consultar os prazos de entrega
-        </span>
-      </div>
+    <div class="flex flex-col font-montserrat">
+      <strong class="leading-normal">Calcule o Frete:</strong>
+      <a
+        class="text-xs leading-[1.15] mb-[5px]"
+        href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+        target="_blank"
+      >
+        Não sei meu CEP
+      </a>
 
       <form
-        class="join"
+        class="flex"
         onSubmit={(e) => {
           e.preventDefault();
           handleSimulation();
@@ -110,8 +134,8 @@ function ShippingSimulation({ items }: Props) {
         <input
           as="input"
           type="text"
-          class="input input-bordered join-item"
-          placeholder="Seu cep aqui"
+          class="border border-gray-400 text-gray-600 rounded-l-[5px] px-4 h-10 w-full outline-none"
+          placeholder="00000-000"
           value={postalCode.value}
           maxLength={8}
           size={8}
@@ -119,15 +143,19 @@ function ShippingSimulation({ items }: Props) {
             postalCode.value = e.currentTarget.value;
           }}
         />
-        <Button type="submit" loading={loading.value} class="join-item">
-          Calcular
-        </Button>
+        <button
+          type="submit"
+          disabled={loading.value}
+          class="h-10 text-white flex items-center justify-center font-medium min-w-[114px] w-[114px] rounded-r-[5px] bg-gray-700 group outline-none"
+        >
+          <span class="group-disabled:loading">
+            Calcular
+          </span>
+        </button>
       </form>
 
       <div>
-        <div>
-          <ShippingContent simulation={simulateResult} />
-        </div>
+        <ShippingContent simulation={simulateResult} />
       </div>
     </div>
   );

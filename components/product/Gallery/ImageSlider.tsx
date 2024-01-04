@@ -44,6 +44,8 @@ export default function GallerySlider(
     ((listPrice ?? 0) - price) / (listPrice ?? 1) * 100,
   );
 
+  const isSingleImage = images.length === 1;
+
   return (
     <div id={id} class="flex">
       {/* Image Slider */}
@@ -86,26 +88,29 @@ export default function GallerySlider(
           ))}
         </Slider>
 
-        <Slider.PrevButton
-          class="absolute left-2 top-1/2 text-black"
-          disabled
-        >
-          <Icon size={24} id="CaretLeft" strokeWidth={0} />
-        </Slider.PrevButton>
+        {!isSingleImage && (
+          <>
+            <Slider.PrevButton
+              class="absolute left-2 top-1/2 text-black"
+              disabled
+            >
+              <Icon size={24} id="CaretLeft" strokeWidth={0} />
+            </Slider.PrevButton>
 
-        <Slider.NextButton
-          class="absolute right-2 top-1/2 text-black"
-          disabled={images.length < 2}
-        >
-          <Icon size={24} id="CaretRight" strokeWidth={0} />
-        </Slider.NextButton>
-
+            <Slider.NextButton
+              class="absolute right-2 top-1/2 text-black"
+              disabled={images.length < 2}
+            >
+              <Icon size={24} id="CaretRight" strokeWidth={0} />
+            </Slider.NextButton>
+          </>
+        )}
         {
           /* <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
-            images={images}
-            width={700}
-            height={Math.trunc(700 * height / width)}
+          images={images}
+          width={700}
+          height={Math.trunc(700 * height / width)}
           />
         </div> */
         }
@@ -123,7 +128,7 @@ export default function GallerySlider(
       </div>
 
       {/* Dots */}
-      {showDots && (
+      {!isSingleImage && showDots && (
         <ul class="hidden sm:carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1 2xl:mr-20 lg:mr-[10%] mr-20 min-w-[100px]">
           {images.map((img, index) => (
             <li class="carousel-item w-full">

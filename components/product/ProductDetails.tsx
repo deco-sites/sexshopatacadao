@@ -3,24 +3,22 @@ import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
 import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
 import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
-import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
 import AddToCartButtonNuvemshop from "$store/islands/AddToCartButton/nuvemshop.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
-import WishlistButton from "$store/islands/WishlistButton.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import ProductSelector from "./ProductVariantSelector.tsx";
 import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
 import GallerySlider from "deco-sites/sexshopatacadao/components/product/Gallery/ImageSlider.tsx";
 import BrowserLog from "deco-sites/sexshopatacadao/islands/BrowserLog.tsx";
 import ProductDetailsActions from "deco-sites/sexshopatacadao/islands/ProductDetailsActions.tsx";
 import { ProductManufacturerCode } from "deco-sites/sexshopatacadao/loaders/manufacturerCode.ts";
+import ProductVariantList from "deco-sites/sexshopatacadao/components/product/VariantList/ProductVariantList.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -126,6 +124,8 @@ function ProductDetails(
     </div>
   );
 
+  const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
+
   return (
     <div class="flex flex-col" id={id}>
       {/* <BrowserLog payload={{ product }} /> */}
@@ -136,7 +136,7 @@ function ProductDetails(
 
       {isMobile && title}
 
-      <div class="px-[5vw] mt-16">
+      <div class="px-[5vw]">
         <div class="flex w-full max-w-[96rem] mx-auto lg:mt-3 lg:pt-8 lg:flex-row flex-col">
           <div class="w-full lg:w-1/2 lg:pr-8">
             <GallerySlider
@@ -226,59 +226,55 @@ function ProductDetails(
                 </div>
               </div>
             </div>
-            {/* Sku Selector */}
-            {
-              /* <div class="mt-4 sm:mt-6">
-              <ProductSelector product={product} />
-            </div> */
-            }
-            {/* Add to Cart and Favorites button */}
-            <div class="mt-4 sm:mt-10 flex flex-col gap-2">
+            {/* SKU Selector & Add to Cart */}
+            <div class="mt-6">
               {availability === "https://schema.org/InStock"
-                ? (
-                  <>
-                    {platform === "vtex" && (
-                      <ProductDetailsActions
-                        eventParams={{ items: [eventItem] }}
-                        productID={productID}
-                        seller={seller}
-                      />
-                    )}
-                    {platform === "wake" && (
-                      <AddToCartButtonWake
-                        eventParams={{ items: [eventItem] }}
-                        productID={productID}
-                      />
-                    )}
-                    {platform === "linx" && (
-                      <AddToCartButtonLinx
-                        eventParams={{ items: [eventItem] }}
-                        productID={productID}
-                        productGroupID={productGroupID}
-                      />
-                    )}
-                    {platform === "vnda" && (
-                      <AddToCartButtonVNDA
-                        eventParams={{ items: [eventItem] }}
-                        productID={productID}
-                        additionalProperty={additionalProperty}
-                      />
-                    )}
-                    {platform === "shopify" && (
-                      <AddToCartButtonShopify
-                        eventParams={{ items: [eventItem] }}
-                        productID={productID}
-                      />
-                    )}
-                    {platform === "nuvemshop" && (
-                      <AddToCartButtonNuvemshop
-                        productGroupID={productGroupID}
-                        eventParams={{ items: [eventItem] }}
-                        additionalProperty={additionalProperty}
-                      />
-                    )}
-                  </>
-                )
+                ? isUniqueSku
+                  ? (
+                    <>
+                      {platform === "vtex" && (
+                        <ProductDetailsActions
+                          eventParams={{ items: [eventItem] }}
+                          productID={productID}
+                          seller={seller}
+                        />
+                      )}
+                      {platform === "wake" && (
+                        <AddToCartButtonWake
+                          eventParams={{ items: [eventItem] }}
+                          productID={productID}
+                        />
+                      )}
+                      {platform === "linx" && (
+                        <AddToCartButtonLinx
+                          eventParams={{ items: [eventItem] }}
+                          productID={productID}
+                          productGroupID={productGroupID}
+                        />
+                      )}
+                      {platform === "vnda" && (
+                        <AddToCartButtonVNDA
+                          eventParams={{ items: [eventItem] }}
+                          productID={productID}
+                          additionalProperty={additionalProperty}
+                        />
+                      )}
+                      {platform === "shopify" && (
+                        <AddToCartButtonShopify
+                          eventParams={{ items: [eventItem] }}
+                          productID={productID}
+                        />
+                      )}
+                      {platform === "nuvemshop" && (
+                        <AddToCartButtonNuvemshop
+                          productGroupID={productGroupID}
+                          eventParams={{ items: [eventItem] }}
+                          additionalProperty={additionalProperty}
+                        />
+                      )}
+                    </>
+                  )
+                  : <ProductVariantList product={product} />
                 : <OutOfStock productID={productID} />}
             </div>
             {/* Shipping Simulation */}

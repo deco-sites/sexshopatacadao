@@ -55,7 +55,8 @@ export type AvailableIcons =
   | "PagePrev"
   | "PageNext"
   | "GalleryGrid"
-  | "GalleryList";
+  | "GalleryList"
+  | "Selected";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

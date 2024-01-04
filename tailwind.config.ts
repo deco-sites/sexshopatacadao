@@ -11,7 +11,9 @@ export default {
       colors: {
         "primary-500": "#e5067c",
         "primary-600": "#b90565",
+        "primary-650": "#b20260",
 
+        "success-400": "#7fbd61",
         "success-500": "#4da630",
         "success-600": "#3f8e25",
 

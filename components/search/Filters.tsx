@@ -24,8 +24,10 @@ function ValueItem(
     <a href={url} rel="nofollow" class="flex gap-2">
       <div
         aria-checked={selected}
-        class="w-4 h-4 min-w-[1rem] min-h-[1rem] border-[2px] border-gray-400 aria-[checked='true']:bg-[#b20260] aria-[checked='true']:border-white"
-      />
+        class="w-4 h-4 min-w-[1rem] min-h-[1rem] border-[2px] border-gray-400 aria-[checked='true']:bg-primary-500 aria-[checked='true']:border-primary-500"
+      >
+        <Icon id="CheckMark" size={12} class="text-white" />
+      </div>
       <span class="text-sm font-montserrat leading-[16px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </a>

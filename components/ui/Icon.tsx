@@ -11,6 +11,7 @@ export type AvailableIcons =
   | "ChevronDown"
   | "ChevronUp2"
   | "CreditCard"
+  | "CheckMark"
   | "Deco"
   | "Diners"
   | "Discord"
@@ -56,6 +57,9 @@ export type AvailableIcons =
   | "PageNext"
   | "GalleryGrid"
   | "GalleryList"
+  | "FacebookButton"
+  | "PinterestButton"
+  | "WhatsappButton"
   | "Selected";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

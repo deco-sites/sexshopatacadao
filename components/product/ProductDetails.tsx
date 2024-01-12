@@ -81,6 +81,8 @@ function ProductDetails(
     product,
   } = page;
 
+  console.log(product);
+
   const {
     productID,
     offers,

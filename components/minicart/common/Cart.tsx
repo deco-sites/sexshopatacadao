@@ -134,9 +134,9 @@ function Cart({
                   )} */
                   }
                   {discounts < 0 && (
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center font-bold">
                       <span class="text-sm">Descontos</span>
-                      <span class="text-sm">
+                      <span class="text-base">
                         {formatPrice(discounts, currency, locale)}
                       </span>
                     </div>

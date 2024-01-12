@@ -30,7 +30,7 @@ function GalleryModeSwitch({ current }: GalleryModeSwitchProps) {
         data-active={current === "list"}
         type="button"
         onClick={() => update("list")}
-        class="flex items-center justify-center gap-2 w-[100px] h-10 rounded-[5px] bg-gray-200 data-[active='true']:bg-primary-500 data-[active='true']:text-white"
+        class="flex items-center justify-center  gap-2 w-[100px] h-10 rounded-[5px] bg-gray-200 data-[active='true']:bg-primary-500 data-[active='true']:text-white"
       >
         <Icon id="GalleryList" size={22} />
         Lista

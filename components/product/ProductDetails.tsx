@@ -22,8 +22,6 @@ import ProductVariantList from "deco-sites/sexshopatacadao/components/product/Va
 import Icon from "$store/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
 
-
-
 interface Props {
   page: ProductDetailsPage | null;
   productManufacturerCode: ProductManufacturerCode | null;
@@ -60,10 +58,10 @@ interface Props {
      */
     showCopyButton?: boolean;
   };
-    /**
+  /**
    * @ignore
    */
-    url: string;
+  url: string;
 }
 
 function ProductDetails(
@@ -328,67 +326,71 @@ function ProductDetails(
                 )}
               </div>
               <div class="md:flex-1">
-               {/* Share card */}
-        {share && Object.values(share).some((value) => value)
-          ? (
-            <div class="flex items-center gap-6">
-              <span class="text-base font-bold text-[#3f3f40]">
-                Compartilhar:
-              </span>
-              <div class="flex items-start gap-2">
-                {share.showPinterestButton && (
-                  <a
-                    href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
-                      images[0].url
-                    }`}
-                    target="_blank"
-                    rel="noreferrer"
-                    title="Salvar no Pinterest"
-                  >
-                    <Icon id="PinterestButton" size={26} />
-                  </a>
-                )}
-                {share.showFacebookButton && (
-                  <a
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedURI}`}
-                    title="Publicar no Facebook"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Icon id="FacebookButton" size={26} />
-                  </a>
-                )}
-                {share.showWhatsappButton && (
-                  <a
-                    href={`https://api.whatsapp.com/send?text=${encodedURI}`}
-                    title="Compartilhar no Whatsapp"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Icon id="WhatsappButton" size={26} />
-                  </a>
-                )}
-                {share.showTwitterButton && (
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${encodedURI}`}
-                    title="Publicar no Twitter"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Icon id="TwitterButton" size={25} />
-                  </a>
-                )}
-                {share.showCopyButton && (
-                  <CopyButton
-                    contentToCopy={url}
-                  >
-                    <Icon id="LinkButton" size={26} class="text-primary" />
-                  </CopyButton>
-                )}
-              </div>
-            </div>
-          )
-          : null}
+                {/* Share card */}
+                {share && Object.values(share).some((value) => value)
+                  ? (
+                    <div class="flex items-center gap-6">
+                      <span class="text-base font-bold text-[#3f3f40]">
+                        Compartilhar:
+                      </span>
+                      <div class="flex items-start gap-2">
+                        {share.showPinterestButton && (
+                          <a
+                            href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
+                              images[0].url
+                            }`}
+                            target="_blank"
+                            rel="noreferrer"
+                            title="Salvar no Pinterest"
+                          >
+                            <Icon id="PinterestButton" size={26} />
+                          </a>
+                        )}
+                        {share.showFacebookButton && (
+                          <a
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedURI}`}
+                            title="Publicar no Facebook"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Icon id="FacebookButton" size={26} />
+                          </a>
+                        )}
+                        {share.showWhatsappButton && (
+                          <a
+                            href={`https://api.whatsapp.com/send?text=${encodedURI}`}
+                            title="Compartilhar no Whatsapp"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Icon id="WhatsappButton" size={26} />
+                          </a>
+                        )}
+                        {share.showTwitterButton && (
+                          <a
+                            href={`https://twitter.com/intent/tweet?text=${encodedURI}`}
+                            title="Publicar no Twitter"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            <Icon id="TwitterButton" size={25} />
+                          </a>
+                        )}
+                        {share.showCopyButton && (
+                          <CopyButton
+                            contentToCopy={url}
+                          >
+                            <Icon
+                              id="LinkButton"
+                              size={26}
+                              class="text-primary"
+                            />
+                          </CopyButton>
+                        )}
+                      </div>
+                    </div>
+                  )
+                  : null}
               </div>
             </div>
 
@@ -421,9 +423,12 @@ function ProductDetails(
           </div>
           <div class="lg:w-1/2">
             <div class="flex justify-center w-full  relative">
-
-            <Image src={images[1]?.url || images[0].url} width={500} height={500}/>
-            <span class="bg-[#00000008] absolute inset-0"></span>
+              <Image
+                src={images[1]?.url || images[0].url}
+                width={500}
+                height={500}
+              />
+              <span class="bg-[#00000008] absolute inset-0"></span>
             </div>
           </div>
         </div>

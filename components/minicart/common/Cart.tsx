@@ -47,7 +47,7 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmpty = items.length === 0;
-  console.log(total, 'incart')
+  console.log(total, "incart");
 
   return (
     <div class="flex flex-col overflow-hidden">
@@ -121,7 +121,6 @@ function Cart({
               {/* Cart Footer */}
               <footer class="w-full px-6 py-2 shadow-[0_0_12px_rgba(0,0,0,.15)]">
                 <div class="flex flex-col gap-3 text-gray-800">
-                 
                   {/* Subtotal */}
                   <div class="w-full flex justify-between text-sm font-bold">
                     <span>Subtotal</span>
@@ -141,8 +140,7 @@ function Cart({
                         {formatPrice(discounts, currency, locale)}
                       </span>
                     </div>
-                  )} 
-                  
+                  )}
 
                   {/* Total */}
                   <div class="flex justify-between items-center w-full font-bold">

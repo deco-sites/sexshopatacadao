@@ -57,7 +57,7 @@ function Cart() {
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;
 
-  console.log( totalizers, total, discounts, (total+discounts) / 100 )
+  console.log(totalizers, total, discounts, (total + discounts) / 100);
 
   const idsToFetchAdditionalProperties = useComputed(() => {
     const ids = new Set<string>();

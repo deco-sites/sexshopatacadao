@@ -205,7 +205,6 @@ function ProductInfo({ page, layout }: Props) {
             }]}
           />
         )}
-        
       </div>
       {/* Description card */}
       <div class="mt-4 sm:mt-6">

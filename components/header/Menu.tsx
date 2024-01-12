@@ -7,7 +7,9 @@ export interface Props {
   items: SiteNavigationElement[];
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
+function MenuItem(
+  { item, fistLevel }: { item: SiteNavigationElement; fistLevel?: boolean },
+) {
   const hasChildren = Boolean(item.children?.length);
 
   const titleContent = (
@@ -16,13 +18,14 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
       class={clsx(
         "p-0 flex items-center h-[60px] data-[highlighted]:font-bold data-[highlighted]:text-primary-500",
         hasChildren && "collapse-title",
+        fistLevel && "text-[#3f3f40]",
       )}
     >
       <span>{item.name}</span>
       {hasChildren && (
         <Icon
           id="AngleUp"
-          size={13}
+          size={14}
           strokeWidth={1}
           class="rotate-180 transition-transform custom-collapse-arrow ml-auto"
         />
@@ -56,7 +59,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
             <li>
               <a
                 href={item.url}
-                class="flex items-center h-[60px] font-bold px-3"
+                class="flex items-center h-[60px] font-bold px-3 text-[#3f3f40]"
               >
                 Ver Todos
               </a>
@@ -76,7 +79,7 @@ function Menu({ items }: Props) {
       <div class="flex flex-col h-max">
         <button
           type="button"
-          class="absolute left-full top-0 p-3"
+          class="absolute left-full top-0 m-3 text-white rounded-full"
           onClick={() => displayMenu.value = false}
         >
           <Icon id="XFilled" size={24} strokeWidth={0} />
@@ -113,7 +116,7 @@ function Menu({ items }: Props) {
         <ul class="flex-grow flex flex-col">
           {items.map((item) => (
             <li>
-              <MenuItem item={item} />
+              <MenuItem item={item} fistLevel />
             </li>
           ))}
         </ul>

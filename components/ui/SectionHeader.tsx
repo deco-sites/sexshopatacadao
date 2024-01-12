@@ -27,7 +27,7 @@ function Header({ title, alignment = "center", limitSize }: Props) {
               )}
             <div
               class={`absolute ${
-                limitSize ? "w-[88%] md:w-full" : "w-full"
+                limitSize ? "w-[88%]" : "w-full"
               } h-1 bg-primary-500 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2`}
             />
           </div>

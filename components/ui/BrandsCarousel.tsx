@@ -33,7 +33,7 @@ function Buttons() {
   return (
     <>
       <div class="absolute top-1/2 -translate-y-1/2 left-0 lg:-left-[2%] flex items-center justify-center z-10 col-start-1 row-start-3">
-        <Slider.PrevButton class="w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 border-0 outline-none">
+        <Slider.PrevButton class="w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 border-0 outline-none flex justify-center items-center">
           <Icon
             class="text-[#717171] scale-x-150 scale-y-[2]"
             size={25}
@@ -43,7 +43,7 @@ function Buttons() {
         </Slider.PrevButton>
       </div>
       <div class="absolute top-1/2 -translate-y-1/2 flex right-0 lg:-right-[2%] items-center justify-center z-10 col-start-3 row-start-3">
-        <Slider.NextButton class="w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 border-0 outline-none">
+        <Slider.NextButton class="w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 border-0 outline-none flex justify-center items-center">
           <Icon
             class="text-[#717171] scale-x-150 scale-y-[2]"
             size={25}
@@ -70,7 +70,7 @@ function BrandsCarousel(props: Props) {
         alignment="center"
       />
 
-      <div class="flex relative h-[130px]">
+      <div class="flex relative h-[130px] my-4">
         <Slider class="carousel carousel-center w-full row-span-full">
           {images?.map(({ href, alt, src }, index) => {
             return (

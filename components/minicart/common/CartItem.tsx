@@ -65,7 +65,7 @@ function CartItem(
 
   return (
     <div
-      class="grid grid-rows-1 gap-2"
+      class="grid grid-rows-1 gap-4"
       style={{
         gridTemplateColumns: "auto 1fr auto",
       }}
@@ -76,7 +76,7 @@ function CartItem(
         style={{ aspectRatio: "1" }}
         width={96}
         height={96}
-        class="h-full object-contain"
+        class="h-full object-contain min-w-[96px]"
       />
 
       <div class="flex flex-col gap-2 text-gray-800">
@@ -103,7 +103,7 @@ function CartItem(
             </span>
           )}
           <span class="text-[15px] leading-none text-primary-500">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+            {isGift ? "Grátis" : formatPrice(sale * quantity, currency, locale)}
           </span>
         </div>
 

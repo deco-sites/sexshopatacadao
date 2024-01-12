@@ -55,7 +55,7 @@ const BenefitItem = ({ description, icon, title, link }: Benefit) => {
         <strong class="">
           {title}
         </strong>
-        <span>
+        <span class="font-medium">
           {description}
         </span>
       </div>

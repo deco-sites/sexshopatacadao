@@ -29,7 +29,7 @@ function CartQuantitySelector(
         <Icon id="AngleUp" size={14} strokeWidth={1} class="rotate-180" />
       </Button>
       <input
-        class="input text-center join-item [appearance:textfield] h-[28px] min-h-[unset] text-black text-xs"
+        class="input text-center join-item [appearance:textfield] h-[28px] min-h-[unset] text-black text-xs px-2"
         type="number"
         inputMode="numeric"
         pattern="[0-9]*"

@@ -19,6 +19,10 @@ import BrowserLog from "deco-sites/sexshopatacadao/islands/BrowserLog.tsx";
 import ProductDetailsActions from "deco-sites/sexshopatacadao/islands/ProductDetailsActions.tsx";
 import { ProductManufacturerCode } from "deco-sites/sexshopatacadao/loaders/manufacturerCode.ts";
 import ProductVariantList from "deco-sites/sexshopatacadao/components/product/VariantList/ProductVariantList.tsx";
+import Icon from "$store/components/ui/Icon.tsx";
+import Image from "apps/website/components/Image.tsx";
+
+
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -31,10 +35,39 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+  /**
+   * @title Opções de compartilhamento
+   */
+  share?: {
+    /**
+     * @title Compartilhar via Pinterest
+     */
+    showPinterestButton?: boolean;
+    /**
+     * @title Compartilhar via Facebook
+     */
+    showFacebookButton?: boolean;
+    /**
+     * @title Compartilhar via Whatsapp
+     */
+    showWhatsappButton?: boolean;
+    /**
+     * @title Compartilhar via Twitter
+     */
+    showTwitterButton?: boolean;
+    /**
+     * @title Copiar link
+     */
+    showCopyButton?: boolean;
+  };
+    /**
+   * @ignore
+   */
+    url: string;
 }
 
 function ProductDetails(
-  { isMobile, page, layout, productManufacturerCode }: ReturnType<
+  { isMobile, page, layout, productManufacturerCode, url, share }: ReturnType<
     typeof loader
   >,
 ) {
@@ -49,16 +82,18 @@ function ProductDetails(
     breadcrumbList,
     product,
   } = page;
+
   const {
     productID,
     offers,
     name = "",
     // gtin,
     brand,
-
+    image: images,
     isVariantOf,
     additionalProperty = [],
   } = product;
+
   const description = product.description || isVariantOf?.description;
   const {
     price = 0,
@@ -125,6 +160,8 @@ function ProductDetails(
   );
 
   const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
+
+  const encodedURI = encodeURI(url);
 
   return (
     <div class="flex flex-col" id={id}>
@@ -291,7 +328,67 @@ function ProductDetails(
                 )}
               </div>
               <div class="md:flex-1">
-                {/* TODO Share */}
+               {/* Share card */}
+        {share && Object.values(share).some((value) => value)
+          ? (
+            <div class="flex items-center gap-6">
+              <span class="text-base font-bold text-[#3f3f40]">
+                Compartilhar:
+              </span>
+              <div class="flex items-start gap-2">
+                {share.showPinterestButton && (
+                  <a
+                    href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
+                      images[0].url
+                    }`}
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Salvar no Pinterest"
+                  >
+                    <Icon id="PinterestButton" size={26} />
+                  </a>
+                )}
+                {share.showFacebookButton && (
+                  <a
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodedURI}`}
+                    title="Publicar no Facebook"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Icon id="FacebookButton" size={26} />
+                  </a>
+                )}
+                {share.showWhatsappButton && (
+                  <a
+                    href={`https://api.whatsapp.com/send?text=${encodedURI}`}
+                    title="Compartilhar no Whatsapp"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Icon id="WhatsappButton" size={26} />
+                  </a>
+                )}
+                {share.showTwitterButton && (
+                  <a
+                    href={`https://twitter.com/intent/tweet?text=${encodedURI}`}
+                    title="Publicar no Twitter"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Icon id="TwitterButton" size={25} />
+                  </a>
+                )}
+                {share.showCopyButton && (
+                  <CopyButton
+                    contentToCopy={url}
+                  >
+                    <Icon id="LinkButton" size={26} class="text-primary" />
+                  </CopyButton>
+                )}
+              </div>
+            </div>
+          )
+          : null}
               </div>
             </div>
 
@@ -313,14 +410,21 @@ function ProductDetails(
 
       {/* Description */}
       {description && (
-        <div class="max-w-[96rem] mx-auto flex font-montserrat">
-          <div class="p-[5vw] text-sm leading-[1.6rem] text-gray-800">
+        <div class="max-w-[96rem] mx-auto flex lg:flex-row flex-col font-montserrat items-center">
+          <div class="lg:w-1/2 p-[5vw] text-sm leading-[1.6rem] text-gray-800">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">
               Descrição do produto
             </h2>
             <div
               dangerouslySetInnerHTML={{ __html: description }}
             />
+          </div>
+          <div class="lg:w-1/2">
+            <div class="flex justify-center w-full  relative">
+
+            <Image src={images[1]?.url || images[0].url} width={500} height={500}/>
+            <span class="bg-[#00000008] absolute inset-0"></span>
+            </div>
           </div>
         </div>
       )}
@@ -334,6 +438,7 @@ export const loader = (props: Props, req: Request) => {
   return {
     ...props,
     isMobile,
+    url: req.url,
   };
 };
 

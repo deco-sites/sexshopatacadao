@@ -76,7 +76,7 @@ function Header(
         }}
       >
         {/* <Drawers menu={{ items }} searchbar={searchbar} platform={platform}> */}
-        <div class="bg-base-100 fixed w-full z-50">
+        <div class="bg-base-100 fixed w-full z-50 shadow-md">
           <Benefits {...benefits} isMobile={isMobile} />
           {/* <Alert alerts={alerts} /> */}
           <Main

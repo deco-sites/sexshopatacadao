@@ -47,6 +47,7 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmpty = items.length === 0;
+  console.log(total, 'incart')
 
   return (
     <div class="flex flex-col overflow-hidden">
@@ -101,7 +102,7 @@ function Cart({
               {/* Cart Items */}
               <ul
                 role="list"
-                class="mt-6 px-3 flex-grow overflow-y-auto flex flex-col gap-8 w-full pb-4 scrollbar scrollbar-track-[#e3e4e6] scrollbar-track-rounded-[0] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[0] scrollbar-w-[13px]"
+                class="lg:mt-6 px-3 flex-grow overflow-y-auto flex flex-col gap-8 w-full pb-4 scrollbar scrollbar-track-[#e3e4e6] scrollbar-track-rounded-[0] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[0] scrollbar-w-[13px]"
               >
                 {items.map((item, index) => (
                   <li key={index}>
@@ -120,16 +121,7 @@ function Cart({
               {/* Cart Footer */}
               <footer class="w-full px-6 py-2 shadow-[0_0_12px_rgba(0,0,0,.15)]">
                 <div class="flex flex-col gap-3 text-gray-800">
-                  {
-                    /* {discounts > 0 && (
-                    <div class="flex justify-between items-center">
-                      <span class="text-sm">Descontos</span>
-                      <span class="text-sm">
-                        {formatPrice(discounts, currency, locale)}
-                      </span>
-                    </div>
-                  )} */
-                  }
+                 
                   {/* Subtotal */}
                   <div class="w-full flex justify-between text-sm font-bold">
                     <span>Subtotal</span>
@@ -142,6 +134,15 @@ function Cart({
                     <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
                   )} */
                   }
+                  {discounts < 0 && (
+                    <div class="flex justify-between items-center">
+                      <span class="text-sm">Descontos</span>
+                      <span class="text-sm">
+                        {formatPrice(discounts, currency, locale)}
+                      </span>
+                    </div>
+                  )} 
+                  
 
                   {/* Total */}
                   <div class="flex justify-between items-center w-full font-bold">

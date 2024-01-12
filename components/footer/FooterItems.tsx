@@ -84,10 +84,14 @@ export default function FooterItems(
 
           {/* Mobile view */}
           <ul class="flex flex-col md:hidden">
-            {sections.map(({ title, content }) => (
+            {sections.map(({ title, content }, index) => (
               <li>
                 <div class="custom-collapse collapse">
-                  <input type="checkbox" class="min-h-[0]" />
+                  <input
+                    type="checkbox"
+                    class="min-h-[0]"
+                    checked={index == 0}
+                  />
                   <div class="collapse-title min-h-[60px] !p-0 flex items-center">
                     <SectionTitle>{title}</SectionTitle>
                     <Icon

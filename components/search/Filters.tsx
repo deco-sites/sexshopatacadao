@@ -1,4 +1,3 @@
-import Avatar from "$store/components/ui/Avatar.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import type {
   Filter,
@@ -9,10 +8,7 @@ import type {
 import { parseRange } from "apps/commerce/utils/filters.ts";
 import Icon from "deco-sites/sexshopatacadao/components/ui/Icon.tsx";
 import { lazy, Suspense } from "preact/compat";
-
-const PriceRange = lazy(() =>
-  import("deco-sites/sexshopatacadao/islands/Search/PriceRange.tsx")
-);
+import PriceRange from "deco-sites/sexshopatacadao/islands/Search/PriceRange.tsx";
 
 interface Props {
   filters: ProductListingPage["filters"];
@@ -106,7 +102,9 @@ function Filters({ filters }: Props) {
                 />
               </div>
               <div class="collapse-content px-0 max-h-[200px] overflow-y-auto scrollbar scrollbar-track-[#f0f0f0] scrollbar-track-rounded-[50px] scrollbar-thumb-[#d3d3d3] scrollbar-thumb-rounded-[50px] scrollbar-w-[12px]">
-                <FilterValues {...filter} />
+                {filter.key == "price" || filter.key == "PriceRanges"
+                  ? <PriceRange filter={filter} />
+                  : <FilterValues {...filter} />}
               </div>
             </div>
           </li>

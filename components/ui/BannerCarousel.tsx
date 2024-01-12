@@ -195,7 +195,7 @@ function Buttons() {
         <Slider.PrevButton class="btn btn-circle w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 !bg-[hsla(0,0%,85.1%,.5)] border-0 outline-none">
           <Icon
             class="text-primary-500"
-            size={24}
+            size={23}
             id="ChevronLeft"
             strokeWidth={0}
           />
@@ -205,7 +205,7 @@ function Buttons() {
         <Slider.NextButton class="btn btn-circle w-[35px] min-w-[35px] h-[35px] min-h-[35px] lg:w-14 lg:min-w-14 lg:h-14 lg:min-h-14 !bg-[hsla(0,0%,85.1%,.5)] border-0 outline-none">
           <Icon
             class="text-primary-500"
-            size={24}
+            size={23}
             id="ChevronRight"
             strokeWidth={0}
           />

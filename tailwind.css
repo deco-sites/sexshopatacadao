@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Allow changing font family via CMS */
   html {
     font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   mark {
@@ -14,8 +15,8 @@
   }
 
   /** Remove default styles from input[type=number] */
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
@@ -27,18 +28,21 @@
     height: 100vh;
   }
 
-  .navitem[data-highlighted='true']:first-of-type {
+  .navitem[data-highlighted="true"]:first-of-type {
     @apply border-l;
   }
 
-  .custom-collapse[open], .custom-collapse > input[type=checkbox]:checked ~.collapse-title .custom-collapse-arrow {
+  .custom-collapse[open],
+  .custom-collapse
+    > input[type="checkbox"]:checked
+    ~ .collapse-title
+    .custom-collapse-arrow {
     @apply rotate-0;
   }
   .drawer-toggle:checked ~ .drawer-side > .drawer-overlay {
-    background-color: rgba(3,4,78,.25) !important;
+    background-color: rgba(3, 4, 78, 0.25) !important;
   }
 
-  
   .prose ul {
     @apply py-4 pl-10 list-disc;
   }
@@ -55,14 +59,15 @@
   .prose.plp-seo a {
     @apply link;
   }
-  .prose.plp-seo h2, .prose.plp-seo h3 {
+  .prose.plp-seo h2,
+  .prose.plp-seo h3 {
     @apply font-bold uppercase text-lg text-primary-500 mb-[5px];
   }
-  .prose.plp-seo b, .prose.plp-seo strong {
+  .prose.plp-seo b,
+  .prose.plp-seo strong {
     @apply font-bold text-primary-500;
   }
 
-  
   .prose.banner-text h1,
   .prose.banner-text h2,
   .prose.banner-text h3,
@@ -75,7 +80,7 @@
 }
 
 .group:disabled .group-disabled\:animate-progress {
-  animation: progress-frame ease normal
+  animation: progress-frame ease normal;
 }
 
 @layer components {
@@ -86,10 +91,10 @@
 
 @keyframes progress-frame {
   0% {
-    --dot-progress: 0%
+    --dot-progress: 0%;
   }
 
   to {
-    --dot-progress: 100%
+    --dot-progress: 100%;
   }
 }

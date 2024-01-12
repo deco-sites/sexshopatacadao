@@ -27,6 +27,31 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+  /**
+   * @title Opções de compartilhamento
+   */
+  share?: {
+    /**
+     * @title Compartilhar via Pinterest
+     */
+    showPinterestButton?: boolean;
+    /**
+     * @title Compartilhar via Facebook
+     */
+    showFacebookButton?: boolean;
+    /**
+     * @title Compartilhar via Whatsapp
+     */
+    showWhatsappButton?: boolean;
+    /**
+     * @title Compartilhar via Twitter
+     */
+    showTwitterButton?: boolean;
+    /**
+     * @title Copiar link
+     */
+    showCopyButton?: boolean;
+  };
 }
 
 function ProductInfo({ page, layout }: Props) {
@@ -180,6 +205,7 @@ function ProductInfo({ page, layout }: Props) {
             }]}
           />
         )}
+        
       </div>
       {/* Description card */}
       <div class="mt-4 sm:mt-6">

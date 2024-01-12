@@ -26,7 +26,7 @@ export default function Articles(props: Props) {
   return (
     <div class="flex flex-col max-w-[96rem] mx-auto">
       <Header title={title} />
-      <div class="flex gap-10 lg:gap-6 w-full flex-col md:flex-row items-center mx-2">
+      <div class="flex gap-10 lg:gap-6 w-full flex-col md:flex-row items-center mx-2 my-3">
         {articles.map((article) => (
           <div class="flex flex-col flex-1 max-w-[500px] ">
             <a href={article.href} target="_blank" class="w-full">
@@ -38,7 +38,7 @@ export default function Articles(props: Props) {
                 height={175}
               />
             </a>
-            <a href={article.href} class="my-[1em] block relative">
+            <a href={article.href} class="mt-6 mb-[1rem] block relative">
               <h3 class="text-[22px] leading-[1.15] h-20 uppercase line-clamp-3">
                 {article.title}
               </h3>

@@ -27,7 +27,7 @@ function List({ possibilities }: { possibilities: Possibilities }) {
               url={url}
             />
 
-            <div class="w-[84px]">
+            <div class="w-[84px] flex-1 flex items-end">
               {inStock
                 ? <ProductVariantAmountSelector sku={sku} />
                 : <ProductVariantOutOfStockButton sku={sku} />}

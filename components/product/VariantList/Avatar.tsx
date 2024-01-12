@@ -25,7 +25,7 @@ function Avatar(
           alt={label}
         />
       </div>
-      <span class="text-xs leading-[131.19%] text-center text-gray-800">
+      <span class="text-xs leading-[131.19%] text-center text-gray-800 w-[84px]">
         {label}
       </span>
       <Icon

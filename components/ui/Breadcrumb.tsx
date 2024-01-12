@@ -20,12 +20,14 @@ function Breadcrumb({ itemListElement = [], applyPadding = true }: Props) {
       <ul class="block p-[15px]">
         {items
           .filter(({ name, item }) => name && item)
-          .map(({ name, item }) => (
+          .map(({ name, item }, index, list) => (
             <li
               data-highlight={name === "Home"}
-              class="data-[highlight='true']:text-primary-500 data-[highlight='true']:font-bold leading-[1.15] [&:first-child]:px-0 [&:not(:first-child)]:before:content-['/'] px-1 inline-block"
+              class="data-[highlight='true']:text-primary-500 data-[highlight='true']:font-bold leading-[1.15] [&:first-child]:px-0 [&:not(:first-child)]:before:content-['/'] px-1 inline-block hover:text-primary-500"
             >
-              <a class="px-1 py-[2px]" href={item}>{name}</a>
+              {index == list.length - 1
+                ? <span class="px-1 py-[2px]" href={item}>{name}</span>
+                : <a class="px-1 py-[2px]" href={item}>{name}</a>}
             </li>
           ))}
       </ul>

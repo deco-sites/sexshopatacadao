@@ -141,7 +141,7 @@ function TabbedProductShelf({
         {tabs.map((tab, index) => (
           <button
             data-active={index === ti}
-            class={"w-[150px] h-[45px] bg-white text-primary-500 border border-primary-500 rounded-[5px] data-[active='true']:bg-primary-500 data-[active='true']:text-white transition-colors duration-500 font-medium"}
+            class={"w-[150px] h-[45px] bg-white text-primary-500 border border-primary-500 rounded-[5px] data-[active='true']:bg-primary-500 data-[active='true']:text-white hover:bg-primary-500 hover:text-white transition-colors duration-500 font-medium"}
             {...usePartialSection({ props: { tabIndex: index } })}
           >
             {tab.title}

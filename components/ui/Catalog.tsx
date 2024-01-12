@@ -26,10 +26,9 @@ export interface Props {
     smallText?: string;
   };
 
-  /**
-   * @ignore
-   */
-  background: string;
+  background: ImageWidget;
+
+  backgroundMobile: ImageWidget;
 
   /**
    * @ignore
@@ -37,7 +36,7 @@ export interface Props {
   children?: ComponentChildren;
 }
 
-function Newsletter({
+function Catalog({
   text,
   children,
   success = {
@@ -49,6 +48,7 @@ function Newsletter({
       "Você passará a receber nossas melhores promoções, brindes e vantagens.",
   },
   background,
+  backgroundMobile,
 }: Props) {
   const id = useId();
   const succeeded = useSignal(false);
@@ -82,7 +82,7 @@ function Newsletter({
       }
 
       await invoke.vtex.actions.masterdata.createDocument({
-        acronym: "NR",
+        acronym: "CT",
         data: {
           email,
           name,
@@ -97,38 +97,38 @@ function Newsletter({
 
   return (
     <div
-      class="relative bg-primary-500 w-full group lg:h-[104px] grid grid-cols-1 grid-rows-1 text-white"
+      class="relative bg-black w-full group lg:h-[350px] text-white py-6 overflow-hidden"
       data-succeeded={succeeded}
     >
-      <div class="row-start-1 row-end-1 col-start-1 col-end-1 group-data-[succeeded='true']:opacity-0 group-data-[succeeded='true']:invisible transition-all duration-300 max-w-[1520px] z-[1] flex flex-col lg:flex-row items-center justify-between h-full py-[18px] lg:py-0 px-[15px] relative mx-auto w-full">
+      <div class="group-data-[succeeded='true']:opacity-0 group-data-[succeeded='true']:invisible transition-all duration-300 max-w-[1520px] z-[1] flex flex-col justify-between h-full py-[18px] lg:py-0 px-[15px] relative mx-auto w-full">
         {text && (
           <div
-            class="prose text-lg leading-[21px] text-center font-ubuntu lg:text-left lg:text-2xl lg:leading-[34px] max-w-[345px]"
+            class="prose text-lg text-primary-500 text-center lg:text-left lg:text-4xl max-w-[500px] mx-auto font-ubuntu font-bold"
             dangerouslySetInnerHTML={{ __html: text }}
           />
         )}
         <form
-          class="contents font-ubuntu"
+          class="font-montserrat mx-auto w-full lg:max-w-[500px]"
           onSubmit={handleSubmit}
           noValidate
         >
-          <div class="flex items-center px-[15px] gap-[30px] w-full lg:w-[55%] mt-5 lg:mt-0">
+          <div class="flex flex-col justify-center items-center px-[15px] gap-4 w-full mt-5 lg:mt-0">
             <div
-              class="flex flex-col w-full relative group/input text-center lg:text-left gap-2 lg:gap-0"
+              class="flex flex-col w-full relative group/input text-center lg:text-left "
               data-errored={nameErrored}
             >
               <label
                 for={`${id}--name`}
-                class="font-bold text-sm leading-[16px]"
+                class="text-sm leading-[16px] mb-1"
               >
-                Nome:
+                Digite seu nome:
               </label>
               <input
                 id={`${id}--name`}
                 name="name"
                 type="text"
-                placeholder="Seu nome"
-                class="text-base leading-[18px] outline-none border-b border-white w-full p-[10px] bg-transparent placeholder:text-white text-center lg:text-left"
+                placeholder="Ex: Maria Eduarda"
+                class="text-sm leading-[18px] text-black outline-none p-[10px] w-full max-w-[475px] rounded-md h-14 text-center lg:text-left placeholder:text-[#979899]"
                 autocomplete="off"
                 onFocus={() => nameErrored.value = false}
               />
@@ -137,21 +137,21 @@ function Newsletter({
               </span>
             </div>
             <div
-              class="flex flex-col w-full relative group/input text-center lg:text-left gap-2 lg:gap-0"
+              class="flex flex-col w-full relative group/input text-center lg:text-left "
               data-errored={emailErrored}
             >
               <label
                 for={`${id}--email`}
-                class="font-bold text-sm leading-[16px]"
+                class="text-sm leading-[16px] mb-1"
               >
-                Email:
+                Digite seu e-mail:
               </label>
               <input
                 id={`${id}--email`}
                 name="email"
                 type="email"
-                placeholder="Seu e-mail"
-                class="text-base leading-[18px] outline-none border-b border-white w-full p-[10px] bg-transparent placeholder:text-white text-center lg:text-left"
+                placeholder="Ex: seuemail@seuemail.com.br"
+                class="text-sm leading-[18px] text-black outline-none w-full p-[10px] max-w-[475px] rounded-md h-14 text-center lg:text-left placeholder:text-[#979899]"
                 autocomplete="off"
                 onFocus={() => emailErrored.value = false}
               />
@@ -159,22 +159,22 @@ function Newsletter({
                 O e-mail inserido parece estar incorreto.
               </span>
             </div>
+            <button
+              type="submit"
+              class="hover:bg-primary-600 bg-primary-500 transition-colors w-full lg:max-w-[210px] text-white uppercase font-bold rounded-[6px] h-10 lg:h-14 flex items-center justify-center group/btn disabled:bg-primary-600 lg:mt-0 "
+              disabled={loading}
+            >
+              <span class="group-disabled/btn:loading group-disabled/btn:text-[0px]">
+                Baixar
+              </span>
+            </button>
           </div>
-          <button
-            type="submit"
-            class="hover:bg-warning-600 bg-warning-500 transition-colors w-full lg:max-w-[188px] text-primary-500 uppercase font-bold rounded-[6px] h-10 lg:h-[50px] flex items-center justify-center group/btn disabled:bg-warning-600 mt-[34px] lg:mt-0"
-            disabled={loading}
-          >
-            <span class="group-disabled/btn:loading group-disabled/btn:text-[0px]">
-              Inscreva-se
-            </span>
-          </button>
         </form>
       </div>
 
-      <div class="flex items-center justify-between row-start-1 row-end-1 col-start-1 col-end-1 opacity-0 invisible group-data-[succeeded='true']:opacity-100 group-data-[succeeded='true']:visible transition-all duration-300 max-w-[1160px] z-[1] h-full flex-col lg:flex-row py-[18px] lg:py-0 px-[15px] mx-auto w-full gap-5 lg:gap-0">
+      <div class="flex items-center justify-between opacity-0 invisible group-data-[succeeded='true']:opacity-100 group-data-[succeeded='true']:visible transition-all duration-300 max-w-[1160px] z-[1] h-full flex-col lg:flex-row py-[18px] lg:py-0 px-[15px] mx-auto w-full gap-5 lg:gap-0 absolute">
         <div class="flex items-center gap-[10px] lg:gap-[104px]">
-          <Image src={success.image} width={52} height={52} alt="Sucesso!" />
+          <Image src={success.image} width={1920} height={250} alt="Sucesso!" />
 
           <div
             class="prose text-lg leading-[21px] lg:text-2xl lg:leading-[34px] max-w-[240px] lg:max-w-[345px] text-center"
@@ -195,12 +195,22 @@ function Newsletter({
           Voltar
         </button>
       </div>
-      <div
-        class="absolute inset-0 opacity-[0.3] lg:opacity-[0.15] bg-repeat-y lg:bg-no-repeat lg:bg-cover z-0"
-        style={{ backgroundImage: `url(${background})` }}
+      <Image
+        src={background}
+        width={1920}
+        height={250}
+        class="absolute top-0 z-0 max-w-none h-[350px] w-auto aspect-[1920/250] left-1/2 -translate-x-1/2 hidden sm:block"
+        loading={"lazy"}
+      />
+      <Image
+        src={backgroundMobile}
+        width={375}
+        height={302}
+        class="absolute top-0 z-0 max-w-none min-h-[302px] w-auto aspect-[375/302] left-1/2 -translate-x-1/2 block sm:hidden"
+        loading={"lazy"}
       />
     </div>
   );
 }
 
-export default Newsletter;
+export default Catalog;

@@ -26,13 +26,8 @@ const script = (id: string) => {
 };
 
 export interface Props {
-  title?: string;
   /** @format html */
   text?: string;
-  policy?: {
-    text?: string;
-    link?: string;
-  };
   buttons?: {
     allowText: string;
     cancelText?: string;
@@ -44,16 +39,10 @@ export interface Props {
 }
 
 const DEFAULT_PROPS = {
-  title: "Cookies",
   text:
     "Guardamos estatísticas de visitas para melhorar sua experiência de navegação.",
-  policy: {
-    text: "Saiba mais sobre sobre política de privacidade",
-    link: "/politica-de-privacidade",
-  },
   buttons: {
     allowText: "Aceitar",
-    cancelText: "Fechar",
   },
   layout: {
     position: "Expanded",
@@ -63,7 +52,7 @@ const DEFAULT_PROPS = {
 
 function CookieConsent(props: Props) {
   const id = useId();
-  const { title, text, policy, buttons, layout } = {
+  const { text, buttons, layout } = {
     ...DEFAULT_PROPS,
     ...props,
   };
@@ -73,51 +62,47 @@ function CookieConsent(props: Props) {
       <div
         id={id}
         class={`
-          transform-gpu translate-y-[200%] transition fixed bottom-0 lg:bottom-2 w-screen z-50 lg:flex
-          ${layout?.position === "Left" ? "lg:justify-start" : ""}
-          ${layout?.position === "Center" ? "lg:justify-center" : ""}
-          ${layout?.position === "Right" ? "lg:justify-end" : ""}
+          transform-gpu translate-y-[200%] transition fixed bottom-0 w-screen z-50 lg:flex bg-primary-500
         `}
+        // ${layout?.position === "Left" ? "lg:justify-start" : ""}
+        // ${layout?.position === "Center" ? "lg:justify-center" : ""}
+        // ${layout?.position === "Right" ? "lg:justify-end" : ""}
       >
         <div
           class={`
-          p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 
+          p-4 flex flex-col sm:flex-row justify-center gap-4 container
           ${
-            !layout?.position || layout?.position === "Expanded"
-              ? "lg:container lg:mx-auto"
-              : `
-            ${layout?.content === "Piled up" ? "lg:w-[480px]" : ""}
-            ${
-                !layout?.content || layout?.content === "Tiled"
-                  ? "lg:w-[520px]"
-                  : ""
-              }
-          `
-          }
-          ${
-            !layout?.content || layout?.content === "Tiled"
-              ? "lg:flex-row lg:items-end"
-              : ""
-          }
-          
+            // ${
+            //   !layout?.position || layout?.position === "Expanded"
+            //     ? "lg:container lg:mx-auto"
+            //     : `
+            //   ${layout?.content === "Piled up" ? "lg:w-[480px]" : ""}
+            //   ${
+            //       !layout?.content || layout?.content === "Tiled"
+            //         ? "lg:w-[520px]"
+            //         : ""
+            //     }
+            // `
+            // }
+            // ${
+            //   !layout?.content || layout?.content === "Tiled"
+            //     ? "lg:flex-row lg:items-end"
+            //     : ""
+            // }
+            ""}
         `}
         >
           <div
-            class={`flex-auto flex flex-col gap-4 ${
+            class={`flex-auto flex flex-col gap-4 max-w-3xl pr-9 ${
               !layout?.content || layout?.content === "Tiled" ? "lg:gap-2" : ""
             }`}
           >
-            <h3 class="text-xl">{title}</h3>
             {text && (
               <div
-                class="text-base"
+                class="text-sm text-white"
                 dangerouslySetInnerHTML={{ __html: text }}
               />
             )}
-
-            <a href={policy.link} class="text-sm link link-secondary">
-              {policy.text}
-            </a>
           </div>
 
           <div
@@ -127,11 +112,11 @@ function CookieConsent(props: Props) {
                 : ""
             }`}
           >
-            <button class="btn" data-button-cc-accept>
+            <button
+              class="btn rounded-none hover:bg-white hover:border-white hover:text-primary-500 bg-transparent border border-white font-bold uppercase text-white h-9"
+              data-button-cc-accept
+            >
               {buttons.allowText}
-            </button>
-            <button class="btn btn-outline" data-button-cc-close>
-              {buttons.cancelText}
             </button>
           </div>
         </div>

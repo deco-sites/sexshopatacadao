@@ -184,23 +184,23 @@ function ProductCard(
                 : ""
             }`}
             sizes="(max-width: 640px) 50vw, 20vw"
-            preload={preload}
-            loading={preload ? "eager" : "lazy"}
+            loading={"lazy"}
             decoding="async"
           />
-          {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && (
-            <Image
-              src={back?.url ?? front.url!}
-              alt={back?.alternateName ?? front.alternateName}
-              width={WIDTH}
-              height={HEIGHT}
-              class="bg-base-100 col-span-full max-w-[220px] row-span-full transition-opacity duration-100 rounded-[3px] w-full opacity-0 lg:group-hover:opacity-100"
-              sizes="(max-width: 640px) 50vw, 20vw"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+          {!isMobile && (!l?.onMouseOver?.image ||
+            l?.onMouseOver?.image == "Change image") &&
+            (
+              <Image
+                src={back?.url ?? front.url!}
+                alt={back?.alternateName ?? front.alternateName}
+                width={WIDTH}
+                height={HEIGHT}
+                class="bg-base-100 col-span-full max-w-[220px] row-span-full transition-opacity duration-100 rounded-[3px] w-full opacity-0 lg:group-hover:opacity-100"
+                sizes="(max-width: 640px) 50vw, 20vw"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
         </div>
         <figcaption
           class={`

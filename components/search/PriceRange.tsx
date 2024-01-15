@@ -107,6 +107,8 @@ export const Range = ({
                   ...price.value,
                   min: float,
                 };
+
+                POST(price.value);
               }}
               step={(max - min) / 100}
               type="range"
@@ -144,6 +146,8 @@ export const Range = ({
                   ...price.value,
                   max: float,
                 };
+
+                POST(price.value);
               }}
               step={(max - min) / 100}
               type="range"
@@ -152,15 +156,17 @@ export const Range = ({
           </label>
         </div>
 
-        <div class="gap-2 flex flex-wrap items-center justify-between w-full">
-          <button
+        <div class="gap-2 flex flex-wrap items-center justify-end w-full">
+          {
+            /* <button
             class={clx(
               "bg-primary-500 duration-300 ease-in-out flex font-normal items-center justify-center h-9 leading-normal rounded text-[#FFFFFF] text-base transition-colors w-16",
             )}
             onClick={() => POST(price.value)}
           >
             Filtrar
-          </button>
+          </button> */
+          }
 
           <span class="font-normal leading-normal text-sm text-[#727273] font-montserrat">
             {formatPrice(price.value.min)} - {formatPrice(price.value.max)}

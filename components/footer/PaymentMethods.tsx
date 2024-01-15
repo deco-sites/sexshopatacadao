@@ -31,6 +31,7 @@ export default function PaymentMethods(
                     height={27}
                     alt={item.name}
                     {...item.image}
+                    loading="lazy"
                   />
                 </li>
               );

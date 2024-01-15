@@ -13,6 +13,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -193,8 +194,8 @@ function TabbedProductShelf({
   );
 }
 
-export function loader(props: Props, req: Request) {
-  const isMobileValue = checkIsMobile(req);
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  const isMobileValue = checkIsMobile(ctx);
   return { ...props, isMobile: isMobileValue };
 }
 

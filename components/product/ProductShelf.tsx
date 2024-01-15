@@ -12,6 +12,7 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { checkIsMobile } from "deco-sites/sexshopatacadao/loaders/isMobile.ts";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
 export interface Props {
   products: Product[] | null;
@@ -145,8 +146,8 @@ function ProductShelf({
   );
 }
 
-export function loader(props: Props, req: Request) {
-  const isMobileValue = checkIsMobile(req);
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  const isMobileValue = checkIsMobile(ctx);
   return { ...props, isMobile: isMobileValue };
 }
 

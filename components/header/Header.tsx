@@ -9,6 +9,7 @@ import Main from "./Main.tsx";
 import Navbar from "$store/components/header/Navbar.tsx";
 import { type EditableProps as BenefitsProps } from "$store/components/header/Benefits.tsx";
 import Benefits from "$store/components/header/Benefits.tsx";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
 const HEADER_HEIGHT_DESKTOP = 266;
 const HEADER_HEIGHT_MOBILE = 180;
@@ -95,8 +96,8 @@ function Header(
   );
 }
 
-export function loader(props: Props, req: Request) {
-  return isMobileLoader(props, req);
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  return isMobileLoader(props, req, ctx);
 }
 
 export default Header;

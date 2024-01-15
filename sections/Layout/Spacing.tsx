@@ -1,9 +1,10 @@
 import isMobileLoader from "$store/loaders/isMobile.ts";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
-export function loader(props: Props, req: Request) {
+export function loader(props: Props, req: Request, ctx: AppContext) {
   return {
     ...props,
-    isMobile: isMobileLoader(props, req).isMobile,
+    isMobile: isMobileLoader(props, req, ctx).isMobile,
   };
 }
 

@@ -21,6 +21,7 @@ import { ProductManufacturerCode } from "deco-sites/sexshopatacadao/loaders/manu
 import ProductVariantList from "deco-sites/sexshopatacadao/components/product/VariantList/ProductVariantList.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -439,8 +440,8 @@ function ProductDetails(
   );
 }
 
-export const loader = (props: Props, req: Request) => {
-  const isMobile = checkIsMobile(req);
+export const loader = (props: Props, req: Request, ctx: AppContext) => {
+  const isMobile = checkIsMobile(ctx);
 
   return {
     ...props,

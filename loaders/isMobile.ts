@@ -1,13 +1,14 @@
-import MatchDevice from "deco/matchers/MatchDevice.ts";
+import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
 
-export function checkIsMobile(req: Request) {
-  return MatchDevice({ mobile: true, tablet: true }, {
-    siteId: 0,
-    request: req,
-  });
+export function checkIsMobile(ctx: AppContext) {
+  return ctx.device === "mobile";
 }
 
-export default function IsMobileLoader<T>({ ...props }: T, req: Request) {
-  const isMobile = checkIsMobile(req);
+export default function IsMobileLoader<T>(
+  { ...props }: T,
+  _req: Request,
+  ctx: AppContext,
+) {
+  const isMobile = checkIsMobile(ctx);
   return { ...props, isMobile };
 }

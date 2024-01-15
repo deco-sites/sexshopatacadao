@@ -70,7 +70,7 @@ function BrandsCarousel(props: Props) {
         alignment="center"
       />
 
-      <div class="flex relative h-[130px] my-4">
+      <div class="flex relative h-[130px] my-4 mx-4">
         <Slider class="carousel carousel-center w-full row-span-full">
           {images?.map(({ href, alt, src }, index) => {
             return (
@@ -101,7 +101,7 @@ function BrandsCarousel(props: Props) {
         <Buttons />
 
         {/* <SliderJS rootId={id} interval={interval && interval * 1e3} infinite /> */}
-        <SliderJS rootId={id} infinite />
+        <SliderJS rootId={id} infinite interval={interval && interval * 1e3} />
       </div>
     </div>
   );

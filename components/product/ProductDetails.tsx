@@ -340,7 +340,7 @@ function ProductDetails(
                         {share.showPinterestButton && (
                           <a
                             href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
-                              images[0].url
+                              images?.[0].url
                             }`}
                             target="_blank"
                             rel="noreferrer"
@@ -427,7 +427,7 @@ function ProductDetails(
           <div class="lg:w-1/2">
             <div class="flex justify-center w-full  relative">
               <Image
-                src={images[1]?.url || images[0].url}
+                src={images?.[1]?.url || images?.[0].url || ""}
                 width={500}
                 height={500}
               />

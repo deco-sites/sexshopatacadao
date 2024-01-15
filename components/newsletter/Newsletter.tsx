@@ -74,7 +74,6 @@ function Newsletter({
       if (!name) {
         nameErrored.value = true;
       }
-
       if (
         !email || !email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g) || !name
       ) {

@@ -37,6 +37,8 @@ export default {
         serif: ["inherit", "serif"],
         montserrat: ["Montserrat", "Ubuntu", "sans-serif"],
         lobster: ["Lobster", "cursive", "serif"],
+        satisfy: ["Satisfy", "cursive", "serif"],
+        lato: ["Lato", "cursive", "serif"],
       },
 
       screens: {

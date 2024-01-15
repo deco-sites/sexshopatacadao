@@ -57,8 +57,10 @@ export type AvailableIcons =
   | "PageNext"
   | "GalleryGrid"
   | "GalleryList"
-  | "FacebookButton"
   | "PinterestButton"
+  | "FacebookButton"
+  | "TwitterButton"
+  | "LinkButton"
   | "WhatsappButton"
   | "Selected";
 

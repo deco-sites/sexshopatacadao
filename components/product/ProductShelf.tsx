@@ -23,6 +23,7 @@ export interface Props {
     headerfontSize?: "Normal" | "Large";
   };
   cardLayout?: cardLayout;
+  limitSizeInTitle?: boolean;
 }
 
 function ProductShelf({
@@ -31,6 +32,7 @@ function ProductShelf({
   layout,
   cardLayout,
   isMobile,
+  limitSizeInTitle = false,
 }: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
@@ -42,11 +44,11 @@ function ProductShelf({
   const parsedProducts = isMobile ? products : products.slice(0, 5);
 
   return (
-    <div class="w-full flex flex-col gap-2">
+    <div class="w-full flex flex-col gap-2 px-2">
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}
-        limitSize
+        limitSize={limitSizeInTitle}
       />
 
       <div class="w-full max-w-[96rem] mx-auto flex flex-col">
@@ -54,7 +56,7 @@ function ProductShelf({
           ? (
             <div
               id={id}
-              class="grid grid-cols-[48px_1fr_48px] px-4"
+              class="grid grid-cols-[48px_1fr_48px]"
             >
               <Slider class="carousel carousel-center sm:carousel-end col-span-full row-start-2 row-end-5">
                 {parsedProducts?.map((product, index) => (

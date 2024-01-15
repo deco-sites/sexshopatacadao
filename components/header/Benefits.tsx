@@ -51,7 +51,7 @@ const BenefitItem = ({ description, icon, title, link }: Benefit) => {
         loading="lazy"
         alt={`${title} ${description}`}
       />
-      <div className="flex flex-col text-white text-[13px] leading-[12px]">
+      <div className="flex flex-col text-white text-xs leading-[14px]">
         <strong class="">
           {title}
         </strong>

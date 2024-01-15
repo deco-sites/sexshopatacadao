@@ -25,20 +25,21 @@ import * as $$18 from "./islands/Header/Searchbar.tsx";
 import * as $$19 from "./islands/Header/SetupMicroHeader.tsx";
 import * as $$20 from "./islands/Institutional/ContactForm.tsx";
 import * as $$21 from "./islands/Newsletter/Newsletter.tsx";
-import * as $$22 from "./islands/OutOfStock.tsx";
-import * as $$23 from "./islands/ProductCard/Actions.tsx";
-import * as $$24 from "./islands/ProductDetailsActions.tsx";
-import * as $$25 from "./islands/ProductImageZoom.tsx";
-import * as $$26 from "./islands/ProductVariantList/AmountSelector.tsx";
-import * as $$27 from "./islands/ProductVariantList/OutOfStockButton.tsx";
-import * as $$28 from "./islands/ProductVariantList/Summary.tsx";
-import * as $$29 from "./islands/Search/GalleryModeSwitch.tsx";
-import * as $$30 from "./islands/Search/PriceRange.tsx";
-import * as $$31 from "./islands/SearchControls.tsx";
-import * as $$32 from "./islands/ShippingSimulation.tsx";
-import * as $$33 from "./islands/SliderJS.tsx";
-import * as $$34 from "./islands/WishlistButton.tsx";
-import * as $$35 from "./islands/ZoomableImage.tsx";
+import * as $$22 from "./islands/Newsletter/NewsletterCompact.tsx";
+import * as $$23 from "./islands/OutOfStock.tsx";
+import * as $$24 from "./islands/ProductCard/Actions.tsx";
+import * as $$25 from "./islands/ProductDetailsActions.tsx";
+import * as $$26 from "./islands/ProductImageZoom.tsx";
+import * as $$27 from "./islands/ProductVariantList/AmountSelector.tsx";
+import * as $$28 from "./islands/ProductVariantList/OutOfStockButton.tsx";
+import * as $$29 from "./islands/ProductVariantList/Summary.tsx";
+import * as $$30 from "./islands/Search/GalleryModeSwitch.tsx";
+import * as $$31 from "./islands/Search/PriceRange.tsx";
+import * as $$32 from "./islands/SearchControls.tsx";
+import * as $$33 from "./islands/ShippingSimulation.tsx";
+import * as $$34 from "./islands/SliderJS.tsx";
+import * as $$35 from "./islands/WishlistButton.tsx";
+import * as $$36 from "./islands/ZoomableImage.tsx";
 
 const manifest = {
   routes: {
@@ -67,20 +68,21 @@ const manifest = {
     "./islands/Header/SetupMicroHeader.tsx": $$19,
     "./islands/Institutional/ContactForm.tsx": $$20,
     "./islands/Newsletter/Newsletter.tsx": $$21,
-    "./islands/OutOfStock.tsx": $$22,
-    "./islands/ProductCard/Actions.tsx": $$23,
-    "./islands/ProductDetailsActions.tsx": $$24,
-    "./islands/ProductImageZoom.tsx": $$25,
-    "./islands/ProductVariantList/AmountSelector.tsx": $$26,
-    "./islands/ProductVariantList/OutOfStockButton.tsx": $$27,
-    "./islands/ProductVariantList/Summary.tsx": $$28,
-    "./islands/Search/GalleryModeSwitch.tsx": $$29,
-    "./islands/Search/PriceRange.tsx": $$30,
-    "./islands/SearchControls.tsx": $$31,
-    "./islands/ShippingSimulation.tsx": $$32,
-    "./islands/SliderJS.tsx": $$33,
-    "./islands/WishlistButton.tsx": $$34,
-    "./islands/ZoomableImage.tsx": $$35,
+    "./islands/Newsletter/NewsletterCompact.tsx": $$22,
+    "./islands/OutOfStock.tsx": $$23,
+    "./islands/ProductCard/Actions.tsx": $$24,
+    "./islands/ProductDetailsActions.tsx": $$25,
+    "./islands/ProductImageZoom.tsx": $$26,
+    "./islands/ProductVariantList/AmountSelector.tsx": $$27,
+    "./islands/ProductVariantList/OutOfStockButton.tsx": $$28,
+    "./islands/ProductVariantList/Summary.tsx": $$29,
+    "./islands/Search/GalleryModeSwitch.tsx": $$30,
+    "./islands/Search/PriceRange.tsx": $$31,
+    "./islands/SearchControls.tsx": $$32,
+    "./islands/ShippingSimulation.tsx": $$33,
+    "./islands/SliderJS.tsx": $$34,
+    "./islands/WishlistButton.tsx": $$35,
+    "./islands/ZoomableImage.tsx": $$36,
   },
   baseUrl: import.meta.url,
 };

@@ -43,12 +43,12 @@ function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
   isMobile: boolean;
 }) {
   return (
-    <div class="w-full max-w-[96rem] mx-auto flex flex-col">
+    <div class="w-full max-w-[96rem] mx-auto flex flex-col px-2">
       {isMobile
         ? (
           <div
             id={id}
-            class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+            class="grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
           >
             <Slider class="carousel carousel-center sm:carousel-end col-span-full row-start-2 row-end-5">
               {products.map((product, index) => (

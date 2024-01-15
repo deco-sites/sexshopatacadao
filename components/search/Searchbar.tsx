@@ -84,7 +84,7 @@ function Searchbar({
           <input
             ref={searchInputRef}
             id="search-input"
-            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none !border-b-[1.5px] group-data-[open='true']:!rounded-b-none font-montserrat text-gray-700 text-base lg:text-[13px] h-[38px] lg:h-[48px]"
+            class="input !border-0 !rounded-[6px] border-gray-100 flex-grow !outline-none !border-b-[1.5px] group-data-[open='true']:!rounded-b-none font-montserrat text-gray-700 text-base lg:text-[13px] h-[35px] lg:h-[48px]"
             name={name}
             onInput={(e) => {
               const value = e.currentTarget.value;
@@ -107,7 +107,7 @@ function Searchbar({
           />
           <Button
             type="submit"
-            class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px] h-[38px] lg:h-[48px] !min-h-[unset]"
+            class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px] h-[35px] lg:h-[48px] !min-h-[unset]"
             aria-label="Search"
             for={id}
             tabIndex={-1}

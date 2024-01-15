@@ -32,6 +32,7 @@ export interface Props {
   };
   cardLayout?: cardLayout;
   tabIndex?: number;
+  limitSizeInTitle?: boolean;
 }
 
 function Shelf({ id, products, cardLayout, platform, title, isMobile }: {
@@ -114,6 +115,7 @@ function TabbedProductShelf({
   cardLayout,
   tabIndex,
   isMobile,
+  limitSizeInTitle = false,
 }: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
@@ -131,14 +133,14 @@ function TabbedProductShelf({
     (isMobile ? productsRow2 : productsRow2?.slice(0, 5)) ?? [];
 
   return (
-    <div class="w-full flex flex-col gap-5">
+    <div class="w-full flex flex-col gap-5 max-w-[96rem] mx-auto">
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}
-        limitSize
+        limitSize={limitSizeInTitle}
       />
 
-      <div class="flex justify-center gap-2">
+      <div class="flex justify-center gap-2 px-2">
         {tabs.map((tab, index) => (
           <button
             data-active={index === ti}

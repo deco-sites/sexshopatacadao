@@ -115,7 +115,7 @@ function TabbedProductShelf({
   cardLayout,
   tabIndex,
   isMobile,
-  limitSizeInTitle = false,
+  limitSizeInTitle = true,
 }: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();

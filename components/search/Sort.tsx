@@ -74,7 +74,7 @@ function Sort({ sortOptions }: Props) {
               value={value}
               selected={value === sort}
               onClick={() => applySort(value)}
-              class="px-4 py-3 leading-[1.15] bg-white data-[active='true']:!bg-gray-400 hover:bg-gray-300 w-full text-left"
+              class="px-4 py-3 leading-[1.15] bg-white data-[active='true']:!bg-gray-400 hover:bg-[#E3E4E6] w-full text-left text-[#3f3f40]"
             >
               {label}
             </button>

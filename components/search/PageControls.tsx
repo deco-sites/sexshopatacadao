@@ -62,7 +62,7 @@ function PageNumber({ value, currentURL }: PageNumberProps) {
         aria-label={`Go to page ${value}`}
         href={current ? "#" : path}
         data-current={current}
-        class="w-[25px] h-[25px] flex items-center justify-center text-base data-[current='true']:bg-primary-500 font-montserrat rounded-[5px] data-[current='true']:!text-white group-hover:font-bold group-hover:text-primary-500 transition-all font-medium"
+        class="w-[25px] h-[25px] text-[#3f3f40] flex items-center justify-center text-base data-[current='true']:bg-primary-500 font-montserrat rounded-[5px] data-[current='true']:!text-white group-hover:font-bold group-hover:text-primary-500 transition-all font-medium"
       >
         {value}
       </a>
@@ -87,7 +87,7 @@ function PageControls(
         aria-label="previous page link"
         rel="prev"
         href={previousPage ?? "#"}
-        class="flex items-center justify-center gap-3 px-2"
+        class="flex items-center justify-center gap-3 px-2 text-[#3f3f40]"
       >
         <Icon id="PagePrev" size={15} strokeWidth={0} />
       </a>
@@ -112,7 +112,7 @@ function PageControls(
         aria-label="next page link"
         rel="next"
         href={nextPage ?? "#"}
-        class="flex items-center justify-center gap-3 px-2"
+        class="flex items-center justify-center gap-3 px-2 text-[#3f3f40]"
       >
         <span class="text-[13px] text-primary-500 font-montserrat max-xs:hidden">
           Próximo

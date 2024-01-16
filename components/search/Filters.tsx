@@ -84,7 +84,7 @@ function FilterValues(filterItem: FilterToggle) {
 
 function Filters({ filters }: Props) {
   return (
-    <ul class="flex flex-col gap-6">
+    <ul class="flex flex-col gap-5">
       {filters
         .filter(isToggle)
         .map((filter) => (

@@ -5,5 +5,5 @@ import type { Props } from "$store/components/newsletter/Newsletter.tsx";
 const NEWSLETTER_BG = asset("/image/news-bg.svg");
 
 export default function Newsletter({ success, ...props }: Props) {
-  return <Component {...props} background={NEWSLETTER_BG} />;
+  return <Component {...props} />;
 }

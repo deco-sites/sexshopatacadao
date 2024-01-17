@@ -26,10 +26,7 @@ export interface Props {
     smallText?: string;
   };
 
-  /**
-   * @ignore
-   */
-  background: string;
+  background: ImageWidget;
 
   /**
    * @ignore
@@ -96,7 +93,7 @@ function Newsletter({
 
   return (
     <div
-      class="relative bg-primary-500 w-full group lg:h-[104px] grid grid-cols-1 grid-rows-1 text-white"
+      class="relative bg-primary-500 w-full group lg:h-[104px] grid grid-cols-1 grid-rows-1 text-white overflow-y-hidden"
       data-succeeded={succeeded}
     >
       <div class="row-start-1 row-end-1 col-start-1 col-end-1 group-data-[succeeded='true']:opacity-0 group-data-[succeeded='true']:invisible transition-all duration-300 max-w-[1520px] z-[1] flex flex-col lg:flex-row items-center justify-between h-full py-[18px] lg:py-0 px-[15px] relative mx-auto w-full">
@@ -194,9 +191,12 @@ function Newsletter({
           Voltar
         </button>
       </div>
-      <div
-        class="absolute inset-0 opacity-[0.3] lg:opacity-[0.15] bg-repeat-y lg:bg-no-repeat lg:bg-cover z-0"
-        style={{ backgroundImage: `url(${background})` }}
+      <Image
+        width={1366}
+        height={106}
+        class="absolute inset-0 opacity-[0.3] w-full lg:opacity-[0.15] bg-repeat-y lg:bg-no-repeat lg:bg-cover z-0 "
+        src={background}
+        loading="lazy"
       />
     </div>
   );

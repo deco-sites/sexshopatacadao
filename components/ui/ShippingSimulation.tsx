@@ -115,9 +115,9 @@ function ShippingSimulation({ items }: Props) {
 
   return (
     <div class="flex flex-col font-montserrat">
-      <strong class="leading-normal">Calcule o Frete:</strong>
+      <strong class="leading-normal text-[#3f3f40]">Calcule o Frete:</strong>
       <a
-        class="text-xs leading-[1.15] mb-[5px]"
+        class="text-xs text-[#3f3f40] leading-[1.15] mb-[5px]"
         href="https://buscacepinter.correios.com.br/app/endereco/index.php"
         target="_blank"
       >

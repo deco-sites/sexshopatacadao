@@ -9,8 +9,13 @@ import {
   ProductCardAddToCart,
 } from "$store/components/product/ProductCardActions.tsx";
 import ProductCardActions from "$store/islands/ProductCard/Actions.tsx";
+// HEAD
 import Quickview from "deco-sites/sexshopatacadao/components/product/Quickview.tsx";
-
+//
+import {
+  GalleryMode,
+} from "deco-sites/sexshopatacadao/actions/gallery/mode.ts";
+//f4d10e83bdc8ad7d4a8093917567841a476e4dae
 export interface Layout {
   basics?: {
     contentAlignment?: "Left" | "Center";
@@ -51,6 +56,7 @@ interface Props {
   layout?: Layout;
   platform?: Platform;
   isMobile?: boolean;
+  galleryMode?: GalleryMode;
 }
 
 const relative = (url: string) => {
@@ -62,7 +68,16 @@ const WIDTH = 202;
 const HEIGHT = 202;
 
 function ProductCard(
-  { product, preload, itemListName, layout, platform, index, isMobile }: Props,
+  {
+    product,
+    preload,
+    itemListName,
+    layout,
+    platform,
+    index,
+    isMobile,
+    galleryMode = "grid",
+  }: Props,
 ) {
   const {
     url,
@@ -106,9 +121,14 @@ function ProductCard(
         text={l?.basics?.ctaText}
         productID={productID}
         seller={seller}
+        galleryMode={galleryMode}
       />
     )
-    : <ProductCardAddToCart>{l?.basics?.ctaText}</ProductCardAddToCart>;
+    : (
+      <ProductCardAddToCart galleryMode={galleryMode}>
+        {l?.basics?.ctaText}
+      </ProductCardAddToCart>
+    );
 
   return (
     <div class="relative group">
@@ -119,9 +139,11 @@ function ProductCard(
       <a
         href={url && relative(url)}
         id={id}
-        class={`card p-0 w-full ${
-          align === "center" ? "text-center" : "text-start"
-        } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
+        class={`card p-0 group w-full ${
+          galleryMode === "list" ? "flex flex-row gap-8" : ""
+        } ${align === "center" ? "text-center" : "text-start"} ${
+          l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""
+        }
         ${
           l?.onMouseOver?.card === "Move up"
             ? "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
@@ -230,10 +252,11 @@ function ProductCard(
           </figcaption>
         </figure>
         {/* Prices & Name */}
-        <div class="flex-auto flex flex-col gap-6">
-          {/* SKU Selector */}
-          {
-            /* {(!l?.elementsPositions?.skuSelector ||
+        <div class="flex-1">
+          <div class="flex-auto flex flex-col gap-6">
+            {/* SKU Selector */}
+            {
+              /* {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
           <>
             {l?.hide?.skuSelector ? "" : (
@@ -247,72 +270,73 @@ function ProductCard(
             )}
           </>
         )} */
-          }
+            }
 
-          {l?.hide?.productName ? "" : (
-            <div class="flex flex-col gap-0">
-              {l?.hide?.productName ? "" : (
-                <h3
-                  class="line-clamp-2 h-[32px] text-sm leading-[16px] text-gray-800"
-                  dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                />
-              )}
-              {
-                /* {l?.hide?.productDescription ? "" : (
+            {l?.hide?.productName ? "" : (
+              <div class="flex flex-col gap-0">
+                {l?.hide?.productName ? "" : (
+                  <h3
+                    class="line-clamp-2 h-[32px] text-sm leading-[16px] text-gray-800"
+                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
+                  />
+                )}
+                {
+                  /* {l?.hide?.productDescription ? "" : (
                 <div
                   class="truncate text-sm lg:text-sm text-neutral"
                   dangerouslySetInnerHTML={{ __html: description ?? "" }}
                 />
               )} */
-              }
-            </div>
-          )}
-          {l?.hide?.allPrices
-            ? ""
-            : (
-              <div class="flex flex-col gap-[5px] font-montserrat">
-                <div
-                  class={`flex flex-col gap-0 ${
-                    align === "center" ? "justify-center" : "justify-start"
-                  }`}
-                >
-                  <div
-                    class={`line-through text-gray-400 text-xs leading-[1.15] ${
-                      (listPrice && listPrice !== price) ? "" : "invisible"
-                    }`}
-                  >
-                    De: {formatPrice(listPrice, offers?.priceCurrency)}
-                  </div>
-                  <div class="text-primary-500 text-[15px] leading-[17px] font-bold">
-                    à vista {formatPrice(price, offers?.priceCurrency)}
-                  </div>
-                </div>
-                {l?.hide?.installments
-                  ? ""
-                  : (
-                    <div class="text-gray-500 text-[11px] leading-[14px] flex flex-col uppercase">
-                      <span>
-                        {formatPrice(price, offers?.priceCurrency)}{" "}
-                        <strong>à prazo</strong>
-                      </span>
-                      <span class="truncate">
-                        ou <strong>{installmentsData?.billingDuration}x</strong>
-                        {" "}
-                        de R$ {installmentsData?.billingIncrement}{" "}
-                        <strong>
-                          {installmentsData?.withTaxes
-                            ? "c/ juros"
-                            : "s/ juros"}
-                        </strong>
-                      </span>
-                    </div>
-                  )}
+                }
               </div>
             )}
+            {l?.hide?.allPrices
+              ? ""
+              : (
+                <div class="flex flex-col gap-[5px] font-montserrat">
+                  <div
+                    class={`flex flex-col gap-0 ${
+                      align === "center" ? "justify-center" : "justify-start"
+                    }`}
+                  >
+                    <div
+                      class={`line-through text-gray-400 text-xs leading-[1.15] ${
+                        (listPrice && listPrice !== price) ? "" : "invisible"
+                      }`}
+                    >
+                      De: {formatPrice(listPrice, offers?.priceCurrency)}
+                    </div>
+                    <div class="text-primary-500 text-[15px] leading-[17px] font-bold">
+                      à vista {formatPrice(price, offers?.priceCurrency)}
+                    </div>
+                  </div>
+                  {l?.hide?.installments
+                    ? ""
+                    : (
+                      <div class="text-gray-500 text-[11px] leading-[14px] flex flex-col uppercase">
+                        <span>
+                          {formatPrice(price, offers?.priceCurrency)}{" "}
+                          <strong>à prazo</strong>
+                        </span>
+                        <span class="truncate">
+                          ou{" "}
+                          <strong>{installmentsData?.billingDuration}x</strong>
+                          {" "}
+                          de R$ {installmentsData?.billingIncrement}{" "}
+                          <strong>
+                            {installmentsData?.withTaxes
+                              ? "c/ juros"
+                              : "s/ juros"}
+                          </strong>
+                        </span>
+                      </div>
+                    )}
+                </div>
+              )}
 
-          {/* SKU Selector */}
-          {
-            /* {l?.elementsPositions?.skuSelector === "Bottom" && (
+            {/* SKU Selector */}
+            {
+              /* {l?.elementsPositions?.skuSelector === "Bottom" && (
           <>
             {l?.hide?.skuSelector ? "" : (
               <ul
@@ -325,20 +349,21 @@ function ProductCard(
             )}
           </>
         )} */
-          }
-        </div>
+            }
+          </div>
 
-        {!l?.hide?.cta
-          ? (
-            <div
-              class={`flex-auto flex items-end mt-[15px] ${
-                l?.onMouseOver?.showCta ? "lg:hidden" : ""
-              }`}
-            >
-              {cta}
-            </div>
-          )
-          : ""}
+          {!l?.hide?.cta
+            ? (
+              <div
+                class={`flex-auto flex items-end mt-[15px] ${
+                  l?.onMouseOver?.showCta ? "lg:hidden" : ""
+                }`}
+              >
+                {cta}
+              </div>
+            )
+            : ""}
+        </div>
       </a>
     </div>
   );

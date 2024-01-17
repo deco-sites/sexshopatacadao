@@ -156,7 +156,7 @@ function ProductDetails(
   const encodedURI = encodeURI(url);
 
   return (
-    <div class="flex flex-col" id={id}>
+    <div class="flex flex-col mb-16" id={id}>
       {/* <BrowserLog payload={{ product }} /> */}
       <Breadcrumb
         itemListElement={breadcrumbList.itemListElement}
@@ -226,7 +226,7 @@ function ProductDetails(
                     <div class="absolute -left-[40px] peer-open:border border-gray-400 rounded-[5px] bg-white grid grid-rows-[0fr] peer-open:grid-rows-[1fr] w-[263px] text-xs transition-all font-sans">
                       <div class="w-full overflow-hidden flex flex-col">
                         {bestInstallments?.map((installment) => (
-                          <div class="px-[15px] h-[34px] uppercase flex justify-between items-center w-full even:bg-gray-400 ">
+                          <div class="px-[15px] h-[34px] uppercase flex justify-between items-center w-full even:bg-gray-200 ">
                             <span>
                               <strong class="font-semibold">
                                 {installment.billingDuration}
@@ -319,11 +319,11 @@ function ProductDetails(
                   />
                 )}
               </div>
-              <div class="md:flex-1">
+              <div class="md:flex-1 mt-8">
                 {/* Share card */}
                 {share && Object.values(share).some((value) => value)
                   ? (
-                    <div class="flex items-center gap-6">
+                    <div class="flex flex-col items-end gap-1 h-full justify-end max-h-[82px]">
                       <span class="text-base font-bold text-[#3f3f40]">
                         Compartilhar:
                       </span>

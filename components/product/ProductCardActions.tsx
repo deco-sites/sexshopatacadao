@@ -3,12 +3,14 @@ import type { ComponentChildren } from "preact";
 import { useUI } from "deco-sites/sexshopatacadao/sdk/useUI.ts";
 import { useSignal } from "@preact/signals";
 import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
+import { GalleryMode } from "deco-sites/sexshopatacadao/actions/gallery/mode.ts";
 
 export function ProductCardAddToCart(
-  { children, onClick, class: _class }: {
+  { children, onClick, class: _class, galleryMode }: {
     children?: ComponentChildren;
     onClick?: (e: Event) => void;
     class?: string;
+    galleryMode: GalleryMode;
   },
 ) {
   return (
@@ -18,6 +20,8 @@ export function ProductCardAddToCart(
       class={clsx(
         "btn btn-block !bg-primary-500 !outline-none !border-none text-white font-montserrat text-base min-h-[unset] h-[44px] font-normal rounded-[5px]",
         _class,
+        galleryMode === "list" && "w-fit",
+        galleryMode === "grid" && "btn-block",
       )}
       onClick={onClick}
     >
@@ -30,10 +34,11 @@ export interface ProductCardActionsProps {
   text?: string;
   productID: string;
   seller: string;
+  galleryMode: GalleryMode;
 }
 
 function ProductCardActions(
-  { text, productID, seller }: ProductCardActionsProps,
+  { text, productID, seller, galleryMode }: ProductCardActionsProps,
 ) {
   const quantity = useSignal(1);
   const { addItems } = useCart();
@@ -60,7 +65,7 @@ function ProductCardActions(
       onClick={(e) => {
         e.preventDefault();
       }}
-      class="flex w-full"
+      class={`flex w-full ${galleryMode === "list" ? "max-w-[340px]" : ""}`}
     >
       <div class="hidden h-[44px] rounded-l-[5px] border border-[#ccc] w-[30%] min-w-[30%] text-black sm:flex">
         <button
@@ -91,7 +96,11 @@ function ProductCardActions(
           +
         </button>
       </div>
-      <ProductCardAddToCart class="flex-1 -ml-[5px]" onClick={onAddItem}>
+      <ProductCardAddToCart
+        galleryMode={galleryMode}
+        class="flex-1 -ml-[5px]"
+        onClick={onAddItem}
+      >
         {text || "Ver produto"}
       </ProductCardAddToCart>
     </div>

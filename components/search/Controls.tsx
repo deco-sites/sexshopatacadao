@@ -25,11 +25,18 @@ function SearchControls(
       open={open.value}
       onClose={() => open.value = false}
       aside={
-        <>
-          <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden w-[80%]">
+        <div class="pl-6 flex align-top">
+          <Icon
+            id="XMark"
+            size={24}
+            strokeWidth={2}
+            class="fixed top-0 left-0 p-1 bg-white/60"
+            onClick={() => open.value = false}
+          />
+          <div class="bg-base-100 flex flex-1 flex-col h-full divide-y overflow-y-hidden w-[80%]">
             <div class="flex justify-between items-center">
               <h1 class="p-4">
-                <span class="font-montserrat text-2xl !leading-[1.15] border-b border-gray-400">
+                <span class="font-montserrat text-2xl !leading-[1.15]">
                   Filtros
                 </span>
               </h1>
@@ -42,8 +49,9 @@ function SearchControls(
             <div class="flex-grow overflow-auto px-2">
               <Filters filters={filters} />
             </div>
+            I
           </div>
-        </>
+        </div>
       }
     >
       <div class="flex flex-col justify-between sm:gap-4 pt-1 sm:flex-row sm:h-[53px] w-full sm:border-b-0 border-b border-gray-400">

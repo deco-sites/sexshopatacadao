@@ -32,7 +32,7 @@ function ProductShelf({
   layout,
   cardLayout,
   isMobile,
-  limitSizeInTitle = false,
+  limitSizeInTitle = true,
 }: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
@@ -44,7 +44,7 @@ function ProductShelf({
   const parsedProducts = isMobile ? products : products.slice(0, 5);
 
   return (
-    <div class="w-full flex flex-col gap-2 max-w-[96rem] mx-auto">
+    <div class="w-full flex flex-col gap-5 max-w-[96rem] mx-auto">
       <Header
         title={title || ""}
         alignment={layout?.headerAlignment || "center"}

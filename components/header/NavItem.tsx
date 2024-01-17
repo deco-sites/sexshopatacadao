@@ -14,13 +14,13 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
       <a href={url} class="flex flex-col items-center pb-5 min-w-[75px]">
         <div class="w-[40px] max-h-[51px] group-data-[micro-header='true']/header:opacity-0 group-data-[micro-header='true']/header:max-h-0 transition-all">
           {iconSrc && (
-            <img
+            <Image
               class="w-full h-[51px] object-cover group-hover/navitem:scale-[1.1] group-hover/navitem:rotate-[5deg] group-data-[micro-header='true']/header:!scale-0 transition-all duration-500"
               src={iconSrc}
               alt={name}
               width={40}
               height={51}
-              loading="eager"
+              loading="lazy"
             />
           )}
         </div>

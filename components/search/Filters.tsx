@@ -51,7 +51,7 @@ function FilterValues(filterItem: FilterToggle) {
   // }
 
   return (
-    <ul class={`flex flex-wrap gap-[14px] ${flexDirection}`}>
+    <ul class={`flex flex-wrap lg:gap-[14px] gap-5 ${flexDirection}`}>
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 

@@ -2,9 +2,12 @@ interface Props {
   title?: string;
   alignment?: "center" | "left";
   limitSize?: boolean;
+  withLine?: boolean;
 }
 
-function Header({ title, alignment = "center", limitSize }: Props) {
+function Header(
+  { title, alignment = "center", limitSize, withLine = true }: Props,
+) {
   return (
     <>
       {title
@@ -25,11 +28,13 @@ function Header({ title, alignment = "center", limitSize }: Props) {
                   dangerouslySetInnerHTML={{ __html: title }}
                 />
               )}
-            <div
-              class={`absolute ${
-                limitSize ? "w-[88%]" : "w-full"
-              } h-1 bg-primary-500 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2`}
-            />
+            {withLine && (
+              <div
+                class={`absolute ${
+                  limitSize ? "w-[88%]" : "w-full"
+                } h-1 bg-primary-500 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2`}
+              />
+            )}
           </div>
         )
         : null}

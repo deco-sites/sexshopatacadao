@@ -82,8 +82,6 @@ function ProductDetails(
     product,
   } = page;
 
-  console.log(product);
-
   const {
     productID,
     offers,
@@ -103,6 +101,7 @@ function ProductDetails(
     // installments,
     installmentsData,
     availability,
+    bestInstallments,
   } = useOffer(offers);
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
@@ -121,14 +120,6 @@ function ProductDetails(
     price,
     listPrice,
   });
-
-  const bestInstallments = offers?.offers?.[0].priceSpecification.flatMap((
-    priceSpecification,
-  ) =>
-    priceSpecification.name === installmentsData?.name
-      ? [priceSpecification]
-      : []
-  );
 
   const manufacturerCode = productManufacturerCode?.manufacturerCode ?? refId;
 

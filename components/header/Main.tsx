@@ -66,7 +66,7 @@ function Main({ searchbar, logo, isMobile }: {
                 width={122}
                 height={71}
                 class="w-[114px] h-[66px] lg:w-[122px] lg:h-[71px]"
-                loading="eager"
+                loading="lazy"
               />
             </a>
           )}

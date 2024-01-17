@@ -70,6 +70,14 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     )
     : null;
 
+  const bestInstallments = offer?.priceSpecification.flatMap((
+    priceSpecification,
+  ) =>
+    priceSpecification.name === parsedInstallments?.name
+      ? [priceSpecification]
+      : []
+  );
+
   return {
     price,
     listPrice: listPrice?.price,
@@ -81,5 +89,6 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
       }`
       : null,
     installmentsData: parsedInstallments,
+    bestInstallments,
   };
 };

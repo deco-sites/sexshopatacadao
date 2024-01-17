@@ -62,7 +62,8 @@ export type AvailableIcons =
   | "TwitterButton"
   | "LinkButton"
   | "WhatsappButton"
-  | "Selected";
+  | "Selected"
+  | "Expand";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

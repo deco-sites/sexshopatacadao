@@ -13,6 +13,7 @@ export interface Props {
 
   showDots?: boolean;
   zoomMode?: "hover" | "click";
+  direction?: "column" | "row";
 }
 
 /**
@@ -22,7 +23,7 @@ export interface Props {
  * we rearrange each cell with col-start- directives
  */
 export default function GallerySlider(
-  { product, showDots = true, zoomMode = "hover" }: Props,
+  { product, showDots = true, zoomMode = "hover", direction = "row" }: Props,
 ) {
   const { image: images, offers } = product;
 
@@ -47,7 +48,10 @@ export default function GallerySlider(
   const isSingleImage = images.length === 1;
 
   return (
-    <div id={id} class="flex">
+    <div
+      id={id}
+      class={`flex ${direction === "column" ? "flex-col-reverse" : ""}`}
+    >
       {/* Image Slider */}
       <div class="relative order-1 sm:order-2 w-full">
         <Slider class="carousel carousel-center gap-6 w-full">
@@ -129,9 +133,15 @@ export default function GallerySlider(
 
       {/* Dots */}
       {!isSingleImage && showDots && (
-        <ul class="hidden sm:carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1 2xl:mr-20 lg:mr-[10%] mr-20 min-w-[100px]">
+        <ul
+          class={`hidden sm:carousel carousel-center gap-1 px-4 sm:px-0  order-2 sm:order-1 2xl:mr-20 lg:mr-[10%] mr-20 min-w-[100px] ${
+            direction === "column" ? "sm:flex-row" : "sm:flex-col"
+          }`}
+        >
           {images.map((img, index) => (
-            <li class="carousel-item w-full">
+            <li
+              class={`carousel-item  ${direction === "column" ? "" : "w-full"}`}
+            >
               <Slider.Dot index={index}>
                 <Image
                   style={{ aspectRatio: 1 }}

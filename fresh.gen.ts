@@ -33,13 +33,14 @@ import * as $$26 from "./islands/ProductImageZoom.tsx";
 import * as $$27 from "./islands/ProductVariantList/AmountSelector.tsx";
 import * as $$28 from "./islands/ProductVariantList/OutOfStockButton.tsx";
 import * as $$29 from "./islands/ProductVariantList/Summary.tsx";
-import * as $$30 from "./islands/Search/GalleryModeSwitch.tsx";
-import * as $$31 from "./islands/Search/PriceRange.tsx";
-import * as $$32 from "./islands/SearchControls.tsx";
-import * as $$33 from "./islands/ShippingSimulation.tsx";
-import * as $$34 from "./islands/SliderJS.tsx";
-import * as $$35 from "./islands/WishlistButton.tsx";
-import * as $$36 from "./islands/ZoomableImage.tsx";
+import * as $$30 from "./islands/Quickview.tsx";
+import * as $$31 from "./islands/Search/GalleryModeSwitch.tsx";
+import * as $$32 from "./islands/Search/PriceRange.tsx";
+import * as $$33 from "./islands/SearchControls.tsx";
+import * as $$34 from "./islands/ShippingSimulation.tsx";
+import * as $$35 from "./islands/SliderJS.tsx";
+import * as $$36 from "./islands/WishlistButton.tsx";
+import * as $$37 from "./islands/ZoomableImage.tsx";
 
 const manifest = {
   routes: {
@@ -76,13 +77,14 @@ const manifest = {
     "./islands/ProductVariantList/AmountSelector.tsx": $$27,
     "./islands/ProductVariantList/OutOfStockButton.tsx": $$28,
     "./islands/ProductVariantList/Summary.tsx": $$29,
-    "./islands/Search/GalleryModeSwitch.tsx": $$30,
-    "./islands/Search/PriceRange.tsx": $$31,
-    "./islands/SearchControls.tsx": $$32,
-    "./islands/ShippingSimulation.tsx": $$33,
-    "./islands/SliderJS.tsx": $$34,
-    "./islands/WishlistButton.tsx": $$35,
-    "./islands/ZoomableImage.tsx": $$36,
+    "./islands/Quickview.tsx": $$30,
+    "./islands/Search/GalleryModeSwitch.tsx": $$31,
+    "./islands/Search/PriceRange.tsx": $$32,
+    "./islands/SearchControls.tsx": $$33,
+    "./islands/ShippingSimulation.tsx": $$34,
+    "./islands/SliderJS.tsx": $$35,
+    "./islands/WishlistButton.tsx": $$36,
+    "./islands/ZoomableImage.tsx": $$37,
   },
   baseUrl: import.meta.url,
 };

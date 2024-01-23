@@ -66,7 +66,15 @@ interface Props {
 }
 
 function ProductDetails(
-  { isMobile, page, layout, productManufacturerCode, url, share }: ReturnType<
+  {
+    isMobile,
+    page,
+    layout,
+    productManufacturerCode,
+    url,
+    share,
+    priceMultiplier,
+  }: ReturnType<
     typeof loader
   >,
 ) {
@@ -95,7 +103,7 @@ function ProductDetails(
 
   const description = product.description || isVariantOf?.description;
   const {
-    price = 0,
+    price: rawPrice = 0,
     listPrice,
     seller = "1",
     // installments,
@@ -103,6 +111,8 @@ function ProductDetails(
     availability,
     bestInstallments,
   } = useOffer(offers);
+
+  const price = rawPrice * priceMultiplier;
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const refId = isVariantOf?.model ?? "";
@@ -198,16 +208,19 @@ function ProductDetails(
               </strong>
               <div class="text-gray-500 flex flex-col">
                 <span class="text-[11px] leading-[1.15] uppercase">
-                  {formatPrice(price, offers?.priceCurrency)}{" "}
+                  {formatPrice(rawPrice, offers?.priceCurrency)}{" "}
                   <strong>à prazo</strong>
                 </span>
                 <div class="flex xs:flex-row flex-col xs:justify-between text-xs leading-[1.15]">
                   <span class="uppercase">
                     ou{" "}
                     <strong class="font-semibold">
-                      {installmentsData?.billingDuration}x
+                      {installmentsData?.billingDuration ?? 1}x
                     </strong>{" "}
-                    de R$ {installmentsData?.billingIncrement}{" "}
+                    de {formatPrice(
+                      installmentsData?.billingIncrement ?? rawPrice,
+                      offers?.priceCurrency,
+                    )}{" "}
                     <strong class="font-semibold">
                       {installmentsData?.withTaxes ? "com juros" : "sem juros"}
                     </strong>
@@ -370,7 +383,8 @@ function ProductDetails(
                             <Icon id="TwitterButton" size={25} />
                           </a>
                         )}
-                        {share.showCopyButton && (
+                        {
+                          /* {share.showCopyButton && (
                           <CopyButton
                             contentToCopy={url}
                           >
@@ -380,7 +394,8 @@ function ProductDetails(
                               class="text-primary"
                             />
                           </CopyButton>
-                        )}
+                        )} */
+                        }
                       </div>
                     </div>
                   )
@@ -433,11 +448,13 @@ function ProductDetails(
 
 export const loader = (props: Props, req: Request, ctx: AppContext) => {
   const isMobile = checkIsMobile(ctx);
+  const priceMultiplier = ctx.priceMultiplier || 1;
 
   return {
     ...props,
     isMobile,
     url: req.url,
+    priceMultiplier,
   };
 };
 

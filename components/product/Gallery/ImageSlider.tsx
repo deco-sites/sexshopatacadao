@@ -1,3 +1,4 @@
+import { Head } from "$fresh/runtime.ts";
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
@@ -6,7 +7,12 @@ import { useId } from "$store/sdk/useId.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import ZoomableImage from "$store/islands/ZoomableImage.tsx";
+import type { Props as ZoomableImageProps } from "$store/components/ui/ZoomableImage.tsx";
 import { useOffer } from "deco-sites/sexshopatacadao/sdk/useOffer.ts";
+import {
+  getOptimizedMediaUrl,
+  getSrcSet,
+} from "apps/website/components/Image.tsx";
 
 export interface Props {
   product: ProductDetailsPage["product"];
@@ -14,6 +20,47 @@ export interface Props {
   showDots?: boolean;
   zoomMode?: "hover" | "click";
   direction?: "column" | "row";
+}
+
+function SliderImage(props: ZoomableImageProps) {
+  const { preload, loading = "lazy" } = props;
+
+  if (!props.height) {
+    console.warn(
+      `Missing height. This image will NOT be optimized: ${props.src}`,
+    );
+  }
+
+  const srcSet = getSrcSet(props.src, props.width, props.height, props.fit);
+  const linkProps = {
+    imagesrcset: srcSet,
+    imagesizes: props.sizes,
+    fetchpriority: props.fetchPriority,
+    media: props.media,
+  };
+
+  const zoomSrc = getOptimizedMediaUrl({
+    originalSrc: props.src,
+    width: 1600,
+    height: 1600,
+    fit: props.fit,
+    factor: 1,
+  });
+
+  return (
+    <>
+      {preload && (
+        <Head>
+          <link as="image" rel="preload" href={props.src} {...linkProps} />
+        </Head>
+      )}
+      <ZoomableImage
+        {...props}
+        srcSet={srcSet}
+        zoomSrc={zoomSrc}
+      />
+    </>
+  );
 }
 
 /**
@@ -60,6 +107,20 @@ export default function GallerySlider(
               index={index}
               class="carousel-item w-full"
             >
+              <SliderImage
+                type={zoomMode}
+                factor={3}
+                class="w-full"
+                sizes="(max-width: 640px) 100vw, 30vw"
+                style={{ aspectRatio: 1 }}
+                src={img.url!}
+                alt={img.alternateName}
+                width={width}
+                height={height}
+                // Preload LCP image for better web vitals
+                preload={index === 0}
+                loading={index === 0 ? "eager" : "lazy"}
+              />
               {
                 /* <Image
                 class="w-full lg:w-[573px] lg:h-[530px]"
@@ -74,7 +135,8 @@ export default function GallerySlider(
                 loading={index === 0 ? "eager" : "lazy"}
               /> */
               }
-              <ZoomableImage
+              {
+                /* <ZoomableImage
                 type={zoomMode}
                 factor={2}
                 class="w-full"
@@ -87,7 +149,8 @@ export default function GallerySlider(
                 // Preload LCP image for better web vitals
                 preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
-              />
+              /> */
+              }
             </Slider.Item>
           ))}
         </Slider>

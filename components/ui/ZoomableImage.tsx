@@ -14,6 +14,7 @@ type ZoomType = "click" | "hover";
 export interface Props extends ComponentProps<typeof Image> {
   type: ZoomType;
   factor: number;
+  zoomSrc?: string;
 }
 
 const clamp = (min: number, max: number, value: number) =>
@@ -58,7 +59,7 @@ const getMousePositionFromEvent = (
   };
 };
 
-function ZoomableImage({ type, factor, ...imageProps }: Props) {
+function ZoomableImage({ type, factor, zoomSrc, ...imageProps }: Props) {
   const [isZoomedIn, setZoom] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -180,7 +181,16 @@ function ZoomableImage({ type, factor, ...imageProps }: Props) {
            * the container, and consequently the zoomed image */
         }}
       >
-        <Image data-zoomed={isZoomedIn} {...imageProps} />
+        <img
+          data-zoomed={isZoomedIn}
+          {...imageProps}
+          data-fresh-disable-lock={true}
+          preload={undefined}
+          srcSet={zoomSrc
+            ? isZoomedIn ? undefined : imageProps.srcSet
+            : imageProps.srcSet}
+          src={zoomSrc ? isZoomedIn ? zoomSrc : imageProps.src : imageProps.src}
+        />
       </div>
     </div>
   );

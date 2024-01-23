@@ -2,7 +2,6 @@ import { SendEventOnView } from "$store/components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "$store/components/product/ProductCard.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
@@ -33,6 +32,7 @@ function ProductShelf({
   cardLayout,
   isMobile,
   limitSizeInTitle = true,
+  priceMultiplier,
 }: ReturnType<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
@@ -71,6 +71,7 @@ function ProductShelf({
                       platform={platform}
                       index={index}
                       isMobile={isMobile}
+                      priceMultiplier={priceMultiplier}
                     />
                   </Slider.Item>
                 ))}
@@ -121,6 +122,7 @@ function ProductShelf({
                       platform={platform}
                       index={index}
                       isMobile={isMobile}
+                      priceMultiplier={priceMultiplier}
                     />
                   </li>
                 ))}
@@ -150,7 +152,8 @@ function ProductShelf({
 
 export function loader(props: Props, req: Request, ctx: AppContext) {
   const isMobileValue = checkIsMobile(ctx);
-  return { ...props, isMobile: isMobileValue };
+  const priceMultiplier = ctx.priceMultiplier || 1;
+  return { ...props, isMobile: isMobileValue, priceMultiplier };
 }
 
 export default ProductShelf;

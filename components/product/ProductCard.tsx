@@ -15,6 +15,7 @@ import Quickview from "deco-sites/sexshopatacadao/components/product/Quickview.t
 import {
   GalleryMode,
 } from "deco-sites/sexshopatacadao/actions/gallery/mode.ts";
+import BrowserLog from "deco-sites/sexshopatacadao/islands/BrowserLog.tsx";
 //f4d10e83bdc8ad7d4a8093917567841a476e4dae
 export interface Layout {
   basics?: {
@@ -57,6 +58,7 @@ interface Props {
   platform?: Platform;
   isMobile?: boolean;
   galleryMode?: GalleryMode;
+  priceMultiplier?: number;
 }
 
 const relative = (url: string) => {
@@ -77,6 +79,7 @@ function ProductCard(
     index,
     isMobile,
     galleryMode = "grid",
+    priceMultiplier = 1,
   }: Props,
 ) {
   const {
@@ -91,8 +94,16 @@ function ProductCard(
   // const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments, installmentsData, seller = "1" } =
-    useOffer(offers);
+
+  const {
+    listPrice,
+    price: rawPrice,
+    installments,
+    installmentsData,
+    seller = "1",
+  } = useOffer(offers);
+
+  const price = rawPrice ? rawPrice * priceMultiplier : undefined;
   // const possibilities = useVariantPossibilities(hasVariant, product);
   // const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
@@ -133,7 +144,12 @@ function ProductCard(
   return (
     <div class="relative group">
       {!isMobile && (
-        <Quickview product={product} isMobile={isMobile} platform={platform} />
+        <Quickview
+          product={product}
+          isMobile={!!isMobile}
+          platform={platform}
+          priceMultiplier={priceMultiplier}
+        />
       )}
 
       <a
@@ -315,14 +331,18 @@ function ProductCard(
                     : (
                       <div class="text-gray-500 text-[11px] leading-[14px] flex flex-col uppercase">
                         <span>
-                          {formatPrice(price, offers?.priceCurrency)}{" "}
+                          {formatPrice(rawPrice, offers?.priceCurrency)}{" "}
                           <strong>à prazo</strong>
                         </span>
                         <span class="truncate">
                           ou{" "}
-                          <strong>{installmentsData?.billingDuration}x</strong>
-                          {" "}
-                          de R$ {installmentsData?.billingIncrement}{" "}
+                          <strong>
+                            {installmentsData?.billingDuration ?? 1}x
+                          </strong>{" "}
+                          de {formatPrice(
+                            installmentsData?.billingIncrement ?? rawPrice,
+                            offers?.priceCurrency,
+                          )}{" "}
                           <strong>
                             {installmentsData?.withTaxes
                               ? "c/ juros"

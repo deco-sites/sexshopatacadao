@@ -10,6 +10,10 @@ import { App, AppContext as DecoAppContext } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
+export type PriceConfig = {
+  multiplier?: number;
+};
+
 export type Props = {
   /**
    * @title Active Commerce Platform
@@ -18,6 +22,12 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
+
+  /**
+   * @title Price Multiplier
+   * @description Multiply the price by this value, only in shelves and product pages
+   */
+  priceMultiplier?: number;
 } & CommerceProps;
 
 export type Platform =

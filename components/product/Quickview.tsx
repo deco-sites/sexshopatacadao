@@ -16,9 +16,12 @@ export interface Props {
   product: Product;
   isMobile: boolean;
   platform?: Platform;
+  priceMultiplier?: number;
 }
 
-function Quickview({ product, isMobile, platform }: Props) {
+function Quickview(
+  { product, isMobile, platform, priceMultiplier = 1 }: Props,
+) {
   const id = useId();
   const open = useSignal(false);
 
@@ -35,12 +38,13 @@ function Quickview({ product, isMobile, platform }: Props) {
 
   const {
     listPrice,
-    price,
+    price: rawPrice = 0,
     installmentsData,
     seller = "1",
     bestInstallments,
     availability,
   } = useOffer(offers);
+  const price = rawPrice * priceMultiplier;
 
   const brandName = brand?.name ?? "";
 
@@ -131,16 +135,19 @@ function Quickview({ product, isMobile, platform }: Props) {
                     </strong>
                     <div class="text-gray-500 flex flex-col">
                       <span class="text-[11px] leading-[1.15] uppercase">
-                        {formatPrice(price, offers?.priceCurrency)}{" "}
+                        {formatPrice(rawPrice, offers?.priceCurrency)}{" "}
                         <strong>à prazo</strong>
                       </span>
                       <div class="flex xs:flex-row flex-col xs:justify-between text-xs leading-[1.15]">
                         <span class="uppercase">
                           ou{" "}
                           <strong class="font-semibold">
-                            {installmentsData?.billingDuration}x
+                            {installmentsData?.billingDuration ?? 1}x
                           </strong>{" "}
-                          de R$ {installmentsData?.billingIncrement}{" "}
+                          de {formatPrice(
+                            installmentsData?.billingIncrement ?? rawPrice,
+                            offers?.priceCurrency,
+                          )}{" "}
                           <strong class="font-semibold">
                             {installmentsData?.withTaxes
                               ? "com juros"
@@ -201,6 +208,7 @@ function Quickview({ product, isMobile, platform }: Props) {
                                 text={"comprar"}
                                 productID={productID}
                                 seller={seller}
+                                galleryMode="grid"
                               />
                             )}
                           </>

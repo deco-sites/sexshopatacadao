@@ -105,24 +105,27 @@ function Searchbar({
             aria-controls="search-suggestion"
             autocomplete="off"
           />
+          {
+            /* <button type="submit" class="hidden" for={id} tabIndex={-1}>
+            Submit
+          </button> */
+          }
           <Button
             type="submit"
             class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px] h-[35px] lg:h-[48px] !min-h-[unset]"
             aria-label="Search"
-            for={id}
-            tabIndex={-1}
-            onClick={(e) => {
-              e.preventDefault();
+            // onClick={(e) => {
+            //   e.preventDefault();
 
-              if (searchInputRef.current) {
-                if (shouldClear) {
-                  setQuery("");
-                  searchInputRef.current.value = "";
-                }
+            //   if (searchInputRef.current) {
+            //     if (shouldClear) {
+            //       setQuery("");
+            //       searchInputRef.current.value = "";
+            //     }
 
-                searchInputRef.current.focus();
-              }
-            }}
+            //     searchInputRef.current.focus();
+            //   }
+            // }}
           >
             {loading.value
               ? <span class="loading loading-spinner loading-xs" />

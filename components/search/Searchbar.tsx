@@ -24,6 +24,7 @@ import type { Platform } from "$store/apps/site.ts";
 import Image from "apps/website/components/Image.tsx";
 import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
 import { useComputed, useSignal } from "@preact/signals";
+import type { Autocomplete } from "$store/loaders/suggestions/autocomplete.ts";
 
 // Editable props
 export interface Props {
@@ -51,6 +52,7 @@ export interface Props {
    * @todo: improve this typings ({query: string, count: number}) => Suggestions
    */
   loader: Resolved<Suggestion | null>;
+  autocompleteLoader: Resolved<Autocomplete | null>;
 
   platform?: Platform;
 }
@@ -60,13 +62,18 @@ function Searchbar({
   action = "/s",
   name = "q",
   loader,
+  autocompleteLoader,
   platform,
 }: Props) {
   const isFocused = useSignal(false);
   const id = useId();
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { setQuery, payload, loading, query } = useSuggestions(loader);
-  const { products = [], searches = [] } = payload.value ?? {};
+  const { setQuery, payload, loading, query } = useSuggestions(
+    loader,
+    autocompleteLoader,
+  );
+  const { products = [], searches = [], autocomplete = [] } = payload.value ??
+    {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
 
@@ -105,27 +112,26 @@ function Searchbar({
             aria-controls="search-suggestion"
             autocomplete="off"
           />
-          {
-            /* <button type="submit" class="hidden" for={id} tabIndex={-1}>
+          <button type="submit" class="hidden" for={id} tabIndex={-1}>
             Submit
-          </button> */
-          }
+          </button>
           <Button
-            type="submit"
+            // type="submit"
+            type="button"
             class="btn-square !bg-primary-500 !border-primary-500 text-white w-[60px] rounded-[6px] h-[35px] lg:h-[48px] !min-h-[unset]"
             aria-label="Search"
-            // onClick={(e) => {
-            //   e.preventDefault();
+            onClick={(e) => {
+              e.preventDefault();
 
-            //   if (searchInputRef.current) {
-            //     if (shouldClear) {
-            //       setQuery("");
-            //       searchInputRef.current.value = "";
-            //     }
+              if (searchInputRef.current) {
+                if (shouldClear) {
+                  setQuery("");
+                  searchInputRef.current.value = "";
+                }
 
-            //     searchInputRef.current.focus();
-            //   }
-            // }}
+                searchInputRef.current.focus();
+              }
+            }}
           >
             {loading.value
               ? <span class="loading loading-spinner loading-xs" />
@@ -144,10 +150,19 @@ function Searchbar({
                 </span>
               </a>
             </li>
-            {searches.map(({ term }) => (
+            {
+              /* {searches.map(({ term }) => (
               <li>
                 <a href={`/s?q=${term}`} class="flex p-3">
                   <span dangerouslySetInnerHTML={{ __html: term }} />
+                </a>
+              </li>
+            ))} */
+            }
+            {autocomplete.map(({ name, slug }) => (
+              <li>
+                <a href={`/${slug}`} class="flex p-3">
+                  <span dangerouslySetInnerHTML={{ __html: name.trim() }} />
                 </a>
               </li>
             ))}

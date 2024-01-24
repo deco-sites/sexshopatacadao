@@ -2,9 +2,10 @@ import { signal } from "@preact/signals";
 import type { Suggestion } from "apps/commerce/types.ts";
 import type { Resolved } from "deco/engine/core/resolver.ts";
 import { useCallback } from "preact/compat";
+import type { Autocomplete } from "$store/loaders/suggestions/autocomplete.ts";
 import { invoke } from "../runtime.ts";
 
-const payload = signal<Suggestion | null>(null);
+const payload = signal<(Suggestion & Autocomplete) | null>(null);
 const loading = signal<boolean>(false);
 
 let queue = Promise.resolve();
@@ -17,7 +18,13 @@ const NULLABLE: Resolved<null> = {
 
 const doFetch = async (
   query: string,
-  { __resolveType, ...extraProps }: Resolved<Suggestion | null> = NULLABLE,
+  { __resolveType: __suggestionResolveType, ...suggestionExtraProps }: Resolved<
+    Suggestion | null
+  > = NULLABLE,
+  { __resolveType: __autocompleteResolveType, ...autocompleteExtraProps }:
+    Resolved<
+      Autocomplete | null
+    > = NULLABLE,
 ) => {
   // Debounce query to API speed
   if (latestQuery !== query) return;
@@ -25,11 +32,22 @@ const doFetch = async (
   try {
     // Figure out a better way to type this loader
     // deno-lint-ignore no-explicit-any
-    const invokePayload: any = {
-      key: __resolveType,
-      props: { query, ...extraProps },
+    const suggestionInvokePayload: any = {
+      key: __suggestionResolveType,
+      props: { query, ...suggestionExtraProps },
     };
-    payload.value = await invoke(invokePayload) as Suggestion | null;
+    // deno-lint-ignore no-explicit-any
+    const autocompleteInvokePayload: any = {
+      key: __autocompleteResolveType,
+      props: { query, ...autocompleteExtraProps },
+    };
+
+    const [suggestionPayload, autocompletePayload] = await Promise.all([
+      invoke(suggestionInvokePayload) as Suggestion | null,
+      invoke(autocompleteInvokePayload) as unknown as Autocomplete | null,
+    ]);
+
+    payload.value = { ...suggestionPayload, ...autocompletePayload! };
   } catch (error) {
     console.error(
       "Something went wrong while fetching suggestions \n",
@@ -42,11 +60,12 @@ const doFetch = async (
 
 export const useSuggestions = (
   loader: Resolved<Suggestion | null>,
+  autocompleteLoader: Resolved<Autocomplete | null>,
 ) => {
   const setQuery = useCallback((query: string) => {
     loading.value = true;
     latestQuery = query;
-    queue = queue.then(() => doFetch(query, loader));
+    queue = queue.then(() => doFetch(query, loader, autocompleteLoader));
   }, [loader]);
 
   return {

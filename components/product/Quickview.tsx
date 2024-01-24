@@ -77,7 +77,7 @@ function Quickview(
   return (
     <>
       <Button
-        class="absolute top-0 left-0 bg-primary-500 h-9 w-9 rounded flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity p-0 z-10"
+        class="absolute top-0 left-0 !bg-primary-500 h-9 w-9 rounded flex items-center justify-center lg:opacity-0 lg:group-hover:opacity-100 transition-opacity p-0 z-10"
         onClick={() => {
           open.value = true;
         }}

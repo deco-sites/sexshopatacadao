@@ -4,9 +4,11 @@ import Button from "$store/components/ui/Button.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useCart } from "apps/vtex/hooks/useCart.ts";
 import type { SimulationOrderForm, SKU, Sla } from "apps/vtex/utils/types.ts";
+import type { ComponentChildren } from "preact";
 
 export interface Props {
   items: Array<SKU>;
+  children?: ComponentChildren;
 }
 
 const formatShippingEstimate = (estimate: string) => {
@@ -90,14 +92,14 @@ function ShippingContent({ simulation }: {
   // );
 }
 
-function ShippingSimulation({ items }: Props) {
+function ShippingSimulation({ items, children }: Props) {
   const postalCode = useSignal("");
   const loading = useSignal(false);
   const simulateResult = useSignal<SimulationOrderForm | null>(null);
   const { simulate, cart } = useCart();
 
   const handleSimulation = useCallback(async () => {
-    if (postalCode.value.length !== 8) {
+    if (postalCode.value.length !== 9) {
       return;
     }
 
@@ -115,44 +117,55 @@ function ShippingSimulation({ items }: Props) {
 
   return (
     <div class="flex flex-col font-montserrat">
-      <strong class="leading-normal text-[#3f3f40]">Calcule o Frete:</strong>
-      <a
-        class="text-xs text-[#3f3f40] leading-[1.15] mb-[5px]"
-        href="https://buscacepinter.correios.com.br/app/endereco/index.php"
-        target="_blank"
-      >
-        Não sei meu CEP
-      </a>
+      <div class="flex gap-8 md:gap-0 flex-col md:flex-row justify-between">
+        <div class="flex flex-col flex-1">
+          <strong class="leading-normal text-[#3f3f40]">
+            Calcule o Frete:
+          </strong>
+          <a
+            class="text-xs text-[#3f3f40] leading-[1.15] mb-[5px]"
+            href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+            target="_blank"
+          >
+            Não sei meu CEP
+          </a>
 
-      <form
-        class="flex"
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSimulation();
-        }}
-      >
-        <input
-          as="input"
-          type="text"
-          class="border border-gray-400 text-gray-600 rounded-l-[5px] px-4 h-10 w-full outline-none"
-          placeholder="00000-000"
-          value={postalCode.value}
-          maxLength={8}
-          size={8}
-          onChange={(e: { currentTarget: { value: string } }) => {
-            postalCode.value = e.currentTarget.value;
-          }}
-        />
-        <button
-          type="submit"
-          disabled={loading.value}
-          class="h-10 text-white flex items-center justify-center font-medium min-w-[114px] w-[114px] rounded-r-[5px] bg-gray-700 group outline-none"
-        >
-          <span class="group-disabled:loading">
-            Calcular
-          </span>
-        </button>
-      </form>
+          <form
+            class="flex"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSimulation();
+            }}
+          >
+            <input
+              as="input"
+              type="text"
+              class="border border-gray-400 text-gray-600 rounded-l-[5px] px-4 h-10 w-full outline-none"
+              placeholder="00000-000"
+              value={postalCode.value}
+              maxLength={9}
+              size={9}
+              onChange={(e: { currentTarget: { value: string } }) => {
+                postalCode.value = e.currentTarget.value.replace(/\D/g, "")
+                  .replace(/(\d{5})(\d)/, "$1-$2")
+                  .replace(/(-\d{3})\d+?$/, "$1");
+              }}
+            />
+            <button
+              type="submit"
+              disabled={loading.value}
+              class="h-10 text-white flex items-center justify-center font-medium min-w-[114px] w-[114px] rounded-r-[5px] bg-gray-700 group outline-none"
+            >
+              <span class="group-disabled:loading">
+                Calcular
+              </span>
+            </button>
+          </form>
+        </div>
+        <div class="flex-1 md:self-end mt-4">
+          {children}
+        </div>
+      </div>
 
       <div>
         <ShippingContent simulation={simulateResult} />

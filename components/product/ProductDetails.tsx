@@ -329,62 +329,60 @@ function ProductDetails(
                       quantity: 1,
                       seller: seller,
                     }]}
-                  />
-                )}
-              </div>
-              <div class="md:flex-1 mt-8">
-                {/* Share card */}
-                {share && Object.values(share).some((value) => value)
-                  ? (
-                    <div class="flex flex-col items-end gap-1 h-full justify-end max-h-[82px]">
-                      <span class="text-base font-bold text-[#3f3f40]">
-                        Compartilhar:
-                      </span>
-                      <div class="flex items-start gap-2">
-                        {share.showPinterestButton && (
-                          <a
-                            href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
-                              images?.[0].url
-                            }`}
-                            target="_blank"
-                            rel="noreferrer"
-                            title="Salvar no Pinterest"
-                          >
-                            <Icon id="PinterestButton" size={26} />
-                          </a>
-                        )}
-                        {share.showFacebookButton && (
-                          <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodedURI}`}
-                            title="Publicar no Facebook"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <Icon id="FacebookButton" size={26} />
-                          </a>
-                        )}
-                        {share.showWhatsappButton && (
-                          <a
-                            href={`https://api.whatsapp.com/send?text=${encodedURI}`}
-                            title="Compartilhar no Whatsapp"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <Icon id="WhatsappButton" size={26} />
-                          </a>
-                        )}
-                        {share.showTwitterButton && (
-                          <a
-                            href={`https://twitter.com/intent/tweet?text=${encodedURI}`}
-                            title="Publicar no Twitter"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            <Icon id="TwitterButton" size={25} />
-                          </a>
-                        )}
-                        {
-                          /* {share.showCopyButton && (
+                  >
+                    <div>
+                      {/* Share card */}
+                      {share && Object.values(share).some((value) => value)
+                        ? (
+                          <div class="flex flex-col items-end gap-1 h-full justify-end max-h-[82px]">
+                            <span class="text-base font-bold text-[#3f3f40]">
+                              Compartilhar:
+                            </span>
+                            <div class="flex items-start gap-2">
+                              {share.showFacebookButton && (
+                                <a
+                                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodedURI}`}
+                                  title="Publicar no Facebook"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <Icon id="FacebookButton" size={26} />
+                                </a>
+                              )}
+                              {share.showWhatsappButton && (
+                                <a
+                                  href={`https://api.whatsapp.com/send?text=${encodedURI}`}
+                                  title="Compartilhar no Whatsapp"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <Icon id="WhatsappButton" size={26} />
+                                </a>
+                              )}
+                              {share.showPinterestButton && (
+                                <a
+                                  href={`http://pinterest.com/pin/create/button/?url=${encodedURI}&media=${
+                                    images?.[0].url
+                                  }`}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  title="Salvar no Pinterest"
+                                >
+                                  <Icon id="PinterestButton" size={26} />
+                                </a>
+                              )}
+                              {share.showTwitterButton && (
+                                <a
+                                  href={`https://twitter.com/intent/tweet?text=${encodedURI}`}
+                                  title="Publicar no Twitter"
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  <Icon id="TwitterButton" size={25} />
+                                </a>
+                              )}
+                              {
+                                /* {share.showCopyButton && (
                           <CopyButton
                             contentToCopy={url}
                           >
@@ -395,11 +393,14 @@ function ProductDetails(
                             />
                           </CopyButton>
                         )} */
-                        }
-                      </div>
+                              }
+                            </div>
+                          </div>
+                        )
+                        : null}
                     </div>
-                  )
-                  : null}
+                  </ShippingSimulation>
+                )}
               </div>
             </div>
 

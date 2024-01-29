@@ -64,9 +64,7 @@ import * as $$$$$$50 from "./sections/Content/Benefits.tsx";
 import * as $$$$$$51 from "./sections/Content/Text.tsx";
 import * as $$$$$$52 from "./sections/Content/Faq.tsx";
 import * as $$$$$$53 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$$$$0 from "./actions/newsletter/subscribe.ts";
-import * as $$$$$$$$$1 from "./actions/contact/send.ts";
-import * as $$$$$$$$$2 from "./actions/gallery/mode.ts";
+import * as $$$$$$$$$0 from "./actions/gallery/mode.ts";
 import * as $$$$$$$$$$$0 from "./apps/site.ts";
 import * as $$$$$$$$$$$1 from "./apps/decohub.ts";
 
@@ -150,9 +148,7 @@ const manifest = {
     "deco-sites/sexshopatacadao/sections/Theme/Theme.tsx": $$$$$$53,
   },
   "actions": {
-    "deco-sites/sexshopatacadao/actions/contact/send.ts": $$$$$$$$$1,
-    "deco-sites/sexshopatacadao/actions/gallery/mode.ts": $$$$$$$$$2,
-    "deco-sites/sexshopatacadao/actions/newsletter/subscribe.ts": $$$$$$$$$0,
+    "deco-sites/sexshopatacadao/actions/gallery/mode.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/sexshopatacadao/apps/decohub.ts": $$$$$$$$$$$1,

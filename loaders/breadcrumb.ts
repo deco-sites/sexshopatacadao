@@ -66,6 +66,30 @@ export const loader = async (
 ): Promise<BreadcrumbListLoader> => {
   const { url: baseUrl } = req;
   const url = new URL(baseUrl);
+  const isSearch = url.pathname === "/s";
+
+  if (isSearch) {
+    const query = url.searchParams.get("q");
+    if (!query) {
+      return {
+        "@type": "BreadcrumbList",
+        itemListElement: [],
+      };
+    }
+
+    return {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          name: query,
+          item: new URL(`/s?q=${query}`, baseUrl).href,
+          position: 1,
+        },
+      ],
+    };
+  }
+
   const pageTypesPromise = pageTypesFromPathname(url.pathname);
   const pageTypes = await pageTypesPromise;
 

@@ -63,7 +63,14 @@ function ContactForm({ form = { submitText: "Enviar" } }: Props) {
     };
 
     try {
-      await invoke["deco-sites/sexshopatacadao"].actions.contact.send(data);
+      await invoke.vtex.actions.masterdata.createDocument({
+        acronym: "FC",
+        data: {
+          email,
+          name,
+          message,
+        },
+      });
 
       succeeded.value = true;
     } catch (error) {

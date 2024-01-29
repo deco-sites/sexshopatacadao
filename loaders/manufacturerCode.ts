@@ -1,4 +1,3 @@
-import { fetchSafe } from "apps/utils/fetch.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { AppContext } from "$store/apps/site.ts";
 
@@ -15,8 +14,6 @@ export const cacheKey = (req: Request) => {
   return url.href;
 };
 
-const VTEX_ACCOUNT_NAME = "atacadaosexyshop";
-
 export interface Props {
   page: ProductDetailsPage | null;
 }
@@ -32,7 +29,7 @@ export const loader = async (
 ): Promise<ProductManufacturerCode> => {
   const { page } = props;
 
-  if (!page || ctx.platform !== "vtex") {
+  if (!page || ctx.platform !== "vtex" || !ctx.vtex) {
     return {
       manufacturerCode: null,
     };
@@ -42,35 +39,26 @@ export const loader = async (
   const { sku } = product;
 
   try {
-    const res = await fetchSafe(
-      `https://${VTEX_ACCOUNT_NAME}.vtexcommercestable.com.br/api/io/_v/private/graphql/v1`,
+    const res = await ctx.vtex.io.query<
+      { sku: { manufacturerCode: string } },
+      { id: string }
+    >(
       {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "accept": "application/json",
-        },
-        body: JSON.stringify({
-          query: `
-            query GetManufacturer($id: ID!) {
-              sku(identifier: { field: id, value: $id }) {
-                manufacturerCode
-              }
+        query: `
+          query GetManufacturer($id: ID!) {
+            sku(identifier: { field: id, value: $id }) {
+              manufacturerCode
             }
-          `,
-          operationName: "GetManufacturer",
-          variables: {
-            id: sku,
-          },
-        }),
+          }
+        `,
+        operationName: "GetManufacturer",
+        variables: {
+          id: sku,
+        },
       },
     );
 
-    const { data } = (await res.json()) as {
-      data: { sku: { manufacturerCode: string } };
-    };
-
-    return data.sku;
+    return res.sku;
   } catch {
     return {
       manufacturerCode: null,

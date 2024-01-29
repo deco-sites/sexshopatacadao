@@ -9,6 +9,7 @@ import { Section } from "deco/blocks/section.ts";
 import { App, AppContext as DecoAppContext } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
+import { Config } from "apps/vtex/loaders/config.ts";
 
 export type PriceConfig = {
   multiplier?: number;
@@ -28,6 +29,8 @@ export type Props = {
    * @description Multiply the price by this value, only in shelves and product pages
    */
   priceMultiplier?: number;
+
+  vtex?: Config;
 } & CommerceProps;
 
 export type Platform =

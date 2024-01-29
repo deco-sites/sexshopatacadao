@@ -1,4 +1,4 @@
-import { fetchSafe } from "apps/utils/fetch.ts";
+import { AppContext } from "$store/apps/site.ts";
 
 export interface Props {
   query?: string;
@@ -8,43 +8,20 @@ export interface Autocomplete {
   autocomplete: { name: string; slug: string }[];
 }
 
-const VTEX_ACCOUNT_NAME = "atacadaosexyshop";
-
 export const loader = async (
   props: Props,
   _req: Request,
+  ctx: AppContext,
 ): Promise<Autocomplete> => {
-  try {
-    const res = await fetchSafe(
-      `https://${VTEX_ACCOUNT_NAME}.vtexcommercestable.com.br/api/io/_v/private/graphql/v1`,
-      {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "accept": "application/json",
-        },
-        body: JSON.stringify({
-          query: `
-            query Autocomplete($term: String!) {
-              autocomplete(searchTerm: $term) @context(provider: "vtex.search-graphql") {
-                itemsReturned {
-                  name
-                  productId
-                  slug
-                }
-              }
-            }
-          `,
-          operationName: "Autocomplete",
-          variables: {
-            term: props.query,
-          },
-        }),
-      },
-    );
+  if (!props.query || ctx.platform !== "vtex" || !ctx.vtex) {
+    return {
+      autocomplete: [],
+    };
+  }
 
-    const { data } = (await res.json()) as {
-      data: {
+  try {
+    const res = await ctx.vtex.io.query<
+      {
         autocomplete: {
           itemsReturned: {
             name: string;
@@ -52,10 +29,29 @@ export const loader = async (
             slug: string;
           }[];
         };
-      };
-    };
+      },
+      { term: string }
+    >(
+      {
+        query: `
+          query Autocomplete($term: String!) {
+            autocomplete(searchTerm: $term) @context(provider: "vtex.search-graphql") {
+              itemsReturned {
+                name
+                productId
+                slug
+              }
+            }
+          }
+        `,
+        operationName: "Autocomplete",
+        variables: {
+          term: props.query,
+        },
+      },
+    );
 
-    const autocomplete = data.autocomplete.itemsReturned.flatMap((
+    const autocomplete = res.autocomplete.itemsReturned.flatMap((
       { productId, ...rest },
     ) => productId ? [] : [rest]);
 

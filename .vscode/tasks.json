@@ -1,16 +1,16 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "deno",
-			"command": "eval",
-			"args": [
-				"'import \"deco/scripts/apps/bundle.ts\"'",
-				"deco-sites/sexshopatacadao"
-			],
-			"problemMatcher": ["$deno"],
-			"label": "deno task: bundle",
-			"detail": ""
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "deno",
+      "command": "eval",
+      "args": [
+        "'import \"deco/scripts/apps/bundle.ts\"'",
+        "deco-sites/sexshopatacadao"
+      ],
+      "problemMatcher": ["$deno"],
+      "label": "deno task: bundle",
+      "detail": ""
+    }
+  ]
 }

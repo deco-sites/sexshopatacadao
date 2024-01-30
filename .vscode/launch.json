@@ -1,0 +1,29 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"request": "launch",
+			"name": "Launch Program",
+			"type": "node",
+
+			"preLaunchTask": "deno task: bundle",
+			"program": "${workspaceFolder}/dev.ts",
+			"cwd": "${workspaceFolder}",
+			"runtimeExecutable": "/home/brunight/.deno/bin/deno",
+			"runtimeArgs": [
+				"run",
+				"--env",
+				"--unstable",
+				"--inspect-wait",
+				"--allow-all",
+				"--watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env"
+			],
+			"autoAttachChildProcesses": true,
+			"restart": true,
+			"attachSimplePort": 9229
+		}
+	]
+}

@@ -47,7 +47,6 @@ function Cart({
 }: Props) {
   const { displayCart } = useUI();
   const isEmpty = items.length === 0;
-  console.log(total, "incart");
 
   return (
     <div class="flex flex-col overflow-hidden">

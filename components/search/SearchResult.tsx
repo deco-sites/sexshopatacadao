@@ -13,6 +13,11 @@ import { getGalleryMode } from "$store/loaders/getGalleryMode.ts";
 import { Return } from "apps/shopify/utils/admin/admin.graphql.gen.ts";
 import GalleryModeSwitch from "deco-sites/sexshopatacadao/islands/Search/GalleryModeSwitch.tsx";
 import { GalleryMode } from "deco-sites/sexshopatacadao/actions/gallery/mode.ts";
+import type { Props as ShelfProps } from "$store/components/product/ProductShelf.tsx";
+import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
+import { ImageOrIconType } from "deco-sites/sexshopatacadao/components/ui/ImageOrIcon.tsx";
+import Searchbar from "$store/islands/Header/Searchbar.tsx";
+import ImageOrIcon from "deco-sites/sexshopatacadao/components/ui/ImageOrIcon.tsx";
 
 export interface Layout {
   /**
@@ -31,12 +36,105 @@ export interface Props {
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
+
+  notFoundProps: NotFoundProps;
 }
 
-function NotFound() {
+/**
+ * @title {{text}}
+ */
+interface NotFoundInfo {
+  icon: ImageOrIconType;
+  text: string;
+}
+
+/**
+ * @title {{text}}
+ */
+interface NotFoundCategory {
+  icon: ImageOrIconType;
+  text: string;
+  href: string;
+}
+
+interface NotFoundProps {
+  searchbar: SearchbarProps;
+
+  info: NotFoundInfo[];
+
+  categories: NotFoundCategory[];
+  shelfProps: ShelfProps;
+}
+
+function NotFound({ searchbar, categories, info }: NotFoundProps) {
   return (
-    <div class="w-full max-w-[96rem] md:px-[5vw] mx-auto flex justify-center items-center pb-10">
-      <span>Not Found!</span>
+    <div class="w-full flex bg-[linear-gradient(90deg,#ff94b4,#ffb1c9_52.08%,#ff94b4)] text-gray-800">
+      <div class="flex flex-col max-w-[1200px] w-full my-2.5 mx-auto bg-white border-l-4 border-primary-500 shadow-[0_6px_10px_rgba(0,0,0,.1)] rounded-[5px] h-[335px]">
+        <h1 class="text-[25px] font-bold uppercase leading-[1.15] mt-[10px] mb-[15px] text-center w-full">
+          Ops...Não encontramos resultados para sua pesquisa!
+        </h1>
+        <div class="flex flex-col lg:flex-row justify-center gap-[60px]">
+          <div class="flex flex-col max-w-[440px]">
+            <h2 class="mb-2.5 lg:mb-0 font-medium text-lg">
+              Vamos tentar de novo? Que tal seguir algumas dicas?
+            </h2>
+            <div class="py-2">
+              <Searchbar searchbar={searchbar} />
+            </div>
+            <ul class="list-disc text-lg leading-[27px] pl-10 font-montserrat">
+              <li>Verifique os termos digitados</li>
+              <li>Tente utilizar uma palavra</li>
+              <li>Utilize termos genéricos na busca</li>
+              <li>Busque utilizar palavras-chave</li>
+            </ul>
+          </div>
+          <div class="bg-primary-500 h-[1px] w-full lg:h-full lg:w-[1px] flex items-center justify-center">
+            <span class="py-3 bg-white">ou</span>
+          </div>
+          <div class="w-full max-w-[500px] flex flex-col justify-center">
+            <h2 class="mb-[15px] font-medium text-lg">
+              Que tal navegar por essas categorias?
+            </h2>
+            <ul class="flex w-full justify-between">
+              {categories.map((category) => (
+                <li>
+                  <a
+                    class="flex flex-col w-[117px] h-[109px] shadow-[3px_4px_7px_rgba(0,0,0,.15)] rounded-[10px] items-center justify-center text-center p-2 font-bold text-[13px] uppercase bg-gray-200"
+                    href={category.href}
+                  >
+                    <ImageOrIcon
+                      width={58}
+                      height={51}
+                      alt={category.text}
+                      loading="eager"
+                      {...category.icon}
+                    />
+                    <span>{category.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <h2 class="mt-4 px-6 lg:px-0 font-medium text-sm lg:text-lg mx-auto">
+          Caso ainda não consiga encontrar o que procura entre em contato
+          conosco para te auxiliarmos:
+        </h2>
+        <div class="flex flex-col lg:flex-row mx-auto">
+          {info.map((infoItem) => (
+            <div class="flex items-center justify-center gap-2 max-lg:py-4 max-lg:first:pt-0 max-lg:first:border-b-0 max-lg:border-b first lg:px-8 lg:first:border-l-0 lg:border-l border-current">
+              <ImageOrIcon
+                width={20}
+                height={20}
+                alt={infoItem.text}
+                loading="eager"
+                {...infoItem.icon}
+              />
+              <span>{infoItem.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
@@ -48,7 +146,7 @@ function Result({
   startingPage = 0,
   galleryMode,
   filterLabelsToHide = [],
-}: Omit<Props, "page"> & {
+}: Omit<Props, "page" | "notFoundProps"> & {
   page: ProductListingPage;
   galleryMode: GalleryMode;
 }) {
@@ -174,9 +272,11 @@ function Result({
   );
 }
 
-function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
-  if (!page) {
-    return <NotFound />;
+function SearchResult(
+  { page, notFoundProps, ...props }: ReturnType<typeof loader>,
+) {
+  if (!page?.products?.length) {
+    return <NotFound {...notFoundProps} />;
   }
 
   return <Result {...props} page={page} />;

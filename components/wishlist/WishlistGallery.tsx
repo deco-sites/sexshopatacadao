@@ -1,11 +1,11 @@
 import SearchResult, {
   Props as SearchResultProps,
 } from "$store/components/search/SearchResult.tsx";
-import { getGalleryMode } from "deco-sites/sexshopatacadao/loaders/getGalleryMode.ts";
+import { loader as searchResultLoader } from "$store/components/search/SearchResult.tsx";
 
 export type Props = SearchResultProps;
 
-function WishlistGallery(props: ReturnType<typeof loader>) {
+function WishlistGallery(props: ReturnType<typeof searchResultLoader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
 
   if (isEmpty) {
@@ -27,13 +27,6 @@ function WishlistGallery(props: ReturnType<typeof loader>) {
   return <SearchResult {...props} />;
 }
 
-export const loader = (props: Props, req: Request) => {
-  const galleryMode = getGalleryMode(req);
-
-  return {
-    ...props,
-    galleryMode,
-  };
-};
+export const loader = searchResultLoader;
 
 export default WishlistGallery;

@@ -4,7 +4,20 @@ import { pageTypesToBreadcrumbList } from "apps/vtex/utils/legacy.ts";
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (req: Request): string => new URL(req.url).pathname;
+export const cacheKey = (req: Request): string => {
+  const { url: baseUrl } = req;
+  const url = new URL(baseUrl);
+  const isSearch = url.pathname === "/s";
+
+  if (isSearch) {
+    const query = url.searchParams.get("q");
+    if (query) {
+      return `/s?q=${query}`;
+    }
+  }
+
+  return new URL(req.url).pathname;
+};
 
 const VTEX_ACCOUNT_NAME = "atacadaosexyshop";
 

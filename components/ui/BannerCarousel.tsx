@@ -118,6 +118,7 @@ function BannerItem(
     >
       <Picture preload={lcp} class="w-full">
         <Source
+          preload={lcp}
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
@@ -125,6 +126,7 @@ function BannerItem(
           height={sizes.mobile.height / 2}
         />
         <Source
+          preload={lcp}
           media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={desktop}

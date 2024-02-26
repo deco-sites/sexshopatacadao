@@ -137,6 +137,8 @@ function BannerItem(
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
+          width={sizes.desktop.width}
+          height={sizes.desktop.height}
           alt={alt}
         />
       </Picture>

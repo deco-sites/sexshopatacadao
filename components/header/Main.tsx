@@ -81,7 +81,6 @@ function Main({ searchbar, logo, isMobile }: {
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
-          UserDataDesktop
         </div>
       </div>
     </>

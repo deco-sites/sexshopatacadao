@@ -59,7 +59,7 @@ const getMousePositionFromEvent = (
   };
 };
 
-function ZoomableImage({ type, factor, zoomSrc, ...imageProps }: Props) {
+function ZoomableImage({ type, factor, zoomSrc, fit, ...imageProps }: Props) {
   const [isZoomedIn, setZoom] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);

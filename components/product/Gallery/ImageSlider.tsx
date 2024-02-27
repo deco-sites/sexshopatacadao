@@ -109,7 +109,7 @@ export default function GallerySlider(
             >
               <SliderImage
                 type={zoomMode}
-                factor={3}
+                factor={2}
                 class="w-full"
                 sizes="(max-width: 640px) 100vw, 30vw"
                 style={{ aspectRatio: 1 }}
@@ -117,7 +117,9 @@ export default function GallerySlider(
                 alt={img.alternateName}
                 width={width}
                 height={height}
+                fit="contain"
                 // Preload LCP image for better web vitals
+
                 preload={index === 0}
                 loading={index === 0 ? "eager" : "lazy"}
               />

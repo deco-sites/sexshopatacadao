@@ -2,6 +2,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 import { type SiteNavigationElement } from "$store/components/header/Header.tsx";
 import { clsx } from "deco-sites/sexshopatacadao/sdk/clx.ts";
 import { useUI } from "$store/sdk/useUI.ts";
+import { UserData } from "$store/islands/Header/UserData.tsx";
 
 export interface Props {
   items: SiteNavigationElement[];
@@ -84,7 +85,9 @@ function Menu({ items }: Props) {
         >
           <Icon id="XFilled" size={24} strokeWidth={0} />
         </button>
-        <a
+        <UserData class="px-3" />
+        {
+          /* <a
           class="flex items-center gap-4 h-[55px] px-3 w-full"
           href="/login"
           aria-label="Log in"
@@ -98,7 +101,8 @@ function Menu({ items }: Props) {
           <span class="block uppercase text-xs font-bold">
             Faça Login | Cadastre-se
           </span>
-        </a>
+        </a> */
+        }
         <a
           class="flex items-center gap-4 h-[55px] px-3 w-full text-primary-500 border-b border-t border-danger-500"
           href="/account#/orders"

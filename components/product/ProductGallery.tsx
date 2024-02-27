@@ -9,12 +9,15 @@ export interface Props {
   products: Product[] | null;
   offset: number;
   galleryMode: GalleryMode;
+  priceMultiplier?: number;
   layout?: {
     card?: CardLayout;
   };
 }
 
-function ProductGallery({ products, layout, offset, galleryMode }: Props) {
+function ProductGallery(
+  { products, layout, offset, galleryMode, priceMultiplier }: Props,
+) {
   const platform = usePlatform();
 
   return (
@@ -30,6 +33,7 @@ function ProductGallery({ products, layout, offset, galleryMode }: Props) {
                 layout={layout?.card}
                 platform={platform}
                 galleryMode={galleryMode}
+                priceMultiplier={priceMultiplier}
               />
             </div>
           )

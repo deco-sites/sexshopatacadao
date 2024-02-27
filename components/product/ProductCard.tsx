@@ -101,9 +101,30 @@ function ProductCard(
     installments,
     installmentsData,
     seller = "1",
+    availability,
   } = useOffer(offers);
+  const isAvailable = availability === "https://schema.org/InStock";
 
-  const price = rawPrice ? rawPrice * priceMultiplier : undefined;
+  console.log({ isAvailable, rawPrice, priceMultiplier });
+
+  const price = isAvailable
+    ? rawPrice ? rawPrice * priceMultiplier : undefined
+    : rawPrice;
+
+  const discountPercentage = (listPrice && price)
+    ? Math.round(
+      ((listPrice - price) / listPrice) * 100,
+    )
+    : 0;
+
+  console.log({
+    isAvailable,
+    rawPrice,
+    priceMultiplier,
+    price,
+    discountPercentage,
+  });
+
   // const possibilities = useVariantPossibilities(hasVariant, product);
   // const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
@@ -192,6 +213,17 @@ function ProductCard(
             maxWidth: `${WIDTH}px`,
           }}
         >
+          {/** Discount Badge */}
+          <div class="absolute top-5 right-[2px]">
+            {discountPercentage > 0 && (
+              <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
+                <span>
+                  {discountPercentage}%
+                </span>
+              </div>
+            )}
+          </div>
+
           {/* Wishlist button */}
           {
             /* <div

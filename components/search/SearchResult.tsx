@@ -40,6 +40,7 @@ export interface Props {
   startingPage?: 0 | 1;
 
   notFoundProps: NotFoundProps;
+  priceMultiplier?: number;
 }
 
 /**
@@ -155,6 +156,7 @@ function Result({
   startingPage = 0,
   galleryMode,
   filterLabelsToHide = [],
+  priceMultiplier,
 }: Omit<Props, "page" | "notFoundProps"> & {
   page: ProductListingPage;
   galleryMode: GalleryMode;
@@ -225,6 +227,7 @@ function Result({
               offset={offset}
               galleryMode={galleryMode}
               layout={{ card: cardLayout }}
+              priceMultiplier={priceMultiplier}
             />
             <div class="w-full flex justify-center items-center mt-[15px] pt-[17px] border-t border-gray-400">
               {pageControls}
@@ -294,11 +297,14 @@ function SearchResult(
 export const loader = (props: Props, req: Request, ctx: AppContext) => {
   const galleryMode = getGalleryMode(req);
 
+  const shelfProps = shelfLoader(props.notFoundProps.shelfProps, req, ctx);
+
   return {
     ...props,
+    priceMultiplier: shelfProps.priceMultiplier,
     notFoundProps: {
       ...props.notFoundProps,
-      shelfProps: shelfLoader(props.notFoundProps.shelfProps, req, ctx),
+      shelfProps,
     },
     galleryMode,
   };

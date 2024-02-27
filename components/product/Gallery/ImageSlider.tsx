@@ -17,6 +17,9 @@ import {
 export interface Props {
   product: ProductDetailsPage["product"];
 
+  priceMultiplier?: number;
+  showDiscountBadge?: boolean;
+
   showDots?: boolean;
   zoomMode?: "hover" | "click";
   direction?: "column" | "row";
@@ -70,13 +73,21 @@ function SliderImage(props: ZoomableImageProps) {
  * we rearrange each cell with col-start- directives
  */
 export default function GallerySlider(
-  { product, showDots = true, zoomMode = "hover", direction = "row" }: Props,
+  {
+    product,
+    showDots = true,
+    zoomMode = "hover",
+    direction = "row",
+    priceMultiplier = 1,
+    showDiscountBadge = true,
+  }: Props,
 ) {
   const { image: images, offers } = product;
 
   const {
-    price = 0,
+    price: rawPrice = 0,
     listPrice,
+    availability,
   } = useOffer(offers);
 
   const id = useId();
@@ -88,9 +99,15 @@ export default function GallerySlider(
     return null;
   }
 
-  const discountPercentage = Math.trunc(
-    ((listPrice ?? 0) - price) / (listPrice ?? 1) * 100,
-  );
+  const isAvailable = availability === "https://schema.org/InStock";
+
+  const price = isAvailable ? rawPrice * priceMultiplier : rawPrice;
+
+  const discountPercentage = showDiscountBadge
+    ? Math.trunc(
+      ((listPrice ?? 0) - price) / (listPrice ?? 1) * 100,
+    )
+    : 0;
 
   const isSingleImage = images.length === 1;
 

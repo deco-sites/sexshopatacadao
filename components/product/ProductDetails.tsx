@@ -34,6 +34,14 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+
+  /**
+   * @title Images config
+   */
+  images?: {
+    showDiscountBadge?: boolean;
+  };
+
   /**
    * @title Opções de compartilhamento
    */
@@ -74,6 +82,7 @@ function ProductDetails(
     url,
     share,
     priceMultiplier,
+    images: imagesConfig,
   }: ReturnType<
     typeof loader
   >,
@@ -183,6 +192,8 @@ function ProductDetails(
             <GallerySlider
               product={product}
               zoomMode={isMobile ? "click" : "hover"}
+              showDiscountBadge={imagesConfig?.showDiscountBadge}
+              priceMultiplier={priceMultiplier}
             />
           </div>
 

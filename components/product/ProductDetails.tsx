@@ -112,7 +112,9 @@ function ProductDetails(
     bestInstallments,
   } = useOffer(offers);
 
-  const price = rawPrice * priceMultiplier;
+  const isAvailable = availability === "https://schema.org/InStock";
+
+  const price = isAvailable ? rawPrice * priceMultiplier : rawPrice;
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const refId = isVariantOf?.model ?? "";
@@ -270,7 +272,7 @@ function ProductDetails(
             </div>
             {/* SKU Selector & Add to Cart */}
             <div class="mt-6">
-              {availability === "https://schema.org/InStock"
+              {isAvailable
                 ? isUniqueSku
                   ? (
                     <>

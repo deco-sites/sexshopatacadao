@@ -3,7 +3,7 @@ import { AppContext } from "$store/apps/site.ts";
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (req: Request) => {
+export const cacheKey = (_props: unknown, req: Request) => {
   const url = new URL(req.url);
 
   const params = new URLSearchParams();

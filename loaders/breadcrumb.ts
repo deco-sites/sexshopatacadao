@@ -4,7 +4,7 @@ import { pageTypesToBreadcrumbList } from "apps/vtex/utils/legacy.ts";
 
 export const cache = "stale-while-revalidate";
 
-export const cacheKey = (req: Request): string => {
+export const cacheKey = (_props: unknown, req: Request) => {
   const { url: baseUrl } = req;
   const url = new URL(baseUrl);
   const isSearch = url.pathname === "/s";

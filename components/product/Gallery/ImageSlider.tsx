@@ -127,7 +127,7 @@ export default function GallerySlider(
               <SliderImage
                 type={zoomMode}
                 factor={2}
-                class="w-full aspect-[1] object-contain"
+                class="w-full [aspect-ratio:1] object-contain"
                 sizes="(max-width: 640px) 100vw, 30vw"
                 style={{ aspectRatio: 1 }}
                 src={img.url!}

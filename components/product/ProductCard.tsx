@@ -62,7 +62,7 @@ interface Props {
 }
 
 const relative = (url: string) => {
-  const link = new URL(url);
+  const link = new URL(url, "http://localhost");
   return `${link.pathname}${link.search}`;
 };
 
@@ -103,13 +103,30 @@ function ProductCard(
     seller = "1",
     availability,
   } = useOffer(offers);
-  const isAvailable = availability === "https://schema.org/InStock";
+  const firstAvailableVariant = product.isVariantOf?.hasVariant?.find((
+    variant,
+  ) =>
+    variant?.offers?.offers?.[0]?.availability === "https://schema.org/InStock"
+  );
 
-  // const shouldShowInstallmentsAndDiscountBadge =
+  const isAvailable = availability === "https://schema.org/InStock" ||
+    !!firstAvailableVariant;
+
+  const parsedUrl = relative(
+    (availability === "https://schema.org/InStock"
+      ? url
+      : firstAvailableVariant
+      ? firstAvailableVariant.url
+      : url) ?? "",
+  );
 
   const price = isAvailable
     ? rawPrice ? rawPrice * priceMultiplier : undefined
     : rawPrice;
+
+  // const shouldShowDiscountBadge = isAvailable && rawPrice && price &&
+  //   listPrice &&
+  //   price < listPrice * priceMultiplier;
 
   const discountPercentage = (listPrice && price)
     ? Math.round(
@@ -157,7 +174,7 @@ function ProductCard(
     : (
       <button
         type="button"
-        class="w-full flex items-center justify-center text-primary-500 bg-white hover:bg-primary-500 hover:text-white transition-colors h-11 rounded-[5px] border border-primary-500 font-montserrat max-w-[250px]"
+        class="w-full flex items-center justify-center text-primary-500 bg-white hover:bg-primary-500 hover:text-white transition-colors h-11 rounded-[5px] border border-primary-500 font-montserrat max-w-[300px] mt-[14px]"
       >
         Avise-me quando chegar
       </button>
@@ -165,7 +182,13 @@ function ProductCard(
 
   return (
     <div class="relative group">
-      {/* <BrowserLog payload={{ product }} /> */}
+      {
+        /* <BrowserLog
+        payload={{
+          product,
+        }}
+      /> */
+      }
       {!isMobile && (
         <Quickview
           product={product}
@@ -176,7 +199,7 @@ function ProductCard(
       )}
 
       <a
-        href={url && relative(url)}
+        href={parsedUrl && relative(parsedUrl)}
         id={id}
         class={`card p-0 group w-full ${
           galleryMode === "list" ? "flex flex-row gap-8" : ""
@@ -216,6 +239,7 @@ function ProductCard(
           }}
         >
           {/** Discount Badge */}
+          {/* {shouldShowDiscountBadge && ( */}
           <div class="absolute top-5 right-[2px]">
             {discountPercentage > 0 && (
               <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
@@ -225,6 +249,7 @@ function ProductCard(
               </div>
             )}
           </div>
+          {/* )} */}
 
           {/* Wishlist button */}
           {

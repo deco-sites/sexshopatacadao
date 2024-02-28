@@ -4,7 +4,7 @@
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.55.1/",
     "deco-sites/std/": "https://denopkg.com/deco-sites/std@1.24.2/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.34.0/",
+    "apps/": "https://denopkg.com/Brunight/apps@c2b3214a205e62d04a6a3cb87d30b4f8665340fb/",
     "$fresh/": "https://denopkg.com/denoland/fresh@7ad4610e3a42aba42638cbc1041b96ee58a9b29e/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
@@ -36,21 +36,11 @@
   "githooks": {
     "pre-commit": "check"
   },
-  "exclude": [
-    "node_modules",
-    "static/",
-    "README.md",
-    "_fresh"
-  ],
+  "exclude": ["node_modules", "static/", "README.md", "_fresh"],
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ],
-      "exclude": [
-        "no-window"
-      ]
+      "tags": ["fresh", "recommended"],
+      "exclude": ["no-window"]
     }
   },
   "nodeModulesDir": true,

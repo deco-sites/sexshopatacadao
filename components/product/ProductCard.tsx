@@ -105,7 +105,7 @@ function ProductCard(
   } = useOffer(offers);
   const isAvailable = availability === "https://schema.org/InStock";
 
-  console.log({ isAvailable, rawPrice, priceMultiplier });
+  // const shouldShowInstallmentsAndDiscountBadge =
 
   const price = isAvailable
     ? rawPrice ? rawPrice * priceMultiplier : undefined
@@ -116,14 +116,6 @@ function ProductCard(
       ((listPrice - price) / listPrice) * 100,
     )
     : 0;
-
-  console.log({
-    isAvailable,
-    rawPrice,
-    priceMultiplier,
-    price,
-    discountPercentage,
-  });
 
   // const possibilities = useVariantPossibilities(hasVariant, product);
   // const variants = Object.entries(Object.values(possibilities)[0] ?? {});
@@ -147,23 +139,33 @@ function ProductCard(
 
   const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
 
-  const cta = (isUniqueSku && !isMobile)
-    ? (
-      <ProductCardActions
-        text={l?.basics?.ctaText}
-        productID={productID}
-        seller={seller}
-        galleryMode={galleryMode}
-      />
-    )
+  const cta = isAvailable
+    ? (isUniqueSku && !isMobile)
+      ? (
+        <ProductCardActions
+          text={l?.basics?.ctaText}
+          productID={productID}
+          seller={seller}
+          galleryMode={galleryMode}
+        />
+      )
+      : (
+        <ProductCardAddToCart galleryMode={galleryMode}>
+          {l?.basics?.ctaText}
+        </ProductCardAddToCart>
+      )
     : (
-      <ProductCardAddToCart galleryMode={galleryMode}>
-        {l?.basics?.ctaText}
-      </ProductCardAddToCart>
+      <button
+        type="button"
+        class="w-full flex items-center justify-center text-primary-500 bg-white hover:bg-primary-500 hover:text-white transition-colors h-11 rounded-[5px] border border-primary-500 font-montserrat max-w-[250px]"
+      >
+        Avise-me quando chegar
+      </button>
     );
 
   return (
     <div class="relative group">
+      {/* <BrowserLog payload={{ product }} /> */}
       {!isMobile && (
         <Quickview
           product={product}
@@ -338,51 +340,57 @@ function ProductCard(
                 }
               </div>
             )}
-            {l?.hide?.allPrices
-              ? ""
-              : (
-                <div class="flex flex-col gap-[5px] font-montserrat">
-                  <div
-                    class={`flex flex-col gap-0 ${
-                      align === "center" ? "justify-center" : "justify-start"
-                    }`}
-                  >
+            {isAvailable
+              ? l?.hide?.allPrices
+                ? ""
+                : (
+                  <div class="flex flex-col gap-[5px] font-montserrat">
                     <div
-                      class={`line-through text-gray-400 text-xs leading-[1.15] ${
-                        (listPrice && listPrice !== price) ? "" : "invisible"
+                      class={`flex flex-col gap-0 ${
+                        align === "center" ? "justify-center" : "justify-start"
                       }`}
                     >
-                      De: {formatPrice(listPrice, offers?.priceCurrency)}
-                    </div>
-                    <div class="text-primary-500 text-[15px] leading-[17px] font-bold">
-                      à vista {formatPrice(price, offers?.priceCurrency)}
-                    </div>
-                  </div>
-                  {l?.hide?.installments
-                    ? ""
-                    : (
-                      <div class="text-gray-500 text-[11px] leading-[14px] flex flex-col uppercase">
-                        <span>
-                          {formatPrice(rawPrice, offers?.priceCurrency)}{" "}
-                          <strong>à prazo</strong>
-                        </span>
-                        <span class="truncate">
-                          ou{" "}
-                          <strong>
-                            {installmentsData?.billingDuration ?? 1}x
-                          </strong>{" "}
-                          de {formatPrice(
-                            installmentsData?.billingIncrement ?? rawPrice,
-                            offers?.priceCurrency,
-                          )}{" "}
-                          <strong>
-                            {installmentsData?.withTaxes
-                              ? "c/ juros"
-                              : "s/ juros"}
-                          </strong>
-                        </span>
+                      <div
+                        class={`line-through text-gray-400 text-xs leading-[1.15] ${
+                          (listPrice && listPrice !== price) ? "" : "invisible"
+                        }`}
+                      >
+                        De: {formatPrice(listPrice, offers?.priceCurrency)}
                       </div>
-                    )}
+                      <div class="text-primary-500 text-[15px] leading-[17px] font-bold">
+                        à vista {formatPrice(price, offers?.priceCurrency)}
+                      </div>
+                    </div>
+                    {l?.hide?.installments
+                      ? ""
+                      : (
+                        <div class="text-gray-500 text-[11px] leading-[14px] flex flex-col uppercase">
+                          <span>
+                            {formatPrice(rawPrice, offers?.priceCurrency)}{" "}
+                            <strong>à prazo</strong>
+                          </span>
+                          <span class="truncate">
+                            ou{" "}
+                            <strong>
+                              {installmentsData?.billingDuration ?? 1}x
+                            </strong>{" "}
+                            de {formatPrice(
+                              installmentsData?.billingIncrement ?? rawPrice,
+                              offers?.priceCurrency,
+                            )}{" "}
+                            <strong>
+                              {installmentsData?.withTaxes
+                                ? "c/ juros"
+                                : "s/ juros"}
+                            </strong>
+                          </span>
+                        </div>
+                      )}
+                  </div>
+                )
+              : (
+                <div class="font-montserrat text-[15px] font-bold leading-[17px] text-gray-800 my-4">
+                  Produto indisponível
                 </div>
               )}
 

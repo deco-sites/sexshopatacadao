@@ -14,9 +14,27 @@ export interface Props {
 const formatShippingEstimate = (estimate: string) => {
   const [, time, type] = estimate.split(/(\d+)/);
 
-  if (type === "bd") return `${time} dias úteis`;
-  if (type === "d") return `${time} dias`;
-  if (type === "h") return `${time} horas`;
+  if (type === "bd") {
+    if (time === "1") {
+      return "1 dia útil";
+    }
+
+    return `${time} dias úteis`;
+  }
+  if (type === "d") {
+    if (time === "1") {
+      return "1 dia";
+    }
+
+    return `${time} dias`;
+  }
+  if (type === "h") {
+    if (time === "1") {
+      return "1 hora";
+    }
+
+    return `${time} horas`;
+  }
 };
 
 function ShippingContent({ simulation }: {
@@ -55,7 +73,9 @@ function ShippingContent({ simulation }: {
               <input type="radio" name="shipping-option" />
             </td>
             <td>
-              {method.name}
+              {method.name.toLowerCase().includes("retira")
+                ? "RETIRADA NO LOCAL"
+                : method.name}
             </td>
             <td>
               Em até {formatShippingEstimate(method.shippingEstimate)}

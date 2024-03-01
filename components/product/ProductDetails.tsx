@@ -39,6 +39,10 @@ interface Props {
    * @title Images config
    */
   images?: {
+    /**
+     * @title Mostrar selo de desconto
+     * @default true
+     */
     showDiscountBadge?: boolean;
   };
 
@@ -192,7 +196,7 @@ function ProductDetails(
             <GallerySlider
               product={product}
               zoomMode={isMobile ? "click" : "hover"}
-              showDiscountBadge={imagesConfig?.showDiscountBadge}
+              showDiscountBadge={!!imagesConfig?.showDiscountBadge}
               priceMultiplier={priceMultiplier}
             />
           </div>
@@ -207,10 +211,12 @@ function ProductDetails(
                   <span class="line-through text-[#cacbcc] !leading-[1.15]">
                     De: {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
-                  <span class="font-bold !leading-[18px] bg-primary-500 rounded-[15px] text-white block px-[10px]">
-                    Economize{" "}
-                    {formatPrice(listPrice! - price, offers?.priceCurrency)}
-                  </span>
+                  {!!imagesConfig?.showDiscountBadge && (
+                    <span class="font-bold !leading-[18px] bg-primary-500 rounded-[15px] text-white block px-[10px]">
+                      Economize{" "}
+                      {formatPrice(listPrice! - price, offers?.priceCurrency)}
+                    </span>
+                  )}
                 </div>
               )}
               <strong class="font-bold text-sm text-primary-500 uppercase !leading-[17px] mb-[17px]">

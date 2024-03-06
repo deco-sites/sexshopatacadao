@@ -67,7 +67,7 @@ function ProductCardActions(
       }}
       class={`flex w-full ${galleryMode === "list" ? "max-w-[340px]" : ""}`}
     >
-      <div class="hidden h-[44px] rounded-l-[5px] border border-[#ccc] w-[30%] min-w-[30%] text-black sm:flex">
+      <div class="h-[44px] rounded-l-[5px] border border-[#ccc] w-[40%] min-w-[40%] sm:w-[30%] sm:min-w-[30%] text-black flex">
         <button
           type="button"
           onClick={decrement}

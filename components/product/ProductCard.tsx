@@ -162,7 +162,8 @@ function ProductCard(
   const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
 
   const cta = isAvailable
-    ? (isUniqueSku && !isMobile)
+    // ? (isUniqueSku && !isMobile)
+    ? isUniqueSku
       ? (
         <ProductCardActions
           text={l?.basics?.ctaText}
@@ -288,7 +289,7 @@ function ProductCard(
               alt={front.alternateName}
               width={WIDTH}
               height={HEIGHT}
-              class={`col-span-full row-span-full rounded-[3px] w-full  ${
+              class={`col-span-full row-span-full rounded-[3px] w-full [aspect-ratio:1] object-contain ${
                 l?.onMouseOver?.image == "Zoom image"
                   ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                   : ""
@@ -296,6 +297,7 @@ function ProductCard(
               sizes="(max-width: 640px) 50vw, 20vw"
               loading={"lazy"}
               decoding="async"
+              fit="contain"
             />
             {!isMobile && (!l?.onMouseOver?.image ||
               l?.onMouseOver?.image == "Change image") &&
@@ -305,10 +307,11 @@ function ProductCard(
                   alt={back?.alternateName ?? front.alternateName}
                   width={WIDTH}
                   height={HEIGHT}
-                  class="bg-base-100 col-span-full max-w-[220px] row-span-full transition-opacity duration-100 rounded-[3px] w-full opacity-0 lg:group-hover:opacity-100"
+                  class="bg-base-100 col-span-full max-w-[220px] row-span-full transition-opacity duration-100 rounded-[3px] w-full opacity-0 [aspect-ratio:1] object-contain lg:group-hover:opacity-100"
                   sizes="(max-width: 640px) 50vw, 20vw"
                   loading="lazy"
                   decoding="async"
+                  fit="contain"
                 />
               )}
           </div>

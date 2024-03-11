@@ -157,9 +157,11 @@ function Result({
   galleryMode,
   filterLabelsToHide = [],
   priceMultiplier,
+  isMobile,
 }: Omit<Props, "page" | "notFoundProps"> & {
   page: ProductListingPage;
   galleryMode: GalleryMode;
+  isMobile: boolean;
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
@@ -228,6 +230,7 @@ function Result({
               galleryMode={galleryMode}
               layout={{ card: cardLayout }}
               priceMultiplier={priceMultiplier}
+              isMobile={isMobile}
             />
             <div class="w-full flex justify-center items-center mt-[15px] pt-[17px] border-t border-gray-400">
               {pageControls}
@@ -306,6 +309,7 @@ export const loader = (props: Props, req: Request, ctx: AppContext) => {
       ...props.notFoundProps,
       shelfProps,
     },
+    isMobile: shelfProps.isMobile,
     galleryMode,
   };
 };

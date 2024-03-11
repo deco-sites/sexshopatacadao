@@ -13,10 +13,11 @@ export interface Props {
   layout?: {
     card?: CardLayout;
   };
+  isMobile?: boolean;
 }
 
 function ProductGallery(
-  { products, layout, offset, galleryMode, priceMultiplier }: Props,
+  { products, layout, offset, galleryMode, priceMultiplier, isMobile }: Props,
 ) {
   const platform = usePlatform();
 
@@ -34,6 +35,7 @@ function ProductGallery(
                 platform={platform}
                 galleryMode={galleryMode}
                 priceMultiplier={priceMultiplier}
+                isMobile={isMobile}
               />
             </div>
           )
@@ -46,6 +48,8 @@ function ProductGallery(
                 layout={layout?.card}
                 platform={platform}
                 galleryMode={galleryMode}
+                priceMultiplier={priceMultiplier}
+                isMobile={isMobile}
               />
             </div>
           )

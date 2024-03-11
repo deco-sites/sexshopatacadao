@@ -57,6 +57,11 @@ export interface Props {
   platform?: Platform;
 }
 
+const relative = (url: string) => {
+  const link = new URL(url, "http://localhost");
+  return `${link.pathname}${link.search}`;
+};
+
 function Searchbar({
   placeholder = "What are you looking for?",
   action = "/s",
@@ -170,18 +175,24 @@ function Searchbar({
           <ul class="flex flex-col">
             {products.map((product) => {
               const [image] = product.image ?? [];
+              const url = product.url;
 
               return (
-                <li class="p-3 flex gap-3 items-center">
-                  <Image
-                    src={image.url!}
-                    alt={image.alternateName!}
-                    width={29}
-                    height={29}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <span>{product.name}</span>
+                <li class="flex">
+                  <a
+                    class="p-3 flex gap-3 items-center"
+                    href={url && relative(url)}
+                  >
+                    <Image
+                      src={image.url!}
+                      alt={image.alternateName!}
+                      width={29}
+                      height={29}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>{product.name}</span>
+                  </a>
                 </li>
               );
             })}

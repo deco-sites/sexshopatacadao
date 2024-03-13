@@ -111,7 +111,10 @@ function Searchbar({
               setQuery(value);
             }}
             onFocus={() => isFocused.value = true}
-            onBlur={() => isFocused.value = false}
+            onBlur={() =>
+              setTimeout(() => {
+                isFocused.value = false;
+              })}
             placeholder={placeholder}
             role="combobox"
             aria-controls="search-suggestion"

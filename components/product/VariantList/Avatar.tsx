@@ -36,13 +36,13 @@ function Avatar(
     </div>
   );
 
-  if (url) {
-    return (
-      <a href={url}>
-        {content}
-      </a>
-    );
-  }
+  // if (url) {
+  //   return (
+  //     <a href={url}>
+  //       {content}
+  //     </a>
+  //   );
+  // }
 
   return content;
 }

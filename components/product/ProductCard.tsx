@@ -70,6 +70,7 @@ const WIDTH = 202;
 const HEIGHT = 202;
 
 const CATEGORY_NAME_TO_SHOW_DISCOUNT_BADGE = "Saldão";
+const BADGE_SPECIFICATION_NAME = "Selo Redondo Rosa (editável)";
 
 function ProductCard(
   {
@@ -126,18 +127,30 @@ function ProductCard(
     ? rawPrice ? rawPrice * priceMultiplier : undefined
     : rawPrice;
 
-  const shouldShowDiscountBadge = product?.additionalProperty?.some((
-    additionalProperty,
-  ) =>
-    additionalProperty.name === "category" &&
-    additionalProperty.value === CATEGORY_NAME_TO_SHOW_DISCOUNT_BADGE
-  );
+  const discountBadgeTextInSpecification = product.isVariantOf
+    ?.additionalProperty?.find(
+      (additionalProperty) =>
+        additionalProperty.name === BADGE_SPECIFICATION_NAME,
+    )?.value;
+
+  const shouldShowDiscountBadge = !!discountBadgeTextInSpecification ||
+    product?.additionalProperty?.some((
+      additionalProperty,
+    ) =>
+      additionalProperty.name === "category" &&
+      additionalProperty.value === CATEGORY_NAME_TO_SHOW_DISCOUNT_BADGE
+    );
 
   const discountPercentage = (listPrice && price)
     ? Math.round(
       ((listPrice - price) / listPrice) * 100,
     )
     : 0;
+
+  const discountBadgeText = discountBadgeTextInSpecification ??
+    ((shouldShowDiscountBadge && discountPercentage > 0)
+      ? `${discountPercentage}%`
+      : undefined);
 
   // const possibilities = useVariantPossibilities(hasVariant, product);
   // const variants = Object.entries(Object.values(possibilities)[0] ?? {});
@@ -191,6 +204,8 @@ function ProductCard(
       {
         /* <BrowserLog
         payload={{
+          discountBadgeTextInSpecification,
+          discountBadgeText,
           product,
         }}
       /> */
@@ -245,15 +260,13 @@ function ProductCard(
           }}
         >
           {/** Discount Badge */}
-          {shouldShowDiscountBadge && (
+          {discountBadgeText && (
             <div class="absolute top-5 right-[2px]">
-              {discountPercentage > 0 && (
-                <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
-                  <span>
-                    {discountPercentage}%
-                  </span>
-                </div>
-              )}
+              <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
+                <span>
+                  {discountBadgeText}
+                </span>
+              </div>
             </div>
           )}
 

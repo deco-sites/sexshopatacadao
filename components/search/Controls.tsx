@@ -35,11 +35,11 @@ function SearchControls(
           />
           <div class="bg-base-100 flex flex-1 flex-col h-full divide-y overflow-y-hidden w-[80%]">
             <div class="flex justify-between items-center">
-              <h1 class="p-4">
+              <h4 class="p-4">
                 <span class="font-montserrat text-2xl !leading-[1.15]">
                   Filtros
                 </span>
-              </h1>
+              </h4>
               {
                 /* <Button class="btn btn-ghost" onClick={() => open.value = false}>
                 <Icon id="XMark" size={24} strokeWidth={2} />

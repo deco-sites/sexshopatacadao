@@ -133,13 +133,15 @@ function ProductCard(
         additionalProperty.name === BADGE_SPECIFICATION_NAME,
     )?.value;
 
-  const shouldShowDiscountBadge = !!discountBadgeTextInSpecification ||
-    product?.additionalProperty?.some((
-      additionalProperty,
-    ) =>
-      additionalProperty.name === "category" &&
-      additionalProperty.value === CATEGORY_NAME_TO_SHOW_DISCOUNT_BADGE
-    );
+  const shouldShowDiscountBadge = Boolean(
+    discountBadgeTextInSpecification ||
+      product?.additionalProperty?.some((
+        additionalProperty,
+      ) =>
+        additionalProperty.name === "category" &&
+        additionalProperty.value === CATEGORY_NAME_TO_SHOW_DISCOUNT_BADGE
+      ),
+  );
 
   const discountPercentage = (listPrice && price)
     ? Math.round(
@@ -260,7 +262,7 @@ function ProductCard(
           }}
         >
           {/** Discount Badge */}
-          {discountBadgeText && (
+          {!!discountBadgeText && (
             <div class="absolute top-5 right-[2px]">
               <div class="rounded-full bg-primary-500 text-white min-w-[45px] min-h-[45px] w-[45px] h-[45px] font-montserrat text-[17px] font-bold flex items-center justify-center">
                 <span>
@@ -398,7 +400,10 @@ function ProductCard(
                     >
                       <div
                         class={`line-through text-gray-400 text-xs leading-[1.15] ${
-                          (listPrice && listPrice !== price) ? "" : "invisible"
+                          (shouldShowDiscountBadge && listPrice &&
+                              listPrice !== price)
+                            ? ""
+                            : "invisible"
                         }`}
                       >
                         De: {formatPrice(listPrice, offers?.priceCurrency)}

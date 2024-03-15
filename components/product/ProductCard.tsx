@@ -399,7 +399,7 @@ function ProductCard(
                       }`}
                     >
                       <div
-                        class={`line-through text-gray-400 text-xs leading-[1.15] ${
+                        class={`line-through text-gray-450 text-xs leading-[1.15] ${
                           (shouldShowDiscountBadge && listPrice &&
                               listPrice !== price)
                             ? ""

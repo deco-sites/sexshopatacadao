@@ -26,6 +26,7 @@ export default {
         "gray-200": "#f0f0f0",
         "gray-300": "#eeeeee",
         "gray-400": "#e3e3e3",
+        "gray-450": "#cacbcc",
         // "gray-500": "#1a1a1a",
         "gray-700": "#888888",
         "gray-750": "#333333",

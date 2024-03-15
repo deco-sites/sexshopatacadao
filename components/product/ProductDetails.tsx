@@ -208,7 +208,7 @@ function ProductDetails(
             <div class="mt-4 mb-1 flex flex-col font-montserrat">
               {(listPrice ?? 0) > price && (
                 <div class="flex flex-row gap-2 items-center text-sm mb-1">
-                  <span class="line-through text-[#cacbcc] !leading-[1.15]">
+                  <span class="line-through text-gray-450 !leading-[1.15]">
                     De: {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
                   {!!imagesConfig?.showDiscountBadge && (

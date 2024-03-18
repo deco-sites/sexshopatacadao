@@ -23,8 +23,14 @@ function ProductVariantList({ product }: Props) {
   const sizes = Object.entries(possibilities).find(([specificationName]) =>
     specificationName.toLowerCase() === "tamanhos"
   )?.[1];
+
   const hasSizes = !!sizes;
-  const hasOneSize = hasSizes && Object.keys(sizes).length === 1;
+  const hasOneSize = hasSizes &&
+    (Object.keys(sizes).length === 1 ||
+      // Check if all sizes are the same (usually when it's "Único" or "U")
+      !Object.values(sizes).some((obj, _index, arr) =>
+        obj.value !== arr[0].value
+      ));
 
   const shouldRenderGrid = hasSizes && hasTwoSpecifications && !hasOneSize; // Otherwise, render a list
 

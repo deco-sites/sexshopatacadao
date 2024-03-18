@@ -17,7 +17,7 @@ function List({ possibilities }: { possibilities: Possibilities }) {
           {specificationName}
         </strong>
       </div>
-      <div class="flex flex-wrap my-5 ml-[30px] md:h-[280px] md:overflow-y-auto md:pr-5 pt-5 gap-x-[30px] gap-y-5 scrollbar scrollbar-track-[#ebebeb] scrollbar-track-rounded-[10px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[10px] scrollbar-w-[10px]">
+      <div class="flex flex-wrap my-5 ml-[30px] md:max-h-[280px] md:overflow-y-auto md:pr-5 pt-5 gap-x-[30px] gap-y-5 scrollbar scrollbar-track-[#ebebeb] scrollbar-track-rounded-[10px] scrollbar-thumb-primary-500 scrollbar-thumb-rounded-[10px] scrollbar-w-[10px]">
         {sortedVariantsByStock.map(([sku, { value, image, inStock, url }]) => (
           <div class="flex flex-col items-center gap-6">
             <Avatar

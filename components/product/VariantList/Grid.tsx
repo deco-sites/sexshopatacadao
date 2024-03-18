@@ -44,7 +44,12 @@ function Grid({ possibilities }: { possibilities: Possibilities }) {
         inStock: variant.inStock,
       };
 
-      const size = sizesValues[sku].value;
+      const size = sizesValues[sku]?.value;
+
+      if (!size) {
+        // ! This should never happen
+        return acc;
+      }
 
       if (acc[value]) {
         acc[value].items.splice(

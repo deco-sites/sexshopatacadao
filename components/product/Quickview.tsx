@@ -11,6 +11,7 @@ import ProductVariantList from "deco-sites/sexshopatacadao/components/product/Va
 import OutOfStock from "deco-sites/sexshopatacadao/components/product/OutOfStock.tsx";
 import { Platform } from "deco-sites/sexshopatacadao/apps/site.ts";
 import ProductCardActions from "deco-sites/sexshopatacadao/components/product/ProductCardActions.tsx";
+import { useVariantPossibilities } from "deco-sites/sexshopatacadao/components/product/VariantList/useVariantPossibilites.ts";
 
 export interface Props {
   product: Product;
@@ -48,7 +49,12 @@ function Quickview(
 
   const brandName = brand?.name ?? "";
 
-  const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
+  const hasVariant = isVariantOf?.hasVariant ?? [];
+  const possibilities = useVariantPossibilities(hasVariant);
+
+  const isUniqueSku = hasVariant.length <= 1 ||
+    Object.keys(possibilities).length <= 1;
+
   const manufacturerCode = refId;
 
   const title = (
@@ -213,7 +219,12 @@ function Quickview(
                             )}
                           </>
                         )
-                        : <ProductVariantList product={product} />
+                        : (
+                          <ProductVariantList
+                            product={product}
+                            possibilities={possibilities}
+                          />
+                        )
                       : <OutOfStock productID={productID} />}
                   </div>
                   <div class="flex mt-3">

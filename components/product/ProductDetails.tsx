@@ -22,6 +22,7 @@ import ProductVariantList from "deco-sites/sexshopatacadao/components/product/Va
 import Icon from "$store/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
 import { AppContext } from "deco-sites/sexshopatacadao/apps/site.ts";
+import { useVariantPossibilities } from "deco-sites/sexshopatacadao/components/product/VariantList/useVariantPossibilites.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -176,13 +177,17 @@ function ProductDetails(
     </div>
   );
 
-  const isUniqueSku = (isVariantOf?.hasVariant?.length ?? 0) <= 1;
+  const hasVariant = isVariantOf?.hasVariant ?? [];
+  const possibilities = useVariantPossibilities(hasVariant);
+
+  const isUniqueSku = hasVariant.length <= 1 ||
+    Object.keys(possibilities).length <= 1;
 
   const encodedURI = encodeURI(url);
 
   return (
     <div class="flex flex-col mb-16" id={id}>
-      {/* <BrowserLog payload={{ product }} /> */}
+      <BrowserLog payload={{ product }} />
       <Breadcrumb
         itemListElement={breadcrumbList.itemListElement}
         applyPadding={false}
@@ -335,7 +340,12 @@ function ProductDetails(
                       )}
                     </>
                   )
-                  : <ProductVariantList product={product} />
+                  : (
+                    <ProductVariantList
+                      product={product}
+                      possibilities={possibilities}
+                    />
+                  )
                 : <OutOfStock productID={productID} />}
             </div>
             {/* Shipping Simulation */}

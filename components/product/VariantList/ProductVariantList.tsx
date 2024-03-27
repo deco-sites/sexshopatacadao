@@ -1,6 +1,5 @@
 import type { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import BrowserLog from "$store/islands/BrowserLog.tsx";
-import { useVariantPossibilities } from "$store/components/product/VariantList/useVariantPossibilites.ts";
+import type { Possibilities } from "$store/components/product/VariantList/useVariantPossibilites.ts";
 import List from "$store/components/product/VariantList/List.tsx";
 import Grid from "$store/components/product/VariantList/Grid.tsx";
 import ProductVariantSummary from "$store/islands/ProductVariantList/Summary.tsx";
@@ -9,18 +8,24 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 
 interface Props {
   product: Product;
+  possibilities: Possibilities;
 }
 
-function ProductVariantList({ product }: Props) {
+function ProductVariantList({ product, possibilities }: Props) {
   const { url, isVariantOf, offers } = product;
 
   const seller = offers?.offers[0].seller;
 
   const hasVariant = isVariantOf?.hasVariant ?? [];
-  const possibilities = useVariantPossibilities(hasVariant);
 
-  const hasTwoSpecifications = Object.keys(possibilities).length === 2;
-  const sizes = Object.entries(possibilities).find(([specificationName]) =>
+  const possibilitiesEntries = Object.entries(possibilities);
+
+  if (possibilitiesEntries.length <= 0) {
+    return null;
+  }
+
+  const hasTwoSpecifications = possibilitiesEntries.length === 2;
+  const sizes = possibilitiesEntries.find(([specificationName]) =>
     specificationName.toLowerCase() === "tamanhos"
   )?.[1];
 

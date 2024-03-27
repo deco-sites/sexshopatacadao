@@ -181,7 +181,7 @@ function ProductDetails(
   const possibilities = useVariantPossibilities(hasVariant);
 
   const isUniqueSku = hasVariant.length <= 1 ||
-    Object.keys(possibilities).length <= 1;
+    Object.keys(possibilities).length === 0;
 
   const encodedURI = encodeURI(url);
 

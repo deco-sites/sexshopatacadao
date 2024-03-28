@@ -187,7 +187,7 @@ function ProductDetails(
 
   return (
     <div class="flex flex-col mb-16" id={id}>
-      <BrowserLog payload={{ product }} />
+      {/* <BrowserLog payload={{ product }} /> */}
       <Breadcrumb
         itemListElement={breadcrumbList.itemListElement}
         applyPadding={false}
